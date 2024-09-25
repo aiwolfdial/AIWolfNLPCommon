@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aiwolf_nlp_common"
+version = "0.0.18"
+requires-python = ">=3.8"
+dependencies = [
+  "pycparser",
+  "cffi>=1.12",
+  "bcrypt>=3.2.0",
+  "cryptography>=3.3",
+  "PyNaCl>=1.5",
+  "paramiko",
+]
+authors = [
+  {name = "aiwolfdial", email = "aiwolf@kanolab.net"},
+  {name = "nwatanabe", email = "aiwolf@kanolab.net"},
+]
+maintainers = [
+  {name = "aiwolfdial", email = "aiwolf@kanolab.net"},
+  {name = "nwatanabe", email = "aiwolf@kanolab.net"}
+]
+description = "A sample python code of an AIWolf Contest's agent for Natural Language Division."
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["aiwolf", "aiwolfNLP"]
+
+[project.urls]
+Homepage = "https://aiwolf.org"
