@@ -9,6 +9,7 @@ class AIWolfNLPAction(enum.Enum):
 	TALK = "TALK"
 	VOTE = "VOTE"
 	DIVINE = "DIVINE"
+	ATTACK = "ATTACK"
 	WHISPER = "WHISPER"
 	FINISH = "FINISH"
 
@@ -122,6 +123,20 @@ class AIWolfNLPAction(enum.Enum):
 		"""
 
 		return request == cls.DIVINE.value
+	
+	@classmethod
+	def is_attack(cls, request:str) -> bool:
+		"""
+			Check if the value associated with the "request" key is "ATTACK".
+
+			Args:
+				request (str): The value associated with the "request" key sent from the game server.
+			
+			Returns:
+				bool: True if the value is "ATTACK", False otherwise.
+		"""
+
+		return request == cls.ATTACK.value
 	
 	@classmethod
 	def is_whisper(cls, request:str) -> bool:
