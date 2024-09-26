@@ -8,6 +8,7 @@ class AIWolfNLPAction(enum.Enum):
 	DAILY_FINISH = "DAILY_FINISH"
 	TALK = "TALK"
 	VOTE = "VOTE"
+	DIVINE = "DIVINE"
 	WHISPER = "WHISPER"
 	FINISH = "FINISH"
 
@@ -107,6 +108,20 @@ class AIWolfNLPAction(enum.Enum):
 		"""
 
 		return request == cls.VOTE.value
+	
+	@classmethod
+	def is_divine(cls, request:str) -> bool:
+		"""
+			Check if the value associated with the "request" key is "DIVINE".
+
+			Args:
+				request (str): The value associated with the "request" key sent from the game server.
+			
+			Returns:
+				bool: True if the value is "DIVINE", False otherwise.
+		"""
+
+		return request == cls.DIVINE.value
 	
 	@classmethod
 	def is_whisper(cls, request:str) -> bool:
