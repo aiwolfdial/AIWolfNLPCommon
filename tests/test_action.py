@@ -51,7 +51,6 @@ def check_is_action(target_json:dict, is_name:bool=False, is_initialize:bool=Fal
     else:
         assert not AIWolfNLPAction.is_finish(request=request)
 
-
 def test_name(name_json) -> None:
     check_is_action(target_json=name_json, is_name=True)
 
