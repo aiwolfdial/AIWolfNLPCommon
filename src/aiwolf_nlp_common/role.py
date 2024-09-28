@@ -99,6 +99,20 @@ class AIWolfNLPRole(enum.Enum):
 		return role in cls.MEDIUM.value[:LANGUAGE]
 	
 	@classmethod
+	def is_bodyguard(cls, role:str) -> bool:
+		"""
+        Check if the value associated with the "role" key is either "BODYGUARD" (in English) or "騎士" (in Japanese).
+
+        Args:
+            request (str): The value associated with the "role" key sent from the game server.
+        
+        Returns:
+            bool: True if the value is "BODYGUARD" or "騎士", False otherwise.
+        """
+
+		return role in cls.BODYGUARD.value[:LANGUAGE]
+	
+	@classmethod
 	def is_werewolf(cls, role:str) -> bool:
 		"""
         Check if the value associated with the "role" key is either "WEREWOLF" (in English) or "人狼" (in Japanese).
