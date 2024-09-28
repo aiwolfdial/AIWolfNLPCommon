@@ -1,0 +1,3 @@
+[submodule "tests/AIWolfNLAgentPython"]
+	path = tests/AIWolfNLAgentPython
+	url = git@github.com:aiwolfdial/AIWolfNLAgentPython.git

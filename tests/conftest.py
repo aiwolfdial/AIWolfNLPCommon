@@ -1,3 +1,4 @@
+import re
 import pytest
 import json
 
@@ -45,3 +46,29 @@ def attack_json() -> dict:
 def finish_json() -> dict:
     finish_json = """{"request":"FINISH","gameInfo":{"day":3,"agent":"Agent[01]","executedAgent":"Agent[03]","voteList":[],"latestVoteList":[],"attackVoteList":[],"latestAttackVoteList":[],"talkList":[],"whisperList":[],"statusMap":{"Agent[01]":"DEAD","Agent[02]":"DEAD","Agent[03]":"DEAD","Agent[04]":"ALIVE","Agent[05]":"DEAD"},"roleMap":{"Agent[01]":"VILLAGER","Agent[02]":"POSSESSED","Agent[03]":"VILLAGER","Agent[04]":"WEREWOLF","Agent[05]":"SEER"},"remainTalkMap":{"Agent[04]":5},"remainWhisperMap":{"Agent[04]":5},"existingRoleList":["POSSESSED","SEER","VILLAGER","WEREWOLF"],"lastDeadAgentList":["Agent[05]"]}}"""
     return json.loads(finish_json)
+
+def json_fix(json_str:str) -> str:
+    json_str = json_str.replace("'","\"")
+    json_str = re.sub("[a-zA-Z]\"[a-zA-Z]","\'",json_str)
+    json_str = json_str.replace("False","\"False\"")
+    json_str = json_str.replace("True","\"True\"")
+
+    return json_str
+
+@pytest.fixture
+def role_num_map() -> dict:
+    role_json = """{'request': 'INITIALIZE', 'gameInfo': {'day': 0, 'agent': 'Agent[02]', 'voteList': [], 'latestVoteList': [], 'attackVoteList': [], 'latestAttackVoteList': [], 'talkList': [], 'whisperList': [], 'statusMap': {'Agent[01]': 'ALIVE', 'Agent[02]': 'ALIVE', 'Agent[03]': 'ALIVE', 'Agent[04]': 'ALIVE', 'Agent[05]': 'ALIVE'}, 'roleMap': {'Agent[02]': 'VILLAGER'}, 'remainTalkMap': {'Agent[01]': 5, 'Agent[02]': 5, 'Agent[03]': 5, 'Agent[04]': 5, 'Agent[05]': 5}, 'remainWhisperMap': {'Agent[05]': 5}, 'existingRoleList': ['POSSESSED', 'SEER', 'VILLAGER', 'WEREWOLF'], 'lastDeadAgentList': []}, 'gameSetting': {'roleNumMap': {'SEER': 1, 'FOX': 0, 'ANY': 0, 'WEREWOLF': 1, 'MEDIUM': 0, 'POSSESSED': 1, 'VILLAGER': 2, 'BODYGUARD': 0, 'FREEMASON': 0}, 'maxTalk': 5, 'maxTalkTurn': 20, 'maxWhisper': 5, 'maxWhisperTurn': 20, 'maxSkip': 0, 'isEnableNoAttack': False, 'isVoteVisible': False, 'isTalkOnFirstDay': True, 'responseTimeout': 120000, 'actionTimeout': 1200000, 'maxRevote': 0, 'maxAttackRevote': 0, 'isEnableRoleRequest': False, 'playerNum': 5}}"""
+    role_json = json_fix(json_str=role_json)
+    role_json = json.loads(role_json)
+
+    return role_json["gameSetting"]["roleNumMap"]
+
+@pytest.fixture
+def seer_json() -> str:
+    seer_json = """{'request': 'INITIALIZE', 'gameInfo': {'day': 0, 'agent': 'Agent[03]', 'voteList': [], 'latestVoteList': [], 'attackVoteList': [], 'latestAttackVoteList': [], 'talkList': [], 'whisperList': [], 'statusMap': {'Agent[01]': 'ALIVE', 'Agent[02]': 'ALIVE', 'Agent[03]': 'ALIVE', 'Agent[04]': 'ALIVE', 'Agent[05]': 'ALIVE'}, 'roleMap': {'Agent[03]': 'SEER'}, 'remainTalkMap': {'Agent[01]': 5, 'Agent[02]': 5, 'Agent[03]': 5, 'Agent[04]': 5, 'Agent[05]': 5}, 'remainWhisperMap': {'Agent[05]': 5}, 'existingRoleList': ['POSSESSED', 'SEER', 'VILLAGER', 'WEREWOLF'], 'lastDeadAgentList': []}, 'gameSetting': {'roleNumMap': {'SEER': 1, 'FOX': 0, 'ANY': 0, 'WEREWOLF': 1, 'MEDIUM': 0, 'POSSESSED': 1, 'VILLAGER': 2, 'BODYGUARD': 0, 'FREEMASON': 0}, 'maxTalk': 5, 'maxTalkTurn': 20, 'maxWhisper': 5, 'maxWhisperTurn': 20, 'maxSkip': 0, 'isEnableNoAttack': False, 'isVoteVisible': False, 'isTalkOnFirstDay': True, 'responseTimeout': 120000, 'actionTimeout': 1200000, 'maxRevote': 0, 'maxAttackRevote': 0, 'isEnableRoleRequest': False, 'playerNum': 5}}"""
+    seer_json = json_fix(json_str=seer_json)
+    seer_json = json.loads(seer_json)
+
+    agent = seer_json["gameInfo"]
+
+    return seer_json["gameInfo"]["roleMap"]
