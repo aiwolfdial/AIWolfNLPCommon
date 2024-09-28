@@ -10,6 +10,8 @@ TEAM_POS = 3
 class AIWolfNLPRoleTeam(enum.Enum):
 	VILLAGER_TEAM = ("VILLAGER","村人陣営")
 	WEREWOLF_TEAM = ("WEREWOLF","人狼陣営")
+	FOX_TEAM = ("FOX","妖狐陣営")
+	ANY_TEAM = ("ANY","?陣営") # 正直訳がわからないが、ゲームサーバから送られてきている役職なので追記
 
 	@classmethod
 	def get_team_en(cls, role_team:"AIWolfNLPRoleTeam") -> bool:
@@ -28,6 +30,12 @@ class AIWolfNLPRole(enum.Enum):
 	# werewolf team
 	WEREWOLF = ("WEREWOLF", "人狼", AIWolfNLPRoleTeam.WEREWOLF_TEAM)
 	POSSESSED = ("POSSESSED", "狂人", AIWolfNLPRoleTeam.WEREWOLF_TEAM)
+
+	# fox team
+	FOX = ("FOX", "妖狐", AIWolfNLPRoleTeam.FOX_TEAM)
+
+	# any team
+	ANY = ("ANY", "?", AIWolfNLPRoleTeam.ANY_TEAM)
 
 	def __init__(self, en:str, ja:str, team:AIWolfNLPRoleTeam) -> None:
 		self.en = en
