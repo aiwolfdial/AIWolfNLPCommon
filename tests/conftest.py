@@ -3,6 +3,7 @@ import pytest
 import json
 from AIWolfNLAgentPython.player.agent import Agent
 from AIWolfNLAgentPython.player.villager import Villager
+from AIWolfNLAgentPython.player.seer import Seer
 from aiwolf_nlp_common import util
 
 @pytest.fixture
@@ -119,10 +120,24 @@ def agent_villager(villager_text:str) -> Villager:
     inifile = util.check_config(config_path=config_path)
     inifile.read(config_path,"UTF-8")
 
-    agent_villager = Villager(inifile=inifile, name="test_villager")
+    agent = Villager(inifile=inifile, name="test_villager")
 
-    agent_villager.parse_info(receive=villager_text)
-    agent_villager.get_info()
-    agent_villager.action()
+    agent.parse_info(receive=villager_text)
+    agent.get_info()
+    agent.action()
 
-    return agent_villager
+    return agent
+
+@pytest.fixture
+def agent_seer(seer_text:str) -> Seer:
+    config_path = "tests/AIWolfNLAgentPython/res/config.ini"
+    inifile = util.check_config(config_path=config_path)
+    inifile.read(config_path,"UTF-8")
+
+    agent = Seer(inifile=inifile, name="test_seer")
+
+    agent.parse_info(receive=seer_text)
+    agent.get_info()
+    agent.action()
+
+    return agent

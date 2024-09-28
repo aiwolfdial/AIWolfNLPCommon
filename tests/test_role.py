@@ -1,12 +1,19 @@
 from aiwolf_nlp_common.role import AIWolfNLPRole
 from AIWolfNLAgentPython.player.villager import Villager
+from AIWolfNLAgentPython.player.seer import Seer
 
-def check_is_role(agent, is_villager:bool=False) -> None:
+def check_is_role(agent, is_villager:bool=False, is_seer:bool=False) -> None:
 
     if is_villager:
         assert AIWolfNLPRole.is_villager(role=agent.role)
     else:
         assert not AIWolfNLPRole.is_villager(role=agent.role)
+    
+    if is_seer:
+        assert AIWolfNLPRole.is_seer(role=agent.role)
+    else:
+        assert not AIWolfNLPRole.is_seer(role=agent.role)
+
 
 def test_exist_role(role_num_map) -> None:
     for role in role_num_map.keys():
@@ -19,3 +26,6 @@ def test_exist_role(role_num_map) -> None:
 
 def test_is_villager(agent_villager:Villager) -> None:
     check_is_role(agent=agent_villager, is_villager=True)
+
+def test_is_seer(agent_seer:Seer) -> None:
+    check_is_role(agent=agent_seer, is_seer=True)
