@@ -3,23 +3,33 @@ from typing import Union
 
 LANGUAGE = 2
 
-ROLE_EN_POS = 1
-ROLE_JA_POS = 2
+EN_POS = 1
+JA_POS = 2
 TEAM_POS = 3
+
+class AIWolfNLPRoleTeam(enum.Enum):
+	VILLAGER_TEAM = ("VILLAGER","村人陣営")
+	WEREWOLF_TEAM = ("WEREWOLF","人狼陣営")
+
+	@classmethod
+	def get_team_en(cls, role_team:"AIWolfNLPRoleTeam") -> bool:
+		return role_team[EN_POS]
+	
+	@classmethod
+	def get_team_ja(cls, role_team:"AIWolfNLPRoleTeam") -> bool:
+		return role_team[JA_POS]
 
 class AIWolfNLPRole(enum.Enum):
 	# villager team
-	VILLAGER_TEAM = "村人陣営"
-	VILLAGER = ("VILLAGER", "村人", True)
-	SEER = ("SEER", "占い師", True)
-	MEDIUM = ("MEDIUM", "霊媒師", True)
+	VILLAGER = ("VILLAGER", "村人", AIWolfNLPRoleTeam.VILLAGER_TEAM)
+	SEER = ("SEER", "占い師", AIWolfNLPRoleTeam.VILLAGER_TEAM)
+	MEDIUM = ("MEDIUM", "霊媒師", AIWolfNLPRoleTeam.VILLAGER_TEAM)
 
 	# werewolf team
-	WEREWOLF_TEAM = "人狼陣営"
-	WEREWOLF = ("WEREWOLF", "人狼", False)
-	POSSESSED = ("POSSESSED", "狂人", False)
+	WEREWOLF = ("WEREWOLF", "人狼", AIWolfNLPRoleTeam.WEREWOLF_TEAM)
+	POSSESSED = ("POSSESSED", "狂人", AIWolfNLPRoleTeam.WEREWOLF_TEAM)
 
-	def __init__(self, en:str, ja:str, team:str) -> None:
+	def __init__(self, en:str, ja:str, team:AIWolfNLPRoleTeam) -> None:
 		self.en = en
 		self.ja = ja
 		self.team = team
@@ -163,7 +173,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "VILLAGER" role.
         """
 
-		return cls.VILLAGER.value[ROLE_JA_POS]
+		return cls.VILLAGER.value[JA_POS]
 	
 	@classmethod
 	def get_seer_ja(cls) -> str:
@@ -174,7 +184,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "SEER" role.
         """
 
-		return cls.SEER.value[ROLE_JA_POS]
+		return cls.SEER.value[JA_POS]
 	
 	@classmethod
 	def get_medium_ja(cls) -> str:
@@ -185,7 +195,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "MEDIUM" role.
         """		
 
-		return cls.MEDIUM.value[ROLE_JA_POS]
+		return cls.MEDIUM.value[JA_POS]
 	
 	@classmethod
 	def get_werewolf_ja(cls) -> str:
@@ -196,7 +206,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "WEREWOLF" role.
         """
 
-		return cls.WEREWOLF.value[ROLE_JA_POS]
+		return cls.WEREWOLF.value[JA_POS]
 	
 	@classmethod
 	def get_possessed_ja(cls) -> str:
@@ -207,4 +217,4 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "POSSESSED" role.
         """
 
-		return cls.POSSESSED.value[ROLE_JA_POS]
+		return cls.POSSESSED.value[JA_POS]
