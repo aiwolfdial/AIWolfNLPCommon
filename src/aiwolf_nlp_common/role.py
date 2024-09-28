@@ -26,6 +26,8 @@ class AIWolfNLPRole(enum.Enum):
 	VILLAGER = ("VILLAGER", "村人", AIWolfNLPRoleTeam.VILLAGER_TEAM)
 	SEER = ("SEER", "占い師", AIWolfNLPRoleTeam.VILLAGER_TEAM)
 	MEDIUM = ("MEDIUM", "霊媒師", AIWolfNLPRoleTeam.VILLAGER_TEAM)
+	BODYGUARD = ("BODYGUARD", "騎士", AIWolfNLPRoleTeam.VILLAGER_TEAM)
+	FREEMASON = ("FREEMASON", "共有者", AIWolfNLPRoleTeam.VILLAGER_TEAM)
 
 	# werewolf team
 	WEREWOLF = ("WEREWOLF", "人狼", AIWolfNLPRoleTeam.WEREWOLF_TEAM)
