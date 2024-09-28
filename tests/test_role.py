@@ -10,4 +10,4 @@ def test_exist_role(role_num_map) -> None:
         assert not AIWolfNLPRole.is_exist_role(role=role)
 
 def test_is_villager() -> None:
-    psq
+    pass
