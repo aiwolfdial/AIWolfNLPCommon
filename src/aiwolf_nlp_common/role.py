@@ -5,22 +5,24 @@ LANGUAGE = 2
 
 ROLE_EN_POS = 1
 ROLE_JA_POS = 2
-IS_VILLAGER_POS = 3
+TEAM_POS = 3
 
 class AIWolfNLPRole(enum.Enum):
 	# villager team
+	VILLAGER_TEAM = "村人陣営"
 	VILLAGER = ("VILLAGER", "村人", True)
 	SEER = ("SEER", "占い師", True)
 	MEDIUM = ("MEDIUM", "霊媒師", True)
 
 	# werewolf team
+	WEREWOLF_TEAM = "人狼陣営"
 	WEREWOLF = ("WEREWOLF", "人狼", False)
 	POSSESSED = ("POSSESSED", "狂人", False)
 
-	def __init__(self, en:str, ja:str, is_villagerr_team:bool) -> None:
+	def __init__(self, en:str, ja:str, team:str) -> None:
 		self.en = en
 		self.ja = ja
-		self.is_villagerr_team = is_villagerr_team
+		self.team = team
 	
 	@classmethod
 	def is_exist_role(cls, role:str) -> bool:
@@ -126,7 +128,7 @@ class AIWolfNLPRole(enum.Enum):
 			role_name_list = role_info.value[:LANGUAGE]
 
 			if role in role_name_list:
-				return role_info.value[IS_VILLAGER_POS - 1]
+				return role_info.value[TEAM_POS - 1] == cls.VILLAGER_TEAM
 	
 	@classmethod
 	def is_werewolf_team(cls, role:str) -> Union[bool, ValueError]:
@@ -143,10 +145,14 @@ class AIWolfNLPRole(enum.Enum):
             ValueError: If a non-existent role is entered.
         """
 
-		try:
-			return not cls.is_villager_team(role=role)
-		except ValueError as e:
-			raise e
+		if not cls.is_exist_role(role=role):
+			raise ValueError(role + "is not exist role.")
+
+		for role_info in cls.__members__.values():
+			role_name_list = role_info.value[:LANGUAGE]
+
+			if role in role_name_list:
+				return role_info.value[TEAM_POS - 1] == cls.WEREWOLF_TEAM
 	
 	@classmethod
 	def get_villager_ja(cls) -> str:
