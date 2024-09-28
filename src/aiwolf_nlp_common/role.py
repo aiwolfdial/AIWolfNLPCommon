@@ -138,7 +138,7 @@ class AIWolfNLPRole(enum.Enum):
 			role_name_list = role_info.value[:LANGUAGE]
 
 			if role in role_name_list:
-				return role_info.value[TEAM_POS - 1] == cls.VILLAGER_TEAM
+				return role_info.value[TEAM_POS - 1] == AIWolfNLPRoleTeam.VILLAGER_TEAM
 	
 	@classmethod
 	def is_werewolf_team(cls, role:str) -> Union[bool, ValueError]:
@@ -162,7 +162,7 @@ class AIWolfNLPRole(enum.Enum):
 			role_name_list = role_info.value[:LANGUAGE]
 
 			if role in role_name_list:
-				return role_info.value[TEAM_POS - 1] == cls.WEREWOLF_TEAM
+				return role_info.value[TEAM_POS - 1] == AIWolfNLPRoleTeam.WEREWOLF_TEAM
 	
 	@classmethod
 	def get_villager_ja(cls) -> str:
