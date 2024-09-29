@@ -8,6 +8,5 @@
 ```
 $ pip install --upgrade pip
 $ pip install --upgrade setuptools
-$ .venv/bin/pip install setuptools wheel
 $ pip install -i https://test.pypi.org/simple/ aiwolf-nlp-common
 ```
