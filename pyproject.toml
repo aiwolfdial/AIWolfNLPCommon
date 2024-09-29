@@ -6,7 +6,9 @@ build-backend = "hatchling.build"
 name = "aiwolf_nlp_common"
 version = "0.0.18"
 license = {file = "LICENSE.txt"}
+description = "A sample python code of an AIWolf Contest's agent for Natural Language Division."
 requires-python = ">=3.8"
+readme = "README.md"
 dependencies = [
   "pycparser",
   "cffi>=1.12",
@@ -23,9 +25,6 @@ maintainers = [
   {name = "aiwolfdial", email = "aiwolf@kanolab.net"},
   {name = "nwatanabe", email = "aiwolf@kanolab.net"}
 ]
-description = "A sample python code of an AIWolf Contest's agent for Natural Language Division."
-readme = "README.md"
-license = {file = "LICENSE"}
 keywords = ["aiwolf", "aiwolfNLP", "aiwolfdial]
 
 [project.urls]
