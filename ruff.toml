@@ -2,4 +2,5 @@
 line-length = 79
 
 [lint]
-extend-select = ["E501"]
+select = ["ALL"]
+ignore = []
