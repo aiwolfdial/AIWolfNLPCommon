@@ -6,7 +6,5 @@
 
 ## 手順
 ```
-$ pip install --upgrade pip
-$ pip install --upgrade setuptools
-$ pip install -i https://test.pypi.org/simple/ aiwolf-nlp-common
+$ pip install aiwolf-nlp-common
 ```
