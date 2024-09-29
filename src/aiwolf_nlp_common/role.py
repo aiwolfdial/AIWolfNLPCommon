@@ -15,11 +15,11 @@ class AIWolfNLPRoleTeam(enum.Enum):
 
 	@classmethod
 	def get_team_en(cls, role_team:"AIWolfNLPRoleTeam") -> bool:
-		return role_team[EN_POS]
+		return role_team[EN_POS - 1]
 	
 	@classmethod
 	def get_team_ja(cls, role_team:"AIWolfNLPRoleTeam") -> bool:
-		return role_team[JA_POS]
+		return role_team[JA_POS - 1]
 
 class AIWolfNLPRole(enum.Enum):
 	# villager team
