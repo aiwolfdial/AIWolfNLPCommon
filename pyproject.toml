@@ -5,6 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "aiwolf_nlp_common"
 version = "0.0.18"
+license = {file = "LICENSE.txt"}
 requires-python = ">=3.8"
 dependencies = [
   "pycparser",
@@ -25,7 +26,7 @@ maintainers = [
 description = "A sample python code of an AIWolf Contest's agent for Natural Language Division."
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = ["aiwolf", "aiwolfNLP"]
+keywords = ["aiwolf", "aiwolfNLP", "aiwolfdial]
 
 [project.urls]
 Homepage = "https://aiwolf.org"
