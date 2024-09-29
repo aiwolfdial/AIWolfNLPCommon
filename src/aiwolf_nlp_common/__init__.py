@@ -1,3 +1,3 @@
 from .action import AIWolfNLPAction
-from .role import AIWolfNLPRole
+from .role.role import AIWolfNLPRole
 from .util import *

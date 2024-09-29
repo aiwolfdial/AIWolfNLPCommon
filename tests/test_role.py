@@ -1,5 +1,5 @@
 from typing import Union
-from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
+from aiwolf_nlp_common.role.role import AIWolfNLPRoleInfo
 from AIWolfNLAgentPython.player.villager import Villager
 from AIWolfNLAgentPython.player.seer import Seer
 from AIWolfNLAgentPython.player.werewolf import Werewolf
