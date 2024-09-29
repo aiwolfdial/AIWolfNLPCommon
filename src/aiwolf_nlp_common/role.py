@@ -197,7 +197,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "VILLAGER" role.
         """
 
-		return cls.VILLAGER.value[JA_POS]
+		return cls.VILLAGER.value[JA_POS - 1]
 	
 	@classmethod
 	def get_seer_ja(cls) -> str:
@@ -208,7 +208,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "SEER" role.
         """
 
-		return cls.SEER.value[JA_POS]
+		return cls.SEER.value[JA_POS - 1]
 	
 	@classmethod
 	def get_medium_ja(cls) -> str:
@@ -219,7 +219,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "MEDIUM" role.
         """		
 
-		return cls.MEDIUM.value[JA_POS]
+		return cls.MEDIUM.value[JA_POS - 1]
 	
 	@classmethod
 	def get_werewolf_ja(cls) -> str:
@@ -230,7 +230,7 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "WEREWOLF" role.
         """
 
-		return cls.WEREWOLF.value[JA_POS]
+		return cls.WEREWOLF.value[JA_POS - 1]
 	
 	@classmethod
 	def get_possessed_ja(cls) -> str:
@@ -241,4 +241,4 @@ class AIWolfNLPRole(enum.Enum):
             str: The Japanese name for the "POSSESSED" role.
         """
 
-		return cls.POSSESSED.value[JA_POS]
+		return cls.POSSESSED.value[JA_POS - 1]
