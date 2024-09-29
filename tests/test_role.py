@@ -54,14 +54,26 @@ def test_villager(agent_villager:Villager) -> None:
     check_is_role(agent=agent_villager, is_villager=True)
     check_is_team(agent=agent_villager, is_villager=True)
 
+    agent_villager.role = AIWolfNLPRole.get_villager_ja()
+    check_is_role(agent=agent_villager, is_villager=True)
+
 def test_is_seer(agent_seer:Seer) -> None:
     check_is_role(agent=agent_seer, is_seer=True)
     check_is_team(agent=agent_seer, is_seer=True)
+
+    agent_seer.role = AIWolfNLPRole.get_seer_ja()
+    check_is_role(agent=agent_seer, is_seer=True)
 
 def test_is_werewolf(agent_werewolf:Werewolf) -> None:
     check_is_role(agent=agent_werewolf, is_werewolf=True)
     check_is_team(agent=agent_werewolf, is_werewolf=True)
 
+    agent_werewolf.role = AIWolfNLPRole.get_werewolf_ja()
+    check_is_role(agent=agent_werewolf, is_werewolf=True)
+
 def test_is_possessed(agent_possessed:Possessed) -> None:
     check_is_role(agent=agent_possessed, is_possessed=True)
     check_is_team(agent=agent_possessed, is_possessed=True)
+
+    agent_possessed.role = AIWolfNLPRole.get_possessed_ja()
+    check_is_role(agent=agent_possessed, is_possessed=True)
