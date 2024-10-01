@@ -1,12 +1,15 @@
-import re
-import pytest
 import json
+import re
+
+import pytest
 from AIWolfNLAgentPython.player.agent import Agent
-from AIWolfNLAgentPython.player.villager import Villager
-from AIWolfNLAgentPython.player.seer import Seer
 from AIWolfNLAgentPython.player.possessed import Possessed
+from AIWolfNLAgentPython.player.seer import Seer
+from AIWolfNLAgentPython.player.villager import Villager
 from AIWolfNLAgentPython.player.werewolf import Werewolf
+
 from aiwolf_nlp_common import util
+
 
 @pytest.fixture
 def name_json() -> dict:
@@ -54,10 +57,10 @@ def finish_json() -> dict:
     return json.loads(finish_json)
 
 def json_fix(json_str:str) -> str:
-    json_str = json_str.replace("'","\"")
-    json_str = re.sub("[a-zA-Z]\"[a-zA-Z]","\'",json_str)
-    json_str = json_str.replace("False","\"False\"")
-    json_str = json_str.replace("True","\"True\"")
+    json_str = json_str.replace("'",'"')
+    json_str = re.sub('[a-zA-Z]"[a-zA-Z]',"'",json_str)
+    json_str = json_str.replace("False",'"False"')
+    json_str = json_str.replace("True",'"True"')
 
     return json_str
 
@@ -105,6 +108,14 @@ def werewolf_text() -> str:
 @pytest.fixture
 def werewolf_json(werewolf_text) -> dict:
     return json.loads(werewolf_text)
+
+@pytest.fixture
+def text_file_path() -> str:
+    return "tests/AIWolfNLAgentPython/res/2019071_44011_AIWolfTalkLogs.txt"
+
+@pytest.fixture
+def config_file_path() -> str:
+    return "tests/AIWolfNLAgentPython/res/config.ini"
 
 @pytest.fixture
 def agent() -> Agent:

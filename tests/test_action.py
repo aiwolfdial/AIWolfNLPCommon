@@ -1,9 +1,10 @@
 from aiwolf_nlp_common.action import AIWolfNLPAction
 
+
 def check_is_action(target_json:dict, is_name:bool=False, is_initialize:bool=False, is_daily_initialize:bool=False,
                     is_talk:bool=False, is_daily_finish:bool=False, is_divine:bool=False, is_vote:bool=False,
                     is_attack:bool=False, is_finish:bool=False) -> None:
-    
+
     request = target_json["request"]
 
     if is_name:
@@ -20,32 +21,32 @@ def check_is_action(target_json:dict, is_name:bool=False, is_initialize:bool=Fal
         assert AIWolfNLPAction.is_daily_initialize(request=request)
     else:
         assert not AIWolfNLPAction.is_daily_initialize(request=request)
-    
+
     if is_talk:
         assert AIWolfNLPAction.is_talk(request=request)
     else:
         assert not AIWolfNLPAction.is_talk(request=request)
-    
+
     if is_daily_finish:
         assert AIWolfNLPAction.is_daily_finish(request=request)
     else:
         assert not AIWolfNLPAction.is_daily_finish(request=request)
-    
+
     if is_divine:
         assert AIWolfNLPAction.is_divine(request=request)
     else:
         assert not AIWolfNLPAction.is_divine(request=request)
-    
+
     if is_vote:
         assert AIWolfNLPAction.is_vote(request=request)
     else:
         assert not AIWolfNLPAction.is_vote(request=request)
-    
+
     if is_attack:
         assert AIWolfNLPAction.is_attack(request=request)
     else:
         assert not AIWolfNLPAction.is_attack(request=request)
-    
+
     if is_finish:
         assert AIWolfNLPAction.is_finish(request=request)
     else:

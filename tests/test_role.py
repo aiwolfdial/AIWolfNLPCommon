@@ -1,9 +1,12 @@
 from typing import Union
-from aiwolf_nlp_common.role.role import AIWolfNLPRoleInfo
-from AIWolfNLAgentPython.player.villager import Villager
-from AIWolfNLAgentPython.player.seer import Seer
-from AIWolfNLAgentPython.player.werewolf import Werewolf
+
 from AIWolfNLAgentPython.player.possessed import Possessed
+from AIWolfNLAgentPython.player.seer import Seer
+from AIWolfNLAgentPython.player.villager import Villager
+from AIWolfNLAgentPython.player.werewolf import Werewolf
+
+from aiwolf_nlp_common.role.role import AIWolfNLPRoleInfo
+
 
 def check_is_role(agent:Union[Villager,Seer,Werewolf,Possessed], is_villager:bool=False, is_seer:bool=False,
                   is_werewolf:bool=False, is_possessed:bool=False) -> None:
@@ -12,17 +15,17 @@ def check_is_role(agent:Union[Villager,Seer,Werewolf,Possessed], is_villager:boo
         assert AIWolfNLPRoleInfo.is_villager(role=agent.role)
     else:
         assert not AIWolfNLPRoleInfo.is_villager(role=agent.role)
-    
+
     if is_seer:
         assert AIWolfNLPRoleInfo.is_seer(role=agent.role)
     else:
         assert not AIWolfNLPRoleInfo.is_seer(role=agent.role)
-    
+
     if is_werewolf:
         assert AIWolfNLPRoleInfo.is_werewolf(role=agent.role)
     else:
         assert not AIWolfNLPRoleInfo.is_werewolf(role=agent.role)
-    
+
     if is_possessed:
         assert AIWolfNLPRoleInfo.is_possessed(role=agent.role)
     else:
@@ -30,12 +33,12 @@ def check_is_role(agent:Union[Villager,Seer,Werewolf,Possessed], is_villager:boo
 
 def check_is_team(agent:Union[Villager,Seer,Werewolf,Possessed], is_villager:bool=False, is_seer:bool=False,
                   is_werewolf:bool=False, is_possessed:bool=False) -> None:
-    
+
     if is_villager or is_seer:
         assert AIWolfNLPRoleInfo.is_villager_team(role=agent.role)
     else:
         assert not AIWolfNLPRoleInfo.is_villager_team(role=agent.role)
-    
+
     if is_werewolf or is_possessed:
         assert AIWolfNLPRoleInfo.is_werewolf_team(role=agent.role)
     else:
@@ -44,7 +47,7 @@ def check_is_team(agent:Union[Villager,Seer,Werewolf,Possessed], is_villager:boo
 def test_exist_role(role_num_map) -> None:
     for role in role_num_map.keys():
         assert AIWolfNLPRoleInfo.is_exist_role(role=role)
-    
+
     not_exist_role = ["ABC", "Villager", "ROLE"]
 
     for role in not_exist_role:
