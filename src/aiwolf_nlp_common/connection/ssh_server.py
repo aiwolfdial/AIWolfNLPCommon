@@ -72,7 +72,7 @@ class SSHServer(Connection):
         config_file = Path(self.ssh_config_path).expanduser()
         ssh_config = paramiko.SSHConfig()
 
-        with Path(config_file).open("r") as file:
+        with Path(config_file).open("r", encoding=self._encode_format) as file:
             ssh_config.parse(file)
 
         return ssh_config.lookup(self.ssh_host_name)
