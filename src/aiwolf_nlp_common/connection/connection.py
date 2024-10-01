@@ -17,7 +17,7 @@ class Connection:
     _encode_format: str = "utf-8"
 
     def __init__(self, inifile: configparser.ConfigParser) -> None:
-        """Receive information from the game server and return it as a string.
+        """Set up the information necessary to communicate with the game server.
 
         Args:
             inifile (configparser.ConfigParser):
