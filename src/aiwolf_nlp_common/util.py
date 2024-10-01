@@ -35,7 +35,7 @@ def is_file_exists(file_path: str) -> bool:
         bool: True if the file exists, False otherwise.
 
     """
-    return Path.is_file(file_path)
+    return Path(file_path).is_file()
 
 
 def is_directory_exists(directory_path: str) -> bool:
@@ -48,7 +48,7 @@ def is_directory_exists(directory_path: str) -> bool:
         bool: True if the directory_path exists, False otherwise.
 
     """
-    return Path.is_dir(directory_path)
+    return Path(directory_path).is_dir()
 
 
 def read_config_file(config_file_path: str) -> configparser.ConfigParser | FileNotFoundError:
@@ -89,8 +89,8 @@ def read_text_file(text_file_path: str) -> list:
     if not is_file_exists(file_path=text_file_path):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), text_file_path)
 
-    with Path.open(text_file_path, mode="r", encoding=ENCODE_FORMAT) as f:
-        return f.readlines()
+    with Path(text_file_path).open(mode="r", encoding=ENCODE_FORMAT) as f:
+        return f.read().splitlines()
 
 
 def split_receive_info(receive: str) -> list:
