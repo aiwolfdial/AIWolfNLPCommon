@@ -1,7 +1,6 @@
 """This module defines methods and settings necessary for TCP communication with the game server.
 
-This module describes the settings and actions to be used when communicating with the game server
-when waiting.
+This method is used to listen for connections from the game server.
 """
 
 from __future__ import annotations
