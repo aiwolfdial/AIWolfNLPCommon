@@ -120,16 +120,14 @@ def config_file_path() -> str:
 @pytest.fixture
 def agent() -> Agent:
     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.check_config(config_path=config_path)
-    inifile.read(config_path,"UTF-8")
+    inifile = util.read_config_file(config_file_path=config_path)
 
     return Agent(inifile=inifile, name="test")
 
 @pytest.fixture
 def agent_villager(villager_text:str) -> Villager:
     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.check_config(config_path=config_path)
-    inifile.read(config_path,"UTF-8")
+    inifile = util.read_config_file(config_file_path=config_path)
 
     agent = Villager(inifile=inifile, name="test_villager")
 
@@ -142,8 +140,7 @@ def agent_villager(villager_text:str) -> Villager:
 @pytest.fixture
 def agent_seer(seer_text:str) -> Seer:
     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.check_config(config_path=config_path)
-    inifile.read(config_path,"UTF-8")
+    inifile = util.read_config_file(config_file_path=config_path)
 
     agent = Seer(inifile=inifile, name="test_seer")
 
@@ -156,8 +153,7 @@ def agent_seer(seer_text:str) -> Seer:
 @pytest.fixture
 def agent_werewolf(werewolf_text:str) -> Werewolf:
     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.check_config(config_path=config_path)
-    inifile.read(config_path,"UTF-8")
+    inifile = util.read_config_file(config_file_path=config_path)
 
     agent = Werewolf(inifile=inifile, name="test_werewolf")
 
@@ -170,8 +166,7 @@ def agent_werewolf(werewolf_text:str) -> Werewolf:
 @pytest.fixture
 def agent_possessed(possessed_text:str) -> Possessed:
     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.check_config(config_path=config_path)
-    inifile.read(config_path,"UTF-8")
+    inifile = util.read_config_file(config_file_path=config_path)
 
     agent = Possessed(inifile=inifile, name="test_possessed")
 
