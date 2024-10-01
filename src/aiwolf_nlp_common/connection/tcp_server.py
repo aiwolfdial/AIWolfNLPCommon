@@ -70,7 +70,7 @@ class TCPServer(TCPConnection):
             str: Information is received from the game server and encoded.
 
         Raises:
-        RuntimeError: If the connection to the game server is lost.
+            RuntimeError: If the connection to the game server is lost.
 
         """
         return super().receive()
