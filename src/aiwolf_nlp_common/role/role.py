@@ -21,7 +21,7 @@ class AIWolfNLPRole:
     __team: AIWolfNLPRoleTeam
 
     def __init__(self, en: str, ja: str, team: AIWolfNLPRoleTeam) -> None:
-        """Check to see if the role exists.
+        """Initialize information about the role.
 
         Args:
             en (str): The English name of the role.
