@@ -103,7 +103,8 @@ def split_receive_info(receive: str) -> list:
         list: A list of notifications or requests from the game server.
 
     """
-    return re.findall("({.*})\n", receive)
+    receive.replace("\n", "")
+    return re.findall("}{")
 
 
 def get_index_from_name(agent_name: str) -> int:

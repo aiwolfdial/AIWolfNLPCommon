@@ -1,6 +1,6 @@
 # Set the maximum line length to 100.
 line-length = 100
-exclude = [".venv", "tests", "__init__.py"]
+exclude = [".venv", "tests"]
 
 [lint]
 select = ["ALL"]
