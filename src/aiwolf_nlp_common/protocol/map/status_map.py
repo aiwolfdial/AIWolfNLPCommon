@@ -27,25 +27,24 @@ class AgentStatus():
 
 class StatusMap(set):
 
-    def change_status(self, agent:str) -> None | ValueError:
+    def reverse_status(self, agent:str) -> None | ValueError:
 
-        if not agent in self:
+        prev_alive = AgentStatus(agent=agent, status=Status.ALIVE.value)
+        prev_dead = AgentStatus(agent=agent, status=Status.DEAD.value)
+
+        if prev_alive not in self and prev_dead not in self:
             raise ValueError(agent + " does not exist in this set.")
         
-        prev_status = None
-        set_status = None
-
-        for elem in self:
-            if elem.agent == agent:
-                prev_status = elem.status
+        next_status = None
         
-        if Status.is_alive(status=prev_status.value):
-            set_status = Status.DEAD.value
+        if prev_alive in self:
+            next_status = prev_dead
+            self.remove(prev_alive)
+            self.add(next_status)
         else:
-            set_status = Status.ALIVE.value
-        
-        self.remove(agent)
-        self.add(AgentStatus(agent=agent, status=set_status))
+            next_status = prev_alive
+            self.remove(prev_dead)
+            self.add(next_status)
 
     def set_alive(self, agent:str) -> None:
         self.add(AgentStatus(agent=agent, status=Status.ALIVE.value))
