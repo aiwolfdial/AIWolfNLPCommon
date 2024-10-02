@@ -27,20 +27,30 @@ class AgentStatus():
 
 class StatusMap(set):
 
-    def set_alive(self, agent:str) -> None | ValueError:
+    def change_status(self, agent:str) -> None | ValueError:
 
         if not agent in self:
             raise ValueError(agent + " does not exist in this set.")
         
+        prev_status = None
+        set_status = None
+
+        for elem in self:
+            if elem.agent == agent:
+                prev_status = elem.status
+        
+        if Status.is_alive(status=prev_status.value):
+            set_status = Status.DEAD.value
+        else:
+            set_status = Status.ALIVE.value
+        
         self.remove(agent)
+        self.add(AgentStatus(agent=agent, status=set_status))
+
+    def set_alive(self, agent:str) -> None:
         self.add(AgentStatus(agent=agent, status=Status.ALIVE.value))
     
-    def set_dead(self, agent:str) -> None | ValueError:
-
-        if not agent in self:
-            raise ValueError(agent + " does not exist in this set.")
-        
-        self.remove(agent)
+    def set_dead(self, agent:str) -> None:
         self.add(AgentStatus(agent=agent, status=Status.DEAD.value))
 
     def set_received_info(self, set_map:dict) -> None:
