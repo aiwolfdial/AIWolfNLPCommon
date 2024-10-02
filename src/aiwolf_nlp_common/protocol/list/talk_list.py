@@ -13,6 +13,9 @@ class TalkInfo():
         self.day = day
         self.idx = idx
         self.text = text
+    
+    def __eq__(self, value: object) -> bool:
+        return self.agent == value.agent and self.day == value.day and self.idx == value.idx and self.text == value.text
 
 class TalkList(list):
 
