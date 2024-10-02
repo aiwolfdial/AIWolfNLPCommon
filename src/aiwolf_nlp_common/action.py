@@ -1,4 +1,3 @@
-
 """This module defines the actions that an agent can perform in the AIWolfNLP game.
 
 It uses an enumeration to represent the various actions required by the game server,
@@ -7,7 +6,6 @@ voting, divine actions, and attacks. The class provides class methods to check i
 the incoming request matches one of the predefined actions, allowing for streamlined
 handling of the game's requests.
 """
-
 
 import enum
 
