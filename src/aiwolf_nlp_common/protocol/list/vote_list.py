@@ -8,6 +8,9 @@ class VoteInfo():
         self.agent = agent
         self.day = day
         self.target = target
+    
+    def __eq__(self, value: object) -> bool:
+        return self.agent == value.agent and self.day == value.day and self.target == value.target
 
 class VoteList(list):
 
