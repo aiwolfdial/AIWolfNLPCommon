@@ -1,4 +1,3 @@
-import json
 import aiwolf_nlp_common.util as util
 
 def test_is_file_exist(text_file_path:str, config_file_path:str) -> None:
@@ -55,3 +54,15 @@ def test_split_receive_info() -> None:
 
     multi_json:str = """{"request": "NAME"}\n"""   
     assert util.split_receive_info(receive=multi_json) == [log_name_json]
+
+def test_get_index_and_name() -> None:
+
+    for i in range(20):
+
+        if i < 10:
+            name = "Agent[0" + str(i) + "]"
+        else:
+            name = "Agent[" + str(i) + "]"
+
+        assert i == util.get_index_from_name(agent_name=name)
+        assert name == util.get_name_from_index(agent_index=i)
