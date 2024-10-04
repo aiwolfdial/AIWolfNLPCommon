@@ -6,11 +6,11 @@ from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
 class ExistingRoleList(list):
     """List extension class for storing “existingRoleList” information."""
 
-    def set_received_info(self, set_list: dict) -> None:
+    def set_received_info(self, set_list: list) -> None:
         """Stores information sent from the game server in class variables.
 
         Args:
-            set_list (dict): Information on “existingRoleList” sent from the game server.
+            set_list (list): Information on “existingRoleList” sent from the game server.
         """
         self.clear()
 
