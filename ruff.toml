@@ -4,7 +4,7 @@ exclude = [".venv", "tests", "__init__.py"]
 
 [lint]
 select = ["ALL"]
-ignore = ["W191", "D206", "D203", "D213", "COM812", "ISC001", "S311"]
+ignore = ["W191", "D206", "D203", "D213", "COM812", "ISC001", "S311", "PLR0913"]
 fixable = ["ALL"]
 unfixable = []
 
