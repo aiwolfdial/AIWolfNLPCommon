@@ -56,7 +56,7 @@ class TalkInfo:
         """Comparison method for making comparisons in “TalkInfo”.
 
         Args:
-            value (object): TalkInfo” for comparison.
+            value (object): Comparison object.
 
         Returns:
             bool: True if the all values are the same., False otherwise.
