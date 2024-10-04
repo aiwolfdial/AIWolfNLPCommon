@@ -1,1 +1,1 @@
-from .remain_talk_map import AgentRemainTalk, RemainTalkMap
+from .remain_talk_map import AgentRemainTalkInfo, RemainTalkMap

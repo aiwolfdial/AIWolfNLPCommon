@@ -1,7 +1,7 @@
 """This method is used to define a class for storing “remainTalkMap” information."""
 
 
-class AgentRemainTalk:
+class AgentRemainTalkInfo:
     """Class for defining elements of “remainTalkMap”."""
 
     agent: str
@@ -52,5 +52,5 @@ class RemainTalkMap(set):
             return
 
         for agent in set_map:
-            add_elem = AgentRemainTalk(agent=agent, remain_talk_number=set_map[agent])
+            add_elem = AgentRemainTalkInfo(agent=agent, remain_talk_number=set_map[agent])
             self.add(add_elem)
