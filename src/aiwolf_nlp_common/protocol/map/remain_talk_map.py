@@ -34,6 +34,9 @@ class AgentRemainTalkInfo:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
+        if value is None or not isinstance(value, AgentRemainTalkInfo):
+            return False
+
         return self.agent == value.agent and self.remain_talk_number == value.remain_talk_number
 
     @property
