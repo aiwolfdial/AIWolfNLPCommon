@@ -1,1 +1,2 @@
 1. voteListがエージェントに与えられているか確認する
+2. json.loadsでobject_hookを使用する
