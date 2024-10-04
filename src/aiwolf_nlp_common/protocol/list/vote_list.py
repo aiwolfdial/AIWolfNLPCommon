@@ -14,7 +14,7 @@ class VoteInfo():
 
 class VoteList(list):
 
-    def set_received_info(self, set_list:dict) -> None:
+    def set_received_info(self, set_list:list) -> None:
         self.clear()
 
         if len(set_list) == 0:
