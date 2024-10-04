@@ -57,7 +57,13 @@ class TalkInfo:
 
         Args:
             value (object): TalkInfo” for comparison.
+
+        Returns:
+            bool: True if the all values are the same., False otherwise.
         """
+        if value is None or not isinstance(value, TalkInfo):
+            return False
+
         return (
             self.agent == value.agent
             and self.day == value.day
