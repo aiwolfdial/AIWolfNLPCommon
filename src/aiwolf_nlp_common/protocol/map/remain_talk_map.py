@@ -4,8 +4,8 @@
 class AgentRemainTalkInfo:
     """Class for defining elements of “remainTalkMap”."""
 
-    agent: str
-    remain_talk_number: int
+    __agent: str
+    __remain_talk_number: int
 
     def __init__(self, agent: str, remain_talk_number: int) -> None:
         """Initialize “AgentRemainTalk”.
@@ -14,8 +14,8 @@ class AgentRemainTalkInfo:
             agent (str): Agent name, such as “Agent[xx]”.
             remain_talk_number (int): Remaining number of utterances.
         """
-        self.agent = agent
-        self.remain_talk_number = remain_talk_number
+        self.__agent = agent
+        self.__remain_talk_number = remain_talk_number
 
     def __hash__(self) -> int:
         """Comparison method for making comparisons in “AgentRemainTalk”.
@@ -35,6 +35,30 @@ class AgentRemainTalkInfo:
             bool: True if the all values are the same., False otherwise.
         """
         return self.agent == value.agent and self.remain_talk_number == value.remain_talk_number
+
+    @property
+    def agent(self) -> str:
+        """Gets the agent's name.
+
+        This property returns the agent's name in the format "Agent[xx]",
+        where "xx" is the agent's identifier.
+
+        Returns:
+            str: Agent name, such as “Agent[xx]”.
+        """
+        return self.__agent
+
+    @property
+    def remain_talk_number(self) -> int:
+        """Gets the agent's remaining number of utterances.
+
+        This property returns the number of remaining utterances that
+        the agent can make.
+
+        Returns:
+            int: The remaining number of utterances.
+        """
+        return self.__remain_talk_number
 
 
 class RemainTalkMap(set):
