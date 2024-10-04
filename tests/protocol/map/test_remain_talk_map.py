@@ -13,3 +13,18 @@ def test_set_received_info(initialize_json:dict) -> None:
         check_set.add(add_elem)
 
     assert test_map == check_set
+
+def test_talk_info_eq() -> None:
+    
+    for i in range(5):
+        name = "Agent[0" + str(i+1) + "]"
+        elem1 = AgentRemainTalkInfo(agent=name, remain_talk_number=5)
+        elem2 = AgentRemainTalkInfo(agent=name, remain_talk_number=5)
+        elem3 = AgentRemainTalkInfo(agent=name+"]", remain_talk_number=5)
+        elem4 = AgentRemainTalkInfo(agent=name, remain_talk_number=6)
+
+        assert elem1 == elem2
+        assert elem1 != elem3
+        assert elem1 != elem4
+        assert elem1 != None
+        assert elem1 != i
