@@ -15,3 +15,13 @@ def test_set_received_info(initialize_json:dict, talk_list_json:dict) -> None:
 
     assert len(talk_list) == len(result)
     assert all(x == y and type(x) == type(y) for x, y in zip(talk_list, result))
+
+    talk:TalkInfo
+    for talk in talk_list:
+        
+        if talk.text == "Skip":
+            assert talk.is_skip() and not talk.is_over()
+        elif talk.text == "Over":
+            assert not talk.is_skip() and talk.is_over()
+        else:
+            assert not talk.is_skip() and not talk.is_over()
