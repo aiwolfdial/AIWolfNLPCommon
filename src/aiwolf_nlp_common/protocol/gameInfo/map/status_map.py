@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import enum
-from typing import Literal
 
 
 class Status(enum.Enum):
@@ -41,7 +40,7 @@ class AgentStatus:
     """Class for defining elements of “statusMap”."""
 
     __agent: str
-    __status: Literal[Status.ALIVE, Status.DEAD]
+    __status: Status
 
     def __init__(self, agent: str, status: str) -> None:
         """Initialize “AgentStatus”.
@@ -68,7 +67,7 @@ class AgentStatus:
             value (object): Comparison object.
 
         Returns:
-            bool: True if the all values are the same., False otherwise.
+            bool: True if all values are the same, False otherwise.
         """
         if value is None or not isinstance(value, AgentStatus):
             return False
@@ -87,7 +86,7 @@ class AgentStatus:
         return self.__agent
 
     @property
-    def status(self) -> Status.ALIVE | Status.DEAD:
+    def status(self) -> Status:
         """Gets the status.
 
         Returns:
