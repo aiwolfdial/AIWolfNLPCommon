@@ -23,7 +23,7 @@ class AgentRemainTalkInfo:
         Returns:
             int: Result of hashing by agent name.
         """
-        return hash(self.agent)
+        return hash((self.agent, self.remain_talk_number))
 
     def __eq__(self, value: object) -> bool:
         """Comparison method for making comparisons in “AgentRemainTalk”.
