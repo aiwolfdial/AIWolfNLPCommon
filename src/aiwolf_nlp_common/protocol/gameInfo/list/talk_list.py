@@ -1,7 +1,5 @@
 """This method is used to define a class for storing “talkList” information."""
 
-from __future__ import annotations
-
 
 class TalkInfo:
     """Class for defining elements of “talkList”."""

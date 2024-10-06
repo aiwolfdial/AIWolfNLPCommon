@@ -51,7 +51,7 @@ def is_directory_exists(directory_path: str) -> bool:
     return Path(directory_path).is_dir()
 
 
-def read_config_file(config_file_path: str) -> configparser.ConfigParser | FileNotFoundError:
+def read_config_file(config_file_path: str) -> configparser.ConfigParser:
     """Reads the specified config file.
 
     Args:

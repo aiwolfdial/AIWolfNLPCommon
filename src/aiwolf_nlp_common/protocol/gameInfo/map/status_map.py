@@ -99,7 +99,7 @@ class AgentStatus:
 class StatusMap(set):
     """Set extension class for storing “statusMap” information."""
 
-    def reverse_status(self, agent: str) -> None | ValueError:
+    def reverse_status(self, agent: str) -> None:
         """Reverses the status of the agent.
 
         Args:
