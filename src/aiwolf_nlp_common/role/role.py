@@ -41,6 +41,8 @@ class AIWolfNLPRole:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
+        if value is None or not isinstance(value, AIWolfNLPRole):
+            return False
         return self.en == value.en and self.ja == value.ja and self.team == value.team
 
     @property
