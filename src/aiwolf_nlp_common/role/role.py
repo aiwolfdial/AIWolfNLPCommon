@@ -38,7 +38,6 @@ class AIWolfNLPRole:
 
         Returns:
         str: Role in English.
-
         """
         return self.__en
 
@@ -48,7 +47,6 @@ class AIWolfNLPRole:
 
         Returns:
         str: Role in Japanese.
-
         """
         return self.__ja
 
@@ -58,7 +56,6 @@ class AIWolfNLPRole:
 
         Returns:
         AIWolfNLPRoleTeam: Team of role.
-
         """
         return self.__team
 
@@ -67,7 +64,6 @@ class AIWolfNLPRole:
 
         Returns:
         set: Role in English and Japanese.
-
         """
         return {self.__en, self.__ja}
 
@@ -101,7 +97,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is an existing role, False otherwise.
-
         """
         is_exist = False
 
@@ -120,7 +115,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is "VILLAGER" or "村人", False otherwise.
-
         """
         return role in cls.VILLAGER.value.get_translations()
 
@@ -133,7 +127,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is "SEER" or "占い師", False otherwise.
-
         """
         return role in cls.SEER.value.get_translations()
 
@@ -146,7 +139,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is "MEDIUM" or "霊媒師", False otherwise.
-
         """
         return role in cls.MEDIUM.value.get_translations()
 
@@ -159,7 +151,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is "BODYGUARD" or "騎士", False otherwise.
-
         """
         return role in cls.BODYGUARD.value.get_translations()
 
@@ -172,7 +163,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is "WEREWOLF" or "人狼", False otherwise.
-
         """
         return role in cls.WEREWOLF.value.get_translations()
 
@@ -185,7 +175,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             bool: True if the value is "POSSESSED" or "狂人", False otherwise.
-
         """
         return role in cls.POSSESSED.value.get_translations()
 
@@ -201,7 +190,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Raises:
                     ValueError: If a non-existent role is entered.
-
         """
         if not cls.is_exist_role(role=role):
             raise ValueError(role + "is not exist role.")
@@ -223,7 +211,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Raises:
             ValueError: If a non-existent role is entered.
-
         """
         if not cls.is_exist_role(role=role):
             raise ValueError(role + "is not exist role.")
@@ -234,12 +221,30 @@ class AIWolfNLPRoleInfo(enum.Enum):
         return None
 
     @classmethod
+    def get_role_info(cls, role: str) -> AIWolfNLPRoleInfo:
+        """Get the AIWolfNLPRoleInfo instance for the role that matches the argument.
+
+        Args:
+            role (str): The value associated with the "role" key sent from the game server.
+
+        Returns:
+            AIWolfNLPRoleInfo: The AIWolfNLPRoleInfo instance that corresponds to the given role.
+
+        Raises:
+            ValueError: If a non-existent role is provided.
+        """
+        for role_info in cls.__members__.values():
+            if role in role_info.value.get_translations():
+                return role_info.value
+
+        raise ValueError(role + "is not exist role.")
+
+    @classmethod
     def get_villager_ja(cls) -> str:
         """Retrieve the Japanese name for the "VILLAGER" role.
 
         Returns:
             str: The Japanese name for the "VILLAGER" role.
-
         """
         return cls.VILLAGER.value.ja
 
@@ -249,7 +254,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             str: The Japanese name for the "SEER" role.
-
         """
         return cls.SEER.value.ja
 
@@ -259,7 +263,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             str: The Japanese name for the "MEDIUM" role.
-
         """
         return cls.MEDIUM.value.ja
 
@@ -269,7 +272,6 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             str: The Japanese name for the "WEREWOLF" role.
-
         """
         return cls.WEREWOLF.value.ja
 
@@ -279,6 +281,5 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         Returns:
             str: The Japanese name for the "POSSESSED" role.
-
         """
         return cls.POSSESSED.value.ja
