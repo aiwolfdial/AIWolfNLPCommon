@@ -8,8 +8,8 @@ from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
 class AgentRole:
     """Class for defining elements of “roleMap”."""
 
-    agent: str
-    role: Literal[
+    __agent: str
+    __role: Literal[
         AIWolfNLPRoleInfo.VILLAGER,
         AIWolfNLPRoleInfo.SEER,
         AIWolfNLPRoleInfo.MEDIUM,
@@ -24,20 +24,20 @@ class AgentRole:
             agent (str): Agent name, such as “Agent[xx]”.
             role (str): String of the role.
         """
-        self.agent = agent
+        self.__agent = agent
 
         if AIWolfNLPRoleInfo.is_villager(role=role):
-            self.role = AIWolfNLPRoleInfo.VILLAGER
+            self.__role = AIWolfNLPRoleInfo.VILLAGER
         elif AIWolfNLPRoleInfo.is_seer(role=role):
-            self.role = AIWolfNLPRoleInfo.SEER
+            self.__role = AIWolfNLPRoleInfo.SEER
         elif AIWolfNLPRoleInfo.is_medium(role=role):
-            self.role = AIWolfNLPRoleInfo.MEDIUM
+            self.__role = AIWolfNLPRoleInfo.MEDIUM
         elif AIWolfNLPRoleInfo.is_possessed(role=role):
-            self.role = AIWolfNLPRoleInfo.POSSESSED
+            self.__role = AIWolfNLPRoleInfo.POSSESSED
         elif AIWolfNLPRoleInfo.is_werewolf(role=role):
-            self.role = AIWolfNLPRoleInfo.WEREWOLF
+            self.__role = AIWolfNLPRoleInfo.WEREWOLF
         else:
-            self.role = AIWolfNLPRoleInfo.ANY
+            self.__role = AIWolfNLPRoleInfo.ANY
 
     def __hash__(self) -> int:
         """Comparison method for making comparisons in “AgentRole”.
@@ -57,6 +57,27 @@ class AgentRole:
             bool: True if the all values are the same., False otherwise.
         """
         return self.agent == value.agent and self.role == value.role
+
+    @property
+    def agent(self) -> str:
+        """Gets the agent's name.
+
+        This property returns the agent's name in the format "Agent[xx]",
+        where "xx" is the agent's identifier.
+
+        Returns:
+            str: Agent name, such as “Agent[xx]”.
+        """
+        return self.__agent
+
+    @property
+    def role(self) -> str:
+        """Gets the role string.
+
+        Returns:
+            str: String of the role.
+        """
+        return self.__role
 
 
 class RoleMap(set):
