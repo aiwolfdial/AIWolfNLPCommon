@@ -1,21 +1,13 @@
 """This method is used to define a class for storing “roleMap” information."""
 
-from typing import Literal
-
-from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
+from aiwolf_nlp_common.role import AIWolfNLPRole, AIWolfNLPRoleInfo
 
 
 class AgentRole:
     """Class for defining elements of “roleMap”."""
 
     __agent: str
-    __role: Literal[
-        AIWolfNLPRoleInfo.VILLAGER,
-        AIWolfNLPRoleInfo.SEER,
-        AIWolfNLPRoleInfo.MEDIUM,
-        AIWolfNLPRoleInfo.POSSESSED,
-        AIWolfNLPRoleInfo.WEREWOLF,
-    ]
+    __role: AIWolfNLPRole
 
     def __init__(self, agent: str, role: str) -> None:
         """Initialize “AgentRole”.
@@ -25,19 +17,7 @@ class AgentRole:
             role (str): String of the role.
         """
         self.__agent = agent
-
-        if AIWolfNLPRoleInfo.is_villager(role=role):
-            self.__role = AIWolfNLPRoleInfo.VILLAGER
-        elif AIWolfNLPRoleInfo.is_seer(role=role):
-            self.__role = AIWolfNLPRoleInfo.SEER
-        elif AIWolfNLPRoleInfo.is_medium(role=role):
-            self.__role = AIWolfNLPRoleInfo.MEDIUM
-        elif AIWolfNLPRoleInfo.is_possessed(role=role):
-            self.__role = AIWolfNLPRoleInfo.POSSESSED
-        elif AIWolfNLPRoleInfo.is_werewolf(role=role):
-            self.__role = AIWolfNLPRoleInfo.WEREWOLF
-        else:
-            self.__role = AIWolfNLPRoleInfo.ANY
+        self.__role = AIWolfNLPRoleInfo.get_role_info(role=role)
 
     def __hash__(self) -> int:
         """Comparison method for making comparisons in “AgentRole”.
@@ -45,7 +25,7 @@ class AgentRole:
         Returns:
             int: Result of hashing by agent name and role string.
         """
-        return hash((self.agent, self.role))
+        return hash((self.agent, self.role.en))
 
     def __eq__(self, value: object) -> bool:
         """Comparison method for making comparisons in “AgentRole”.
@@ -74,11 +54,11 @@ class AgentRole:
         return self.__agent
 
     @property
-    def role(self) -> str:
+    def role(self) -> AIWolfNLPRole:
         """Gets the role string.
 
         Returns:
-            str: String of the role.
+            AIWolfNLPRoleInfo: role information.
         """
         return self.__role
 

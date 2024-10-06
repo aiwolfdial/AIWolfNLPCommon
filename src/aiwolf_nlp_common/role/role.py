@@ -221,7 +221,7 @@ class AIWolfNLPRoleInfo(enum.Enum):
         return None
 
     @classmethod
-    def get_role_info(cls, role: str) -> AIWolfNLPRoleInfo:
+    def get_role_info(cls, role: str) -> AIWolfNLPRole:
         """Get the AIWolfNLPRoleInfo instance for the role that matches the argument.
 
         Args:
