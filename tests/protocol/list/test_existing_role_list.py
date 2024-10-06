@@ -6,6 +6,6 @@ def test_set_received_info(initialize_json:dict) -> None:
     vote_list = ExistingRoleList()
     vote_list.set_received_info(set_list=initialize_json["gameInfo"]["existingRoleList"])
 
-    check_list = [AIWolfNLPRoleInfo.POSSESSED, AIWolfNLPRoleInfo.SEER, AIWolfNLPRoleInfo.VILLAGER, AIWolfNLPRoleInfo.WEREWOLF]
+    check_list = [AIWolfNLPRoleInfo.POSSESSED.value, AIWolfNLPRoleInfo.SEER.value, AIWolfNLPRoleInfo.VILLAGER.value, AIWolfNLPRoleInfo.WEREWOLF.value]
 
     assert vote_list == check_list
