@@ -40,8 +40,8 @@ class Status(enum.Enum):
 class AgentStatus:
     """Class for defining elements of “statusMap”."""
 
-    agent: str
-    status: Literal[Status.ALIVE, Status.DEAD]
+    __agent: str
+    __status: Literal[Status.ALIVE, Status.DEAD]
 
     def __init__(self, agent: str, status: str) -> None:
         """Initialize “AgentStatus”.
@@ -50,8 +50,8 @@ class AgentStatus:
             agent (str): Agent name, such as “Agent[xx]”.
             status (str): String of the status.
         """
-        self.agent = agent
-        self.status = Status.ALIVE if Status.is_alive(status=status) else Status.DEAD
+        self.__agent = agent
+        self.__status = Status.ALIVE if Status.is_alive(status=status) else Status.DEAD
 
     def __hash__(self) -> int:
         """Comparison method for making comparisons in “AgentStatus”.
@@ -73,6 +73,27 @@ class AgentStatus:
         if value is None or not isinstance(value, AgentStatus):
             return False
         return self.agent == value.agent and self.status.value == value.status.value
+
+    @property
+    def agent(self) -> str:
+        """Gets the agent's name.
+
+        This property returns the agent's name in the format "Agent[xx]",
+        where "xx" is the agent's identifier.
+
+        Returns:
+            str: Agent name, such as “Agent[xx]”.
+        """
+        return self.__agent
+
+    @property
+    def status(self) -> Status.ALIVE | Status.DEAD:
+        """Gets the status.
+
+        Returns:
+            Status.ALIVE | Status.DEAD: status.
+        """
+        return self.__status
 
 
 class StatusMap(set):
