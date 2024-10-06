@@ -19,6 +19,17 @@ class AIWolfNLPRoleTeam:
         self.__en = en
         self.__ja = ja
 
+    def __eq__(self, value: object) -> bool:
+        """Comparison method for making comparisons in “AIWolfNLPRoleTeam”.
+
+        Args:
+            value (object): Comparison object.
+
+        Returns:
+            bool: True if the all values are the same., False otherwise.
+        """
+        return self.en == value.en and self.ja == value.ja
+
     @property
     def en(self) -> str:
         """Returns the role team assigned at init in English.
