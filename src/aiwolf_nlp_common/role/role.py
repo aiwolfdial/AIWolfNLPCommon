@@ -83,21 +83,31 @@ class AIWolfNLPRoleInfo(enum.Enum):
     """A class that declares information about positions sent by the game server in AIWolfNLP."""
 
     # villager team
-    VILLAGER = AIWolfNLPRole(en="VILLAGER", ja="村人", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM)
-    SEER = AIWolfNLPRole(en="SEER", ja="占い師", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM)
-    MEDIUM = AIWolfNLPRole(en="MEDIUM", ja="霊媒師", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM)
-    BODYGUARD = AIWolfNLPRole(en="BODYGUARD", ja="騎士", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM)
-    FREEMASON = AIWolfNLPRole(en="FREEMASON", ja="共有者", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM)
+    VILLAGER = AIWolfNLPRole(
+        en="VILLAGER", ja="村人", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+    )
+    SEER = AIWolfNLPRole(en="SEER", ja="占い師", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value)
+    MEDIUM = AIWolfNLPRole(en="MEDIUM", ja="霊媒師", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value)
+    BODYGUARD = AIWolfNLPRole(
+        en="BODYGUARD", ja="騎士", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+    )
+    FREEMASON = AIWolfNLPRole(
+        en="FREEMASON", ja="共有者", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+    )
 
     # werewolf team
-    WEREWOLF = AIWolfNLPRole(en="WEREWOLF", ja="人狼", team=AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM)
-    POSSESSED = AIWolfNLPRole(en="POSSESSED", ja="狂人", team=AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM)
+    WEREWOLF = AIWolfNLPRole(
+        en="WEREWOLF", ja="人狼", team=AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM.value
+    )
+    POSSESSED = AIWolfNLPRole(
+        en="POSSESSED", ja="狂人", team=AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM.value
+    )
 
     # fox team
-    FOX = AIWolfNLPRole(en="FOX", ja="妖狐", team=AIWolfNLPRoleTeamInfo.FOX_TEAM)
+    FOX = AIWolfNLPRole(en="FOX", ja="妖狐", team=AIWolfNLPRoleTeamInfo.FOX_TEAM.value)
 
     # any team
-    ANY = AIWolfNLPRole(en="ANY", ja="?", team=AIWolfNLPRoleTeamInfo.ANY_TEAM)
+    ANY = AIWolfNLPRole(en="ANY", ja="?", team=AIWolfNLPRoleTeamInfo.ANY_TEAM.value)
 
     @classmethod
     def is_exist_role(cls, role: str) -> bool:
@@ -200,14 +210,14 @@ class AIWolfNLPRoleInfo(enum.Enum):
         bool: True if the value represents a role from the Villager team, False otherwise.
 
         Raises:
-                    ValueError: If a non-existent role is entered.
+            ValueError: If a non-existent role is entered.
         """
         if not cls.is_exist_role(role=role):
             raise ValueError(role + "is not exist role.")
 
         for role_info in cls.__members__.values():
             if role in role_info.value.get_translations():
-                return role_info.value.team == AIWolfNLPRoleTeamInfo.VILLAGER_TEAM
+                return role_info.value.team == AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
         return None
 
     @classmethod
@@ -228,7 +238,7 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         for role_info in cls.__members__.values():
             if role in role_info.value.get_translations():
-                return role_info.value.team == AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM
+                return role_info.value.team == AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM.value
         return None
 
     @classmethod
