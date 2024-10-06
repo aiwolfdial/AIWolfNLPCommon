@@ -1,14 +1,29 @@
-from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
+"""This method is used to define a class for storing “roleMap” information."""
 
 from typing import Literal
 
-class AgentRole():
-    agent:str
-    role:Literal[AIWolfNLPRoleInfo.VILLAGER, AIWolfNLPRoleInfo.SEER,
-                 AIWolfNLPRoleInfo.MEDIUM, AIWolfNLPRoleInfo.POSSESSED,
-                 AIWolfNLPRoleInfo.WEREWOLF]
+from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
 
-    def __init__(self, agent:str, role:str) -> None:
+
+class AgentRole:
+    """Class for defining elements of “roleMap”."""
+
+    agent: str
+    role: Literal[
+        AIWolfNLPRoleInfo.VILLAGER,
+        AIWolfNLPRoleInfo.SEER,
+        AIWolfNLPRoleInfo.MEDIUM,
+        AIWolfNLPRoleInfo.POSSESSED,
+        AIWolfNLPRoleInfo.WEREWOLF,
+    ]
+
+    def __init__(self, agent: str, role: str) -> None:
+        """Initialize “AgentRole”.
+
+        Args:
+            agent (str): Agent name, such as “Agent[xx]”.
+            role (str): String of the role.
+        """
         self.agent = agent
 
         if AIWolfNLPRoleInfo.is_villager(role=role):
@@ -23,22 +38,41 @@ class AgentRole():
             self.role = AIWolfNLPRoleInfo.WEREWOLF
         else:
             self.role = AIWolfNLPRoleInfo.ANY
-    
+
     def __hash__(self) -> int:
+        """Comparison method for making comparisons in “AgentRole”.
+
+        Returns:
+            int: Result of hashing by agent name.
+        """
         return hash(self.agent)
-    
+
     def __eq__(self, value: object) -> bool:
+        """Comparison method for making comparisons in “AgentRole”.
+
+        Args:
+            value (object): Comparison object.
+
+        Returns:
+            bool: True if the all values are the same., False otherwise.
+        """
         return self.agent == value.agent and self.role == value.role
 
+
 class RoleMap(set):
-    
-    
-    def set_received_info(self, set_map:dict) -> None:
+    """Set extension class for storing “roleMap” information."""
+
+    def set_received_info(self, set_map: dict) -> None:
+        """Stores information sent from the game server in class variables.
+
+        Args:
+            set_map (map): Information on “roleMap” sent from the game server.
+        """
         self.clear()
 
         if len(set_map) == 0:
             return
-        
-        for agent in set_map.keys():
+
+        for agent in set_map:
             add_elem = AgentRole(agent=agent, role=set_map[agent])
             self.add(add_elem)
