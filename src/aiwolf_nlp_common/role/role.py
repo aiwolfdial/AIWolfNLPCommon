@@ -179,7 +179,7 @@ class AIWolfNLPRoleInfo(enum.Enum):
         return role in cls.POSSESSED.value.get_translations()
 
     @classmethod
-    def is_villager_team(cls, role: str) -> bool | ValueError:
+    def is_villager_team(cls, role: str) -> bool:
         """Check if the value associated with the "role" key belongs to the Villager team.
 
         Args:
@@ -200,7 +200,7 @@ class AIWolfNLPRoleInfo(enum.Enum):
         return None
 
     @classmethod
-    def is_werewolf_team(cls, role: str) -> bool | ValueError:
+    def is_werewolf_team(cls, role: str) -> bool:
         """Check if the value associated with the "role" key belongs to the Werewolf team.
 
         Args:
