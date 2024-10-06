@@ -21,7 +21,7 @@ class AgentRemainTalkInfo:
         """Comparison method for making comparisons in “AgentRemainTalk”.
 
         Returns:
-            int: Result of hashing by agent name.
+            int: Result of hashing by agent name and remain_talk_number.
         """
         return hash((self.agent, self.remain_talk_number))
 

@@ -57,7 +57,7 @@ class AgentStatus:
         """Comparison method for making comparisons in “AgentStatus”.
 
         Returns:
-            int: Result of hashing by agent name.
+            int: Result of hashing by agent name and status.
         """
         return hash((self.agent, self.status.value))
 

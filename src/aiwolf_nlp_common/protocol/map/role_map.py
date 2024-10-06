@@ -43,7 +43,7 @@ class AgentRole:
         """Comparison method for making comparisons in “AgentRole”.
 
         Returns:
-            int: Result of hashing by agent name.
+            int: Result of hashing by agent name and role string.
         """
         return hash((self.agent, self.role))
 
