@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.protocol.map.role_map import RoleMap, AgentRole
+from aiwolf_nlp_common.protocol.gameInfo.map.role_map import RoleMap, AgentRole
 from aiwolf_nlp_common.role.role import AIWolfNLPRoleInfo
 
 

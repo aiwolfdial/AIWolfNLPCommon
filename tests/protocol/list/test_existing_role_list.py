@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.protocol.list.existing_role_list import ExistingRoleList
+from aiwolf_nlp_common.protocol.gameInfo.list.existing_role_list import ExistingRoleList
 from aiwolf_nlp_common.role.role import AIWolfNLPRoleInfo
 
 

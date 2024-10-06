@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.protocol.map.status_map import StatusMap, Status, AgentStatus
+from aiwolf_nlp_common.protocol.gameInfo.map.status_map import StatusMap, Status, AgentStatus
 
 
 def test_set_received_info(initialize_json:dict, status_map_json:dict) -> None:

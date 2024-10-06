@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.protocol.list.vote_list import VoteList, VoteInfo
+from aiwolf_nlp_common.protocol.gameInfo.list.vote_list import VoteList, VoteInfo
 
 
 def test_set_received_info(initialize_json:dict, vote_list_json:dict) -> None:

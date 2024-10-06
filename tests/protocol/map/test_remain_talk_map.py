@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.protocol.map.remain_talk_map import RemainTalkMap, AgentRemainTalkInfo
+from aiwolf_nlp_common.protocol.gameInfo.map.remain_talk_map import RemainTalkMap, AgentRemainTalkInfo
 
 
 def test_set_received_info(initialize_json:dict) -> None:
