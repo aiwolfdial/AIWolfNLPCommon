@@ -70,6 +70,8 @@ class AgentStatus:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
+        if value is None or not isinstance(value, AgentStatus):
+            return False
         return self.agent == value.agent and self.status.value == value.status.value
 
 
