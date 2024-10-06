@@ -29,6 +29,8 @@ class VoteInfo:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
+        if value is None or not isinstance(value, VoteInfo):
+            return False
         return self.agent == value.agent and self.day == value.day and self.target == value.target
 
 
