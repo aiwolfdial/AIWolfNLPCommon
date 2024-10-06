@@ -45,7 +45,7 @@ class AgentRole:
         Returns:
             int: Result of hashing by agent name.
         """
-        return hash(self.agent)
+        return hash((self.agent, self.role))
 
     def __eq__(self, value: object) -> bool:
         """Comparison method for making comparisons in “AgentRole”.
