@@ -55,7 +55,7 @@ class AgentRole:
 
     @property
     def role(self) -> AIWolfNLPRole:
-        """Gets the role string.
+        """Gets the role.
 
         Returns:
             AIWolfNLPRoleInfo: role information.
