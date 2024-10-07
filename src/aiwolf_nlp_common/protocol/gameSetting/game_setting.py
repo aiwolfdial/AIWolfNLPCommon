@@ -51,3 +51,23 @@ class GameSetting:
         self.max_attack_revote = max_attack_revote
         self.is_enable_role_request = is_enable_role_request
         self.playe_num = playe_num
+
+    @staticmethod
+    def object_hook(value: object) -> "GameSetting":
+        return GameSetting(
+            role_num_map=value["roleNumMap"],
+            max_talk=value["maxTalk"],
+            max_talk_turn=value["maxTalkTurn"],
+            max_whisper=value["maxWhisper"],
+            max_whisper_turn=value["maxWhisperTurn"],
+            max_skip=value["maxSkip"],
+            is_enable_no_attack=value["isEnableNoAttack"],
+            is_vote_visible=value["isVoteVisible"],
+            is_talk_on_first_day=value["isTalkOnFirstDay"],
+            response_timeout=value["responseTimeout"],
+            action_timeout=value["actionTimeout"],
+            max_revote=value["maxRevote"],
+            max_attack_revote=value["maxAttackRevote"],
+            is_enable_role_request=value["isEnableRoleRequest"],
+            playe_num=value["playerNum"],
+        )
