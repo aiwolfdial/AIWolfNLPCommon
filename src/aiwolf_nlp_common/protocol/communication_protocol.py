@@ -1,5 +1,5 @@
-from gameSetting.game_setting import GameSetting
-from gameSetting.map.role_num_map import RoleNumMap
+from .gameSetting.game_setting import GameSetting
+from .gameSetting.map.role_num_map import RoleNumMap
 
 
 class CommunicationProtocol:
