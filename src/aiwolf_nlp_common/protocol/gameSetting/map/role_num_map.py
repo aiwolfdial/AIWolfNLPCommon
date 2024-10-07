@@ -63,17 +63,17 @@ class RoleNumInfo:
 class RoleNumMap(set):
     """Set extension class for storing “roleNumMap” information."""
 
-    def set_received_info(self, set_map: dict) -> None:
+    @staticmethod
+    def object_hook(value: dict) -> "RoleNumMap":
         """Stores information sent from the game server in class variables.
 
         Args:
-            set_map (map): Information on “roleNumMap” sent from the game server.
+            value (dict): Information on “roleNumMap” sent from the game server.
         """
-        self.clear()
+        result = RoleNumMap()
 
-        if len(set_map) == 0:
-            return
+        for role in value:
+            add_elem = RoleNumInfo(role=role, allocated_count=value[role])
+            result.add(add_elem)
 
-        for agent in set_map:
-            add_elem = RoleNumInfo(agent=agent, role=set_map[agent])
-            self.add(add_elem)
+        return result
