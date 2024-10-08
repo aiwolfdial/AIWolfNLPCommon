@@ -37,7 +37,7 @@ class VoteInfo:
 class VoteList(list):
     """List extension class for storing “voteList” information."""
 
-    def set_received_info(self, set_list: list) -> None:
+    def from_json(self, set_list: list) -> None:
         """Stores information sent from the game server in class variables.
 
         Args:
