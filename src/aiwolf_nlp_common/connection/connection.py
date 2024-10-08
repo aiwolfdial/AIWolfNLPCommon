@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -25,7 +26,7 @@ class Connection:
         """
         self.buffer = inifile.getint("connection", "buffer")
 
-    def receive(self, socket: socket.socket | paramiko.channel.Channel) -> str | RuntimeError:
+    def receive(self, socket: socket.socket | paramiko.channel.Channel) -> list | RuntimeError:
         """Receive information from the game server and return it as a string.
 
         Args:
@@ -33,15 +34,15 @@ class Connection:
                 socket that establishes the connection to the game server.
 
         Returns:
-            str: Information is received from the game server and encoded.
+            list: Information is received from the game server and encoded.
 
         Raises:
-        RuntimeError: If the connection to the game server is lost.
+            RuntimeError: If the connection to the game server is lost.
 
         """
         responses = b""
 
-        while not self.is_json_complate(responses=responses):
+        while not Connection.is_json_complate(responses=responses):
             response = socket.recv(self.buffer)
 
             if response == b"":
@@ -50,7 +51,7 @@ class Connection:
 
             responses += response
 
-        return responses.decode(self._encode_format)
+        return Connection.split_receive_info(receive=responses.decode(self._encode_format))
 
     def send(self, socket: socket.socket | paramiko.channel.Channel, message: str) -> None:
         """Send information to the game server with a new line.
@@ -106,3 +107,16 @@ class Connection:
 
         """
         return "{" in receive_data
+
+    @classmethod
+    def split_receive_info(cls, receive: str) -> list:
+        """Split multiple pieces of information received in bulk from the game server.
+
+        Args:
+            receive (str): String received from the game server.
+
+        Returns:
+            list: A list of notifications or requests from the game server.
+
+        """
+        return re.findall("({.*})\n", receive)
