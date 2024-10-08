@@ -10,7 +10,7 @@ handling of the game's requests.
 import enum
 
 
-class AIWolfNLPAction(enum.Enum):
+class Action(enum.Enum):
     """This class declares the agent's behavior as required by the game server in AIWolfNLP."""
 
     INITIALIZE = "INITIALIZE"

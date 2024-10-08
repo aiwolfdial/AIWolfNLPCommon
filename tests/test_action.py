@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.action import AIWolfNLPAction
+from aiwolf_nlp_common.action import Action
 
 
 def check_is_action(target_json:dict, is_name:bool=False, is_initialize:bool=False, is_daily_initialize:bool=False,
@@ -8,49 +8,49 @@ def check_is_action(target_json:dict, is_name:bool=False, is_initialize:bool=Fal
     request = target_json["request"]
 
     if is_name:
-        assert AIWolfNLPAction.is_name(request=request)
+        assert Action.is_name(request=request)
     else:
-        assert not AIWolfNLPAction.is_name(request=request)
+        assert not Action.is_name(request=request)
 
     if is_initialize:
-        assert AIWolfNLPAction.is_initialize(request=request)
+        assert Action.is_initialize(request=request)
     else:
-        assert not AIWolfNLPAction.is_initialize(request=request)
+        assert not Action.is_initialize(request=request)
 
     if is_daily_initialize:
-        assert AIWolfNLPAction.is_daily_initialize(request=request)
+        assert Action.is_daily_initialize(request=request)
     else:
-        assert not AIWolfNLPAction.is_daily_initialize(request=request)
+        assert not Action.is_daily_initialize(request=request)
 
     if is_talk:
-        assert AIWolfNLPAction.is_talk(request=request)
+        assert Action.is_talk(request=request)
     else:
-        assert not AIWolfNLPAction.is_talk(request=request)
+        assert not Action.is_talk(request=request)
 
     if is_daily_finish:
-        assert AIWolfNLPAction.is_daily_finish(request=request)
+        assert Action.is_daily_finish(request=request)
     else:
-        assert not AIWolfNLPAction.is_daily_finish(request=request)
+        assert not Action.is_daily_finish(request=request)
 
     if is_divine:
-        assert AIWolfNLPAction.is_divine(request=request)
+        assert Action.is_divine(request=request)
     else:
-        assert not AIWolfNLPAction.is_divine(request=request)
+        assert not Action.is_divine(request=request)
 
     if is_vote:
-        assert AIWolfNLPAction.is_vote(request=request)
+        assert Action.is_vote(request=request)
     else:
-        assert not AIWolfNLPAction.is_vote(request=request)
+        assert not Action.is_vote(request=request)
 
     if is_attack:
-        assert AIWolfNLPAction.is_attack(request=request)
+        assert Action.is_attack(request=request)
     else:
-        assert not AIWolfNLPAction.is_attack(request=request)
+        assert not Action.is_attack(request=request)
 
     if is_finish:
-        assert AIWolfNLPAction.is_finish(request=request)
+        assert Action.is_finish(request=request)
     else:
-        assert not AIWolfNLPAction.is_finish(request=request)
+        assert not Action.is_finish(request=request)
 
 def test_name(name_json) -> None:
     check_is_action(target_json=name_json, is_name=True)
