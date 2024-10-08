@@ -10,11 +10,13 @@ from AIWolfNLAgentPython.player.werewolf import Werewolf
 
 from aiwolf_nlp_common import util
 
+@pytest.fixture
+def name_str() -> str:
+    return """{"request": "NAME"}"""
 
 @pytest.fixture
-def name_json() -> dict:
-    name_json = """{"request": "NAME"}"""
-    return json.loads(name_json)
+def name_json(name_str) -> dict:
+    return json.loads(name_str)
 
 @pytest.fixture
 def initialize_str() -> str:
