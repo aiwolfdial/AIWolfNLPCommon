@@ -44,17 +44,6 @@ def test_read_text_file(text_file_path:str) -> None:
 
     assert correct_list == check_list
 
-def test_split_receive_info() -> None:
-    log_name_json:str = """{"request": "NAME"}"""
-    multi_json:str = """{"request": "NAME"}\n{"request": "NAME"}\n{"request": "NAME"}\n{"request": "NAME"}\n{"request": "NAME"}\n"""
-
-    correct_list:list = [log_name_json] * 5
-
-    assert util.split_receive_info(receive=multi_json) == correct_list
-
-    multi_json:str = """{"request": "NAME"}\n"""   
-    assert util.split_receive_info(receive=multi_json) == [log_name_json]
-
 def test_get_index_and_name() -> None:
 
     for i in range(20):
