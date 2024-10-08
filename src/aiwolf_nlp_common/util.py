@@ -93,19 +93,6 @@ def read_text_file(text_file_path: str) -> list:
         return f.read().splitlines()
 
 
-def split_receive_info(receive: str) -> list:
-    """Split multiple pieces of information received in bulk from the game server.
-
-    Args:
-        receive (str): String received from the game server.
-
-    Returns:
-        list: A list of notifications or requests from the game server.
-
-    """
-    return re.findall("({.*})\n", receive)
-
-
 def get_index_from_name(agent_name: str) -> int:
     """Extract numbers from the agent's string.
 
