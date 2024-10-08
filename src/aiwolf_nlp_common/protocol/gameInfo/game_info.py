@@ -28,7 +28,7 @@ storing various elements of the game state in its attributes.
 
 from .list.existing_role_list import ExistingRoleList
 from .list.last_dead_agent_list import LastDeadAgentList
-from .list.talk_list import TalkList
+from ..talk_list import TalkList
 from .list.vote_list import VoteList
 from .map.remain_talk_map import RemainTalkMap
 from .map.role_map import RoleMap

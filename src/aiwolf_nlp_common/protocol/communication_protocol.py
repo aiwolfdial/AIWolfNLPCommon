@@ -1,25 +1,20 @@
+from .gameInfo.game_info import GameInfo
 from .gameSetting.game_setting import GameSetting
-from .gameSetting.map.role_num_map import RoleNumMap
+import json
 
 
 class CommunicationProtocol:
+    game_info: GameInfo
     game_setting: GameSetting
 
-    def __init__(self, game_setting: GameSetting) -> None:
+    def __init__(self, game_info: GameInfo, game_setting: GameSetting) -> None:
+        self.game_info = game_info
         self.game_setting = game_setting
 
-    @staticmethod
-    def object_hook(value: object) -> "CommunicationProtocol":
-        return CommunicationProtocol(game_setting=value["gameSetting"])
-
-    @staticmethod
-    def json_decode(value: dict):
-        if not isinstance(value, dict):
-            return value
-
-        if value["class"] == "gameSetting":
-            return GameSetting.object_hook(value=value)
-        if value["class"] == "RoleNumMap":
-            return RoleNumMap.object_hook(value=value)
-
-        return value
+    @classmethod
+    def initialize_from_json(cls, received_str: str) -> "CommunicationProtocol":
+        received_json: dict = json.loads(received_str)
+        return cls(
+            GameInfo.initialize_from_json(value=received_json["gameInfo"]),
+            GameSetting.initialize_from_json(value=received_json["gameSetting"]),
+        )
