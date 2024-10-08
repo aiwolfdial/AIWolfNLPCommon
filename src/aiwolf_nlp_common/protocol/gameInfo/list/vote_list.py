@@ -37,19 +37,33 @@ class VoteInfo:
 class VoteList(list):
     """List extension class for storing “voteList” information."""
 
-    def from_json(self, set_list: list) -> None:
-        """Stores information sent from the game server in class variables.
+    @classmethod
+    def initialize_from_json(cls, set_list: list) -> "VoteList":
+        """Initializes a VoteList instance from JSON data received from the game server.
+
+        This docstring was created by a generative AI.
+        This method creates a new instance of the VoteList class and populates it with
+        VoteInfo objects based on the provided list of vote information. Each item in the
+        input list should be a dictionary containing "agent", "day", and "target" keys,
+        representing the vote details.
 
         Args:
-            set_list (list): Information on “voteList” sent from the game server.
-        """
-        self.clear()
+            set_list (list): Information on "voteList" sent from the game server.
+                Each element is expected to be a dictionary with the following structure:
+                - "agent" (int): The agent who voted.
+                - "day" (int): The day the vote was cast.
+                - "target" (int): The agent who was targeted by the vote.
 
-        if len(set_list) == 0:
-            return
+        Returns:
+            VoteList: A new VoteList instance populated with VoteInfo objects created
+            from the input data.
+        """
+        instance = cls()
 
         for vote_info in set_list:
             add_elem = VoteInfo(
                 agent=vote_info["agent"], day=vote_info["day"], target=vote_info["target"]
             )
-            self.append(add_elem)
+            instance.append(add_elem)
+        
+        return instance
