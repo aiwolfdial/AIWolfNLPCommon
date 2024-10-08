@@ -74,3 +74,12 @@ def test_set_reverse_status() -> None:
         test_map.reverse_status(agent=name)
 
     assert test_map == check_set
+
+def test_get_agent_list(status_map_json:dict) -> None:
+    test_map = StatusMap.initialize_from_json(set_map=status_map_json["gameInfo"]["statusMap"])
+
+    alive_list = ["Agent[04]", "Agent[05]"]
+    dead_list = ["Agent[01]", "Agent[02]", "Agent[03]"]
+
+    assert test_map.get_alive_agent_list() == alive_list
+    assert test_map.get_dead_agent_list() == dead_list
