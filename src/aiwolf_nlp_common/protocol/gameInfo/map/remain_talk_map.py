@@ -95,7 +95,7 @@ class RemainTalkMap(set):
 
         return instance
 
-    def get_agent_remain_talk_number(self, agent: str) -> int | ValueError:
+    def get_agent_remain_talk_number(self, agent: str) -> int:
         """Retrieve the remaining talk number of a specified agent.
 
         This docstring was created by a generative AI.
