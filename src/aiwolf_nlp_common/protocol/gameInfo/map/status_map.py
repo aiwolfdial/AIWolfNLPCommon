@@ -134,3 +134,39 @@ class StatusMap(set):
             agent (str): Agent name, such as “Agent[xx]”.
         """
         self.add(AgentStatus(agent=agent, status=Status.DEAD.value))
+
+    def get_alive_agent_list(self) -> list:
+        """Retrieve a list of agents that are currently alive.
+
+        This docstring was created by a generative AI.
+        This method iterates through the status of each agent in the current
+        instance and checks their status using the Status enumeration. If an
+        agent's status is determined to be "ALIVE", their identifier is added
+        to the result list.
+
+        Returns:
+            list: A list of agent identifiers (strings) representing the agents
+            that are alive.
+        """
+        return [
+            agent_status.agent
+            for agent_status in self
+            if Status.is_alive(status=agent_status.status)
+        ]
+
+    def get_dead_agent_list(self) -> list:
+        """Retrieve a list of agents that are marked as dead.
+
+        This docstring was created by a generative AI.
+        This method iterates through the agent statuses and collects the
+        identifiers of agents whose status is classified as "DEAD". It
+        utilizes the `Status.is_dead` method to check each agent's status.
+
+        Returns:
+            list: A list of agent identifiers that are dead.
+        """
+        return [
+            agent_status.agent
+            for agent_status in self
+            if Status.is_dead(status=agent_status.status)
+        ]
