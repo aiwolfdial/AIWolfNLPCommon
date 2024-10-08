@@ -12,6 +12,8 @@ Methods:
     Status.is_alive: Checks if a status string is "ALIVE".
 """
 
+from __future__ import annotations
+
 import enum
 
 
@@ -34,30 +36,37 @@ class Status(enum.Enum):
     DEAD = "DEAD"
 
     @classmethod
-    def is_alive(cls, status: str) -> bool:
-        """Check if the given status is equal to the class's "ALIVE" status.
+    def is_alive(cls, status: str | Status) -> bool:
+        """Determine if the provided status represents the "ALIVE" state.
+
+        This docstring was created by a generative AI.
+        This class method checks whether the given status string matches the
+        enumeration value for "ALIVE". It supports both the enum member and
+        its value string.
 
         Args:
             status (str): The status string to check.
 
         Returns:
-            bool: True if the status string is equal to the class's ALIVE status, False otherwise.
+            bool: True if the status string indicates that the agent is alive,
+                  False otherwise.
         """
-        return status == cls.ALIVE.value
+        return status in {cls.ALIVE, cls.ALIVE.value}
 
     @classmethod
-    def is_dead(cls, status: str) -> bool:
-        """Check if the given status is equal to the class's "DEAD" status.
+    def is_dead(cls, status: str | Status) -> bool:
+        """Determine if the provided status represents the "DEAD" state.
 
-            This docstring was created by a generative AI.
-            This class method compares the provided status string with the enum's
-            DEAD value to determine if the agent is dead.
+        This docstring was created by a generative AI.
+        This class method checks whether the given status string matches the
+        enumeration value for "DEAD". It supports both the enum member and
+        its value string.
 
         Args:
             status (str): The status string to check.
 
         Returns:
-            bool: True if the status string is equal to the class's DEAD status,
-            False otherwise.
+            bool: True if the status string indicates that the agent is dead,
+                  False otherwise.
         """
-        return status == cls.DEAD.value
+        return status in {cls.DEAD, cls.DEAD.value}
