@@ -44,3 +44,20 @@ class Status(enum.Enum):
             bool: True if the status string is equal to the class's ALIVE status, False otherwise.
         """
         return status == cls.ALIVE.value
+
+    @classmethod
+    def is_dead(cls, status: str) -> bool:
+        """Check if the given status is equal to the class's "DEAD" status.
+
+            This docstring was created by a generative AI.
+            This class method compares the provided status string with the enum's
+            DEAD value to determine if the agent is dead.
+
+        Args:
+            status (str): The status string to check.
+
+        Returns:
+            bool: True if the status string is equal to the class's DEAD status,
+            False otherwise.
+        """
+        return status == cls.DEAD.value
