@@ -119,7 +119,7 @@ class GameSetting:
             value (dict): json dict of “gameSetting” received from the game server.
         """
         return cls(
-            value["roleNumMap"],
+            RoleNumMap.initialize_from_json(value=value["roleNumMap"]),
             value["maxTalk"],
             value["maxTalkTurn"],
             value["maxWhisper"],
