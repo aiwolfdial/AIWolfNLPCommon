@@ -3,7 +3,7 @@
 import enum
 
 
-class AIWolfNLPRoleTeam:
+class RoleTeam:
     """A class that manages information about role teams."""
 
     __en: str
@@ -20,7 +20,7 @@ class AIWolfNLPRoleTeam:
         self.__ja = ja
 
     def __eq__(self, value: object) -> bool:
-        """Comparison method for making comparisons in “AIWolfNLPRoleTeam”.
+        """Comparison method for making comparisons in “RoleTeam”.
 
         Args:
             value (object): Comparison object.
@@ -28,7 +28,7 @@ class AIWolfNLPRoleTeam:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
-        if value is None or not isinstance(value, AIWolfNLPRoleTeam):
+        if value is None or not isinstance(value, RoleTeam):
             return False
         return self.en == value.en and self.ja == value.ja
 
@@ -53,10 +53,10 @@ class AIWolfNLPRoleTeam:
         return self.__ja
 
 
-class AIWolfNLPRoleTeamInfo(enum.Enum):
+class RoleTeamInfo(enum.Enum):
     """This class defines the team of role sent from AIWolfNLP's game server."""
 
-    VILLAGER_TEAM = AIWolfNLPRoleTeam(en="VILLAGER", ja="村人陣営")
-    WEREWOLF_TEAM = AIWolfNLPRoleTeam(en="WEREWOLF", ja="人狼陣営")
-    FOX_TEAM = AIWolfNLPRoleTeam(en="FOX", ja="妖狐陣営")
-    ANY_TEAM = AIWolfNLPRoleTeam(en="ANY", ja="?陣営")
+    VILLAGER_TEAM = RoleTeam(en="VILLAGER", ja="村人陣営")
+    WEREWOLF_TEAM = RoleTeam(en="WEREWOLF", ja="人狼陣営")
+    FOX_TEAM = RoleTeam(en="FOX", ja="妖狐陣営")
+    ANY_TEAM = RoleTeam(en="ANY", ja="?陣営")

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import enum
 
-from .role_team import AIWolfNLPRoleTeam, AIWolfNLPRoleTeamInfo
+from .role_team import RoleTeam, RoleTeamInfo
 
 LANGUAGE = 2
 
@@ -18,15 +18,15 @@ class AIWolfNLPRole:
 
     __en: str
     __ja: str
-    __team: AIWolfNLPRoleTeam
+    __team: RoleTeam
 
-    def __init__(self, en: str, ja: str, team: AIWolfNLPRoleTeam) -> None:
+    def __init__(self, en: str, ja: str, team: RoleTeam) -> None:
         """Initialize information about the role.
 
         Args:
             en (str): The English name of the role.
             ja (str): The Japanese name of the role.
-            team (AIWolfNLPRoleTeam): The team to which the role belongs.
+            team (RoleTeam): The team to which the role belongs.
         """
         self.__en = en
         self.__ja = ja
@@ -64,11 +64,11 @@ class AIWolfNLPRole:
         return self.__ja
 
     @property
-    def team(self) -> AIWolfNLPRoleTeam:
+    def team(self) -> RoleTeam:
         """Returns the team of role assigned at init.
 
         Returns:
-        AIWolfNLPRoleTeam: Team of role.
+        RoleTeam: Team of role.
         """
         return self.__team
 
@@ -86,30 +86,30 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
     # villager team
     VILLAGER = AIWolfNLPRole(
-        en="VILLAGER", ja="村人", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+        en="VILLAGER", ja="村人", team=RoleTeamInfo.VILLAGER_TEAM.value
     )
-    SEER = AIWolfNLPRole(en="SEER", ja="占い師", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value)
-    MEDIUM = AIWolfNLPRole(en="MEDIUM", ja="霊媒師", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value)
+    SEER = AIWolfNLPRole(en="SEER", ja="占い師", team=RoleTeamInfo.VILLAGER_TEAM.value)
+    MEDIUM = AIWolfNLPRole(en="MEDIUM", ja="霊媒師", team=RoleTeamInfo.VILLAGER_TEAM.value)
     BODYGUARD = AIWolfNLPRole(
-        en="BODYGUARD", ja="騎士", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+        en="BODYGUARD", ja="騎士", team=RoleTeamInfo.VILLAGER_TEAM.value
     )
     FREEMASON = AIWolfNLPRole(
-        en="FREEMASON", ja="共有者", team=AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+        en="FREEMASON", ja="共有者", team=RoleTeamInfo.VILLAGER_TEAM.value
     )
 
     # werewolf team
     WEREWOLF = AIWolfNLPRole(
-        en="WEREWOLF", ja="人狼", team=AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM.value
+        en="WEREWOLF", ja="人狼", team=RoleTeamInfo.WEREWOLF_TEAM.value
     )
     POSSESSED = AIWolfNLPRole(
-        en="POSSESSED", ja="狂人", team=AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM.value
+        en="POSSESSED", ja="狂人", team=RoleTeamInfo.WEREWOLF_TEAM.value
     )
 
     # fox team
-    FOX = AIWolfNLPRole(en="FOX", ja="妖狐", team=AIWolfNLPRoleTeamInfo.FOX_TEAM.value)
+    FOX = AIWolfNLPRole(en="FOX", ja="妖狐", team=RoleTeamInfo.FOX_TEAM.value)
 
     # any team
-    ANY = AIWolfNLPRole(en="ANY", ja="?", team=AIWolfNLPRoleTeamInfo.ANY_TEAM.value)
+    ANY = AIWolfNLPRole(en="ANY", ja="?", team=RoleTeamInfo.ANY_TEAM.value)
 
     @classmethod
     def is_exist_role(cls, role: str) -> bool:
@@ -219,7 +219,7 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         for role_info in cls.__members__.values():
             if role in role_info.value.get_translations():
-                return role_info.value.team == AIWolfNLPRoleTeamInfo.VILLAGER_TEAM.value
+                return role_info.value.team == RoleTeamInfo.VILLAGER_TEAM.value
         return None
 
     @classmethod
@@ -240,7 +240,7 @@ class AIWolfNLPRoleInfo(enum.Enum):
 
         for role_info in cls.__members__.values():
             if role in role_info.value.get_translations():
-                return role_info.value.team == AIWolfNLPRoleTeamInfo.WEREWOLF_TEAM.value
+                return role_info.value.team == RoleTeamInfo.WEREWOLF_TEAM.value
         return None
 
     @classmethod
