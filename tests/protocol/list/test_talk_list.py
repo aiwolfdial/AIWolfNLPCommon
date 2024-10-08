@@ -1,4 +1,4 @@
-from aiwolf_nlp_common.protocol.gameInfo.list.talk_list import TalkInfo, TalkList
+from aiwolf_nlp_common.protocol.talk_list import TalkInfo, TalkList
 
 def test_set_received_info(initialize_json:dict, talk_list_json:dict) -> None:
     talk_list = TalkList()
