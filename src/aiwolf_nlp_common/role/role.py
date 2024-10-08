@@ -13,7 +13,7 @@ JA_POS = 2
 TEAM_POS = 3
 
 
-class AIWolfNLPRole:
+class Role:
     """Class that manages information about the role."""
 
     __en: str
@@ -33,7 +33,7 @@ class AIWolfNLPRole:
         self.__team = team
 
     def __eq__(self, value: object) -> bool:
-        """Comparison method for making comparisons in “AIWolfNLPRole”.
+        """Comparison method for making comparisons in “Role”.
 
         Args:
             value (object): Comparison object.
@@ -41,7 +41,7 @@ class AIWolfNLPRole:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
-        if value is None or not isinstance(value, AIWolfNLPRole):
+        if value is None or not isinstance(value, Role):
             return False
         return self.en == value.en and self.ja == value.ja and self.team == value.team
 
@@ -81,35 +81,35 @@ class AIWolfNLPRole:
         return {self.__en, self.__ja}
 
 
-class AIWolfNLPRoleInfo(enum.Enum):
+class RoleInfo(enum.Enum):
     """A class that declares information about positions sent by the game server in AIWolfNLP."""
 
     # villager team
-    VILLAGER = AIWolfNLPRole(
+    VILLAGER = Role(
         en="VILLAGER", ja="村人", team=RoleTeamInfo.VILLAGER_TEAM.value
     )
-    SEER = AIWolfNLPRole(en="SEER", ja="占い師", team=RoleTeamInfo.VILLAGER_TEAM.value)
-    MEDIUM = AIWolfNLPRole(en="MEDIUM", ja="霊媒師", team=RoleTeamInfo.VILLAGER_TEAM.value)
-    BODYGUARD = AIWolfNLPRole(
+    SEER = Role(en="SEER", ja="占い師", team=RoleTeamInfo.VILLAGER_TEAM.value)
+    MEDIUM = Role(en="MEDIUM", ja="霊媒師", team=RoleTeamInfo.VILLAGER_TEAM.value)
+    BODYGUARD = Role(
         en="BODYGUARD", ja="騎士", team=RoleTeamInfo.VILLAGER_TEAM.value
     )
-    FREEMASON = AIWolfNLPRole(
+    FREEMASON = Role(
         en="FREEMASON", ja="共有者", team=RoleTeamInfo.VILLAGER_TEAM.value
     )
 
     # werewolf team
-    WEREWOLF = AIWolfNLPRole(
+    WEREWOLF = Role(
         en="WEREWOLF", ja="人狼", team=RoleTeamInfo.WEREWOLF_TEAM.value
     )
-    POSSESSED = AIWolfNLPRole(
+    POSSESSED = Role(
         en="POSSESSED", ja="狂人", team=RoleTeamInfo.WEREWOLF_TEAM.value
     )
 
     # fox team
-    FOX = AIWolfNLPRole(en="FOX", ja="妖狐", team=RoleTeamInfo.FOX_TEAM.value)
+    FOX = Role(en="FOX", ja="妖狐", team=RoleTeamInfo.FOX_TEAM.value)
 
     # any team
-    ANY = AIWolfNLPRole(en="ANY", ja="?", team=RoleTeamInfo.ANY_TEAM.value)
+    ANY = Role(en="ANY", ja="?", team=RoleTeamInfo.ANY_TEAM.value)
 
     @classmethod
     def is_exist_role(cls, role: str) -> bool:
@@ -244,14 +244,14 @@ class AIWolfNLPRoleInfo(enum.Enum):
         return None
 
     @classmethod
-    def get_role_info(cls, role: str) -> AIWolfNLPRole:
-        """Get the AIWolfNLPRoleInfo instance for the role that matches the argument.
+    def get_role_info(cls, role: str) -> Role:
+        """Get the RoleInfo instance for the role that matches the argument.
 
         Args:
             role (str): The value associated with the "role" key sent from the game server.
 
         Returns:
-            AIWolfNLPRoleInfo: The AIWolfNLPRoleInfo instance that corresponds to the given role.
+            RoleInfo: The RoleInfo instance that corresponds to the given role.
 
         Raises:
             ValueError: If a non-existent role is provided.

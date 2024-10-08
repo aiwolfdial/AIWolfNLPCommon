@@ -1,5 +1,5 @@
 from aiwolf_nlp_common.protocol.gameInfo.map.role_map import RoleMap, AgentRole
-from aiwolf_nlp_common.role.role import AIWolfNLPRoleInfo
+from aiwolf_nlp_common.role.role import RoleInfo
 
 
 def test_set_received_info(initialize_json:dict, status_map_json:dict) -> None:

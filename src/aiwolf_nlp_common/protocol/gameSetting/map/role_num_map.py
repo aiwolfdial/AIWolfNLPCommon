@@ -1,12 +1,12 @@
 """This method is used to define a class for storing “roleNumMap” information."""
 
-from aiwolf_nlp_common.role import AIWolfNLPRole, AIWolfNLPRoleInfo
+from aiwolf_nlp_common.role import Role, RoleInfo
 
 
 class RoleNumInfo:
     """Class for defining elements of “roleNumMap”."""
 
-    __role: AIWolfNLPRole
+    __role: Role
     __allocated_count: int
 
     def __init__(self, role: str, allocated_count: int) -> None:
@@ -16,7 +16,7 @@ class RoleNumInfo:
             role (str): String of the role.
             allocated_count (int): Number of roles assigned.
         """
-        self.__role = AIWolfNLPRoleInfo.get_role_info(role=role)
+        self.__role = RoleInfo.get_role_info(role=role)
         self.__allocated_count = allocated_count
 
     def __hash__(self) -> int:
@@ -42,11 +42,11 @@ class RoleNumInfo:
         return self.__role == value.role and self.__allocated_count == value.allocated_count
 
     @property
-    def role(self) -> AIWolfNLPRole:
+    def role(self) -> Role:
         """Gets the role.
 
         Returns:
-            AIWolfNLPRoleInfo: role information.
+            RoleInfo: role information.
         """
         return self.__role
 

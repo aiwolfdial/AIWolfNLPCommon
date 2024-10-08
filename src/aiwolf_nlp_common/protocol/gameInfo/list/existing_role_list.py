@@ -1,6 +1,6 @@
 """This method is used to define a class for storing “existingRoleList” information."""
 
-from aiwolf_nlp_common.role import AIWolfNLPRoleInfo
+from aiwolf_nlp_common.role import RoleInfo
 
 
 class ExistingRoleList(list):
@@ -28,7 +28,7 @@ class ExistingRoleList(list):
         instance = cls()
 
         for role in set_list:
-            set_role = AIWolfNLPRoleInfo.get_role_info(role=role)
+            set_role = RoleInfo.get_role_info(role=role)
             instance.append(set_role)
 
         return instance

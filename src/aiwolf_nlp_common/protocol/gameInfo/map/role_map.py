@@ -1,13 +1,13 @@
 """This method is used to define a class for storing “roleMap” information."""
 
-from aiwolf_nlp_common.role import AIWolfNLPRole, AIWolfNLPRoleInfo
+from aiwolf_nlp_common.role import Role, RoleInfo
 
 
 class AgentRole:
     """Class for defining elements of “roleMap”."""
 
     __agent: str
-    __role: AIWolfNLPRole
+    __role: Role
 
     def __init__(self, agent: str, role: str) -> None:
         """Initialize “AgentRole”.
@@ -17,7 +17,7 @@ class AgentRole:
             role (str): String of the role.
         """
         self.__agent = agent
-        self.__role = AIWolfNLPRoleInfo.get_role_info(role=role)
+        self.__role = RoleInfo.get_role_info(role=role)
 
     def __hash__(self) -> int:
         """Comparison method for making comparisons in “AgentRole”.
@@ -54,11 +54,11 @@ class AgentRole:
         return self.__agent
 
     @property
-    def role(self) -> AIWolfNLPRole:
+    def role(self) -> Role:
         """Gets the role.
 
         Returns:
-            AIWolfNLPRoleInfo: role information.
+            RoleInfo: role information.
         """
         return self.__role
 
