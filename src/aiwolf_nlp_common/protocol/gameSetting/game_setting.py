@@ -65,6 +65,8 @@ class GameSetting:
     ) -> None:
         """Initialize “GameSetting”.
 
+        This description was written by Claude 3.5 Sonnet.
+
         Args:
             role_num_map (RoleNumMap): Information on “roleNumMap” received from the
                 game server.
