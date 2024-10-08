@@ -1,5 +1,7 @@
 """This method is used to define a class for storing “remainTalkMap” information."""
 
+from __future__ import annotations
+
 
 class AgentRemainTalkInfo:
     """Class for defining elements of “remainTalkMap”."""
@@ -68,7 +70,7 @@ class RemainTalkMap(set):
     """Set extension class for storing “remainTalkMap” information."""
 
     @classmethod
-    def initialize_from_json(cls, set_map: dict) -> "RemainTalkMap":
+    def initialize_from_json(cls, set_map: dict) -> RemainTalkMap:
         """Initializes a RemainTalkMap instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -92,3 +94,28 @@ class RemainTalkMap(set):
             instance.add(add_elem)
 
         return instance
+
+    def get_agent_remain_talk_number(self, agent: str) -> int | ValueError:
+        """Retrieve the remaining talk number of a specified agent.
+
+        This docstring was created by a generative AI.
+        This method searches for the remaining talk count associated
+        with the given agent name. If the agent is found, it returns
+        the corresponding remaining talk number; otherwise, it raises
+        a ValueError.
+
+        Args:
+            agent (str): The name of the agent, formatted as “Agent[xx]”.
+
+        Returns:
+            int: The remaining talk number of the specified agent.
+
+        Raises:
+            ValueError: If the specified agent name does not exist
+            in the current context.
+        """
+        for agent_remain_info in self:
+            if agent_remain_info.agent == agent:
+                return agent_remain_info.remain_talk_number
+
+        raise ValueError(agent + " is a name that does not exist.")
