@@ -32,6 +32,19 @@ class RoleTeam:
             return False
         return self.en == value.en and self.ja == value.ja
 
+    def __hash__(self) -> int:
+        """Return the hash value of the object.
+
+        This method computes a hash value for the instance by combining
+        the hash values of the instance's attributes: __en and __ja.
+        This allows instances of this class to be used as keys in dictionaries
+        or to be stored in sets.
+
+        Returns:
+            int: The hash value of the object.
+        """
+        return hash((self.__en, self.__ja))
+
     @property
     def en(self) -> str:
         """Returns the role team assigned at init in English.
