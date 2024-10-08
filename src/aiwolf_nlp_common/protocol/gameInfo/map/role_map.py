@@ -66,17 +66,28 @@ class AgentRole:
 class RoleMap(set):
     """Set extension class for storing “roleMap” information."""
 
-    def set_received_info(self, set_map: dict) -> None:
-        """Stores information sent from the game server in class variables.
+    @classmethod
+    def initialize_from_json(cls, set_map: dict) -> "RoleMap":
+        """Initializes a RoleMap instance from JSON data received from the game server.
+
+        This docstring was created by a generative AI.
+        This method creates a new instance of the RoleMap class and populates it with
+        information about the roles assigned to each agent. The provided dictionary maps
+        agent identifiers to their respective roles.
 
         Args:
-            set_map (map): Information on “roleMap” sent from the game server.
-        """
-        self.clear()
+            set_map (dict): Information on “roleMap” sent from the game server.
+                Each key in the dictionary is an agent identifier, and the corresponding
+                value is the role assigned to that agent.
 
-        if len(set_map) == 0:
-            return
+        Returns:
+            RoleMap: A new RoleMap instance populated with AgentRole objects created
+            from the input data.
+        """
+        instance = cls()
 
         for agent in set_map:
             add_elem = AgentRole(agent=agent, role=set_map[agent])
-            self.add(add_elem)
+            instance.add(add_elem)
+
+        return instance

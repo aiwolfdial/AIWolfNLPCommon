@@ -98,6 +98,31 @@ class AgentStatus:
 class StatusMap(set):
     """Set extension class for storing “statusMap” information."""
 
+    @classmethod
+    def initialize_from_json(cls, set_map: dict) -> StatusMap:
+        """Initializes a StatusMap instance from JSON data received from the game server.
+
+        This method creates a new instance of the StatusMap class and populates it with
+        information about the statuses assigned to each agent. The provided dictionary maps
+        agent identifiers to their respective statuses.
+
+        Args:
+            set_map (dict): Information on “statusMap” sent from the game server.
+                Each key in the dictionary is an agent identifier, and the corresponding
+                value is the status assigned to that agent.
+
+        Returns:
+            StatusMap: A new StatusMap instance populated with AgentStatus objects created
+            from the input data.
+        """
+        instance = cls()
+
+        for agent in set_map:
+            add_elem = AgentStatus(agent=agent, status=set_map[agent])
+            instance.add(add_elem)
+
+        return instance
+
     def reverse_status(self, agent: str) -> None:
         """Reverses the status of the agent.
 
@@ -139,18 +164,3 @@ class StatusMap(set):
             agent (str): Agent name, such as “Agent[xx]”.
         """
         self.add(AgentStatus(agent=agent, status=Status.DEAD.value))
-
-    def set_received_info(self, set_map: dict) -> None:
-        """Stores information sent from the game server in class variables.
-
-        Args:
-            set_map (map): Information on “statusMap” sent from the game server.
-        """
-        self.clear()
-
-        if len(set_map) == 0:
-            return
-
-        for agent in set_map:
-            add_elem = AgentStatus(agent=agent, status=set_map[agent])
-            self.add(add_elem)

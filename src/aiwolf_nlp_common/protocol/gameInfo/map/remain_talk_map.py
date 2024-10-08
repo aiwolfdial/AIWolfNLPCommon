@@ -67,17 +67,28 @@ class AgentRemainTalkInfo:
 class RemainTalkMap(set):
     """Set extension class for storing “remainTalkMap” information."""
 
-    def set_received_info(self, set_map: dict) -> None:
-        """Stores information sent from the game server in class variables.
+    @classmethod
+    def initialize_from_json(cls, set_map: dict) -> "RemainTalkMap":
+        """Initializes a RemainTalkMap instance from JSON data received from the game server.
+
+        This docstring was created by a generative AI.
+        This method creates a new instance of the RemainTalkMap class and populates it with
+        information about the remaining talk numbers for each agent. The provided dictionary
+        maps agent identifiers to their respective remaining talk numbers.
 
         Args:
-            set_map (map): Information on “remainTalkMap” sent from the game server.
-        """
-        self.clear()
+            set_map (dict): Information on “remainTalkMap” sent from the game server.
+                Each key in the dictionary is an agent identifier, and the corresponding
+                value is the number of remaining talks for that agent.
 
-        if len(set_map) == 0:
-            return
+        Returns:
+            RemainTalkMap: A new RemainTalkMap instance populated with AgentRemainTalkInfo
+            objects created from the input data.
+        """
+        instance = cls()
 
         for agent in set_map:
             add_elem = AgentRemainTalkInfo(agent=agent, remain_talk_number=set_map[agent])
-            self.add(add_elem)
+            instance.add(add_elem)
+
+        return instance
