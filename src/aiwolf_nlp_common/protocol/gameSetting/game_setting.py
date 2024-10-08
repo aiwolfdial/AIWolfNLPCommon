@@ -113,6 +113,17 @@ class GameSetting:
         self.is_enable_role_request = is_enable_role_request
         self.playe_num = player_num
 
+    def get_action_timeout_in_seconds(self) -> int:
+        """Convert and retrieve the action timeout in seconds.
+
+        This method converts the `action_timeout` value, which is stored in milliseconds,
+        to seconds and returns the result as an integer.
+
+        Returns:
+            int: The action timeout value in seconds.
+        """
+        return int(self.action_timeout / 1000)
+
     @classmethod
     def initialize_from_json(cls, value: dict) -> "GameSetting":
         """Initialize with information received from the game server.
