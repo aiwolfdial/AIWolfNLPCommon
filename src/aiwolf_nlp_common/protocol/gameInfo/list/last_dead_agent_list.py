@@ -4,16 +4,26 @@
 class LastDeadAgentList(list):
     """List extension class for storing “lastDeadAgentList” information."""
 
-    def set_received_info(self, set_list: list) -> None:
-        """Stores information sent from the game server in class variables.
+    @classmethod
+    def initialize_from_json(cls, set_list: list) -> "LastDeadAgentList":
+        """Initializes a LastDeadAgentList instance from JSON data received from the game server.
+
+        This docstring was created by a generative AI.
+        This method creates a new instance of the LastDeadAgentList class and populates it with
+        the agents that have died in the game. The provided list is expected to contain information
+        about the last dead agents as sent from the game server.
 
         Args:
             set_list (list): Information on “lastDeadAgentList” sent from the game server.
-        """
-        self.clear()
+                Each element in the list is expected to represent an agent that has died.
 
-        if len(set_list) == 0:
-            return
+        Returns:
+            LastDeadAgentList: A new LastDeadAgentList instance populated with agent information
+            created from the input data.
+        """
+        instance = cls()
 
         for agent in set_list:
-            self.append(agent)
+            instance.append(agent)
+
+        return instance
