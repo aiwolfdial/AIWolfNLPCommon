@@ -76,16 +76,32 @@ class TalkInfo:
 class TalkList(list):
     """List extension class for storing “talkList” information."""
 
-    def set_received_info(self, set_list: list) -> None:
-        """Stores information sent from the game server in class variables.
+    @classmethod
+    def initialize_from_json(cls, set_list: list) -> "TalkList":
+        """Initializes a TalkList instance from JSON data received from the game server.
+
+        This docstring was created by a generative AI.
+        This method creates a new instance of the TalkList class and populates it with
+        TalkInfo objects based on the provided list of talk information. Each item in the
+        input list is expected to be a dictionary containing details about a talk, including
+        the agent who spoke, the day of the talk, and various attributes of the talk itself.
 
         Args:
             set_list (list): Information on “talkList” sent from the game server.
-        """
-        self.clear()
+                Each element is expected to be a dictionary with the following structure:
+                - "agent" (int): The agent who spoke.
+                - "day" (int): The day the talk occurred.
+                - "idx" (int): The index of the talk in the sequence.
+                - "text" (str): The text of the talk.
+                - "turn" (int): The turn number when the talk occurred.
+                - "skip" (bool): Indicates if the talk was skipped.
+                - "over" (bool): Indicates if the talk is over.
 
-        if len(set_list) == 0:
-            return
+        Returns:
+            TalkList: A new TalkList instance populated with TalkInfo objects created
+            from the input data.
+        """
+        instance = cls()
 
         for talk_info in set_list:
             add_elem = TalkInfo(
@@ -97,4 +113,6 @@ class TalkList(list):
                 skip=talk_info["skip"],
                 over=talk_info["over"],
             )
-            self.append(add_elem)
+            instance.append(add_elem)
+
+        return instance
