@@ -148,11 +148,13 @@ class StatusMap(set):
             list: A list of agent identifiers (strings) representing the agents
             that are alive.
         """
-        return [
-            agent_status.agent
-            for agent_status in self
-            if Status.is_alive(status=agent_status.status)
-        ]
+        return sorted(
+            [
+                agent_status.agent
+                for agent_status in self
+                if Status.is_alive(status=agent_status.status)
+            ]
+        )
 
     def get_dead_agent_list(self) -> list:
         """Retrieve a list of agents that are marked as dead.
@@ -165,8 +167,10 @@ class StatusMap(set):
         Returns:
             list: A list of agent identifiers that are dead.
         """
-        return [
-            agent_status.agent
-            for agent_status in self
-            if Status.is_dead(status=agent_status.status)
-        ]
+        return sorted(
+            [
+                agent_status.agent
+                for agent_status in self
+                if Status.is_dead(status=agent_status.status)
+            ]
+        )
