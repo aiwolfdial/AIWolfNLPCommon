@@ -27,3 +27,10 @@ def test_talk_info_eq() -> None:
         assert elem1 != elem4
         assert elem1 != None
         assert elem1 != i
+
+def test_get_agent_remain_talk_number(initialize_json:dict) -> None:
+    test_map = RemainTalkMap.initialize_from_json(set_map=initialize_json["gameInfo"]["remainTalkMap"])
+
+    for i in range(5):
+        name = "Agent[0" + str(i+1) + "]"
+        assert test_map.get_agent_remain_talk_number(agent=name) == 5
