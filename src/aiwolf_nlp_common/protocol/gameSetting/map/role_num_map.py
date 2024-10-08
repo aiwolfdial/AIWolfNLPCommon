@@ -63,8 +63,8 @@ class RoleNumInfo:
 class RoleNumMap(set):
     """Set extension class for storing “roleNumMap” information."""
 
-    @staticmethod
-    def object_hook(value: dict) -> "RoleNumMap":
+    @classmethod
+    def initialize_from_json(cls, value: dict) -> "RoleNumMap":
         """Stores information sent from the game server in class variables.
 
         Args:
