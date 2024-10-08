@@ -1,5 +1,5 @@
+import pytest
 from typing import Union
-
 from AIWolfNLAgentPython.player.possessed import Possessed
 from AIWolfNLAgentPython.player.seer import Seer
 from AIWolfNLAgentPython.player.villager import Villager
@@ -52,6 +52,11 @@ def test_exist_role(role_num_map) -> None:
 
     for role in not_exist_role:
         assert not RoleInfo.is_exist_role(role=role)
+
+    assert not RoleInfo.is_exist_role("Villager")
+    assert RoleInfo.is_exist_role("VILLAGER")
+    assert RoleInfo.is_exist_role(RoleInfo.VILLAGER)
+    assert RoleInfo.is_exist_role(RoleInfo.VILLAGER.value)
 
 def test_villager(agent_villager:Villager) -> None:
     check_is_role(agent=agent_villager, is_villager=True)
