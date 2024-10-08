@@ -1,5 +1,7 @@
 """This method is used to define a class for storing “roleMap” information."""
 
+from __future__ import annotations
+
 from aiwolf_nlp_common.role import Role, RoleInfo
 
 
@@ -67,7 +69,7 @@ class RoleMap(set):
     """Set extension class for storing “roleMap” information."""
 
     @classmethod
-    def initialize_from_json(cls, set_map: dict) -> "RoleMap":
+    def initialize_from_json(cls, set_map: dict) -> RoleMap:
         """Initializes a RoleMap instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -91,3 +93,25 @@ class RoleMap(set):
             instance.add(add_elem)
 
         return instance
+
+    def get_agent_role(self, agent: str) -> Role | ValueError:
+        """Retrieve the role of a specified agent.
+
+        This docstring was created by a generative AI.
+        This method searches for the role associated with the given agent name.
+        If the agent is found, it returns the corresponding role; otherwise, it raises a ValueError.
+
+        Args:
+            agent (str): The name of the agent, formatted as “Agent[xx]”.
+
+        Returns:
+            Role: The role of the specified agent.
+
+        Raises:
+            ValueError: If the specified agent name does not exist in the current context.
+        """
+        for agent_role in self:
+            if agent_role.agent == agent:
+                return agent_role.role
+
+        raise ValueError(agent + " is a name that does not exist.")
