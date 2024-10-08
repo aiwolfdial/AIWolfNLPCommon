@@ -2,8 +2,7 @@ from aiwolf_nlp_common.protocol.gameInfo.map.remain_talk_map import RemainTalkMa
 
 
 def test_set_received_info(initialize_json:dict) -> None:
-    test_map = RemainTalkMap()
-    test_map.set_received_info(set_map=initialize_json["gameInfo"]["remainTalkMap"])
+    test_map = RemainTalkMap.initialize_from_json(set_map=initialize_json["gameInfo"]["remainTalkMap"])
 
     check_set:set[AgentRemainTalkInfo] = set()
 
