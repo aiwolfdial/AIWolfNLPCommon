@@ -1,5 +1,7 @@
 """This method is used to define a class for storing “roleNumMap” information."""
 
+from __future__ import annotations
+
 from aiwolf_nlp_common.role import Role, RoleInfo
 
 
@@ -64,7 +66,7 @@ class RoleNumMap(set):
     """Set extension class for storing “roleNumMap” information."""
 
     @classmethod
-    def initialize_from_json(cls, value: dict) -> "RoleNumMap":
+    def initialize_from_json(cls, value: dict) -> RoleNumMap:
         """Stores information sent from the game server in class variables.
 
         Args:
@@ -77,3 +79,42 @@ class RoleNumMap(set):
             result.add(add_elem)
 
         return result
+
+    def get_role_num(self, role: str | Role) -> int:
+        """Retrieve the number of allocated instances for a specified role.
+
+        This docstring was created by a generative AI.
+        This method retrieves the count of allocated instances for a
+        specified role, identified either by its name as a string or
+        by an instance of the Role enum. If the specified role is not
+        found, it raises a ValueError.
+
+        Args:
+            role (str | Role): The name of the role as a string or
+            an instance of the Role enum.
+
+        Returns:
+            int: The number of allocated instances for the specified role.
+
+        Raises:
+            ValueError: If the specified role does not exist in the
+            current context or if it has not been added yet.
+
+        Examples:
+            >>> instance = RoleNumMap()
+            >>> instance.get_role_num('WEREWOLF')
+            1
+            >>> instance.get_role_num(Role.VILLAGER)
+            2
+        """
+        if not RoleInfo.is_exist_role(role=role):
+            raise ValueError(role + " is a nonexistent role.")
+
+        if not isinstance(role, Role):
+            role = RoleInfo.get_role_info(role=role)
+
+        for role_num_info in self:
+            if role_num_info.role == role:
+                return role_num_info.allocated_count
+
+        raise ValueError(role + " has not been added.")
