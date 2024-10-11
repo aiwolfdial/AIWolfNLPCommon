@@ -26,6 +26,7 @@ The `GameInfo` class provides methods for initializing itself from JSON data and
 storing various elements of the game state in its attributes.
 """
 
+from .divine_result import DivineResult
 from .list.existing_role_list import ExistingRoleList
 from .list.last_dead_agent_list import LastDeadAgentList
 from ..talk_list import TalkList
@@ -74,6 +75,7 @@ class GameInfo:
 
     day: int
     agent: str
+    divine_result:DivineResult
     vote_list: VoteList
     latest_vote_list: VoteList
     attack_vote_list: VoteList
@@ -91,6 +93,7 @@ class GameInfo:
         self,
         day: int,
         agent: str,
+        divine_result:DivineResult,
         vote_list: VoteList,
         latest_vote_list: VoteList,
         attack_vote_list: VoteList,
@@ -126,6 +129,7 @@ class GameInfo:
         """
         self.day = day
         self.agent = agent
+        self.divine_result = divine_result
         self.vote_list = vote_list
         self.latest_vote_list = latest_vote_list
         self.attack_vote_list = attack_vote_list
@@ -173,6 +177,7 @@ class GameInfo:
         return cls(
             day=value["day"],
             agent=value["agent"],
+            divine_result=value["divineResult"],
             vote_list=VoteList.initialize_from_json(value["voteList"]),
             latest_vote_list=VoteList.initialize_from_json(value["latestVoteList"]),
             attack_vote_list=VoteList.initialize_from_json(value["attackVoteList"]),
