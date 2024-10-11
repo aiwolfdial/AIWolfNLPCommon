@@ -73,7 +73,7 @@ class Connection(Protocol):
         socket.send(message.encode(self._encode_format))
 
     @classmethod
-    def get_socket(cls, inifile:configparser.ConfigParser) -> Connection:
+    def get_socket(cls, inifile:configparser.ConfigParser) -> TCPClient | TCPServer | SSHServer | WebSocketClient:
 
         if inifile.getboolean("connection","websocket"):
             return WebSocketClient(inifile=inifile)
