@@ -9,6 +9,10 @@ import random
 import re
 from pathlib import Path
 
+from aiwolf_nlp_common.connection.ssh import SSHServer
+from aiwolf_nlp_common.connection.tcp import TCPClient, TCPServer
+from aiwolf_nlp_common.connection.websocket import WebSocketClient
+
 ENCODE_FORMAT: str = "utf-8"
 
 
@@ -121,3 +125,15 @@ def get_name_from_index(agent_index: int) -> str:
 
     """
     return f"Agent[{agent_index:0>2d}]"
+
+def get_socket(inifile: configparser.ConfigParser) -> TCPClient | TCPServer | SSHServer | WebSocketClient:
+    if inifile.getboolean("connection", "websocket"):
+        return WebSocketClient(inifile=inifile)
+
+    if inifile.getboolean("connection", "ssh"):
+        return SSHServer(inifile=inifile, name=inifile.get("agent", "name1"))
+
+    if inifile.getboolean("connection", "is_host"):
+        return TCPServer(inifile=inifile, name=inifile.get("agent", "name1"))
+
+    return TCPClient(inifile=inifile)

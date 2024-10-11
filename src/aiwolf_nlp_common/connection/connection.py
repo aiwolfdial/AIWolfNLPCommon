@@ -3,13 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Protocol, TYPE_CHECKING
-from aiwolf_nlp_common.connection.tcp import(
-    TCPClient,
-    TCPServer
-)
-from aiwolf_nlp_common.connection.ssh import SSHServer
-from aiwolf_nlp_common.connection.websocket import WebSocketClient
+from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
     import configparser
@@ -71,16 +65,6 @@ class Connection(Protocol):
         message += "\n"
 
         socket.send(message.encode(self._encode_format))
-
-    @classmethod
-    def get_socket(cls, inifile:configparser.ConfigParser) -> TCPClient | TCPServer | SSHServer | WebSocketClient:
-
-        if inifile.getboolean("connection","websocket"):
-            return WebSocketClient(inifile=inifile)
-        elif inifile.getboolean("connection","ssh"):
-            return SSHServer(inifile=inifile, name=inifile.get("agent","name1"))
-        else:
-            return TCPServer(inifile=inifile, name=inifile.get("agent","name1")) if inifile.getboolean("connection","is_host") else TCPClient(inifile=inifile)       
 
     @classmethod
     def is_json_complate(cls, responses: bytes) -> bool:
