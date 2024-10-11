@@ -2,7 +2,7 @@ import websocket
 import configparser
 from aiwolf_nlp_common.connection import Connection
 
-class Websocket_Client(Connection):
+class WebSocketClient(Connection):
 
     __uri_prefix:str = "ws://"
 
