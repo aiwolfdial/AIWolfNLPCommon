@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 
 import paramiko
 
-from .connection import Connection
+from ..connection import Connection
 
 if TYPE_CHECKING:
     import configparser
