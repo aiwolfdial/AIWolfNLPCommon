@@ -5,7 +5,7 @@ from __future__ import annotations
 import socket
 from typing import TYPE_CHECKING
 
-from ..connection import Connection
+from aiwolf_nlp_common.connection import Connection
 
 if TYPE_CHECKING:
     import configparser
