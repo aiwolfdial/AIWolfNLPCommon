@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import websocket
 import configparser
 from aiwolf_nlp_common.connection import Connection
