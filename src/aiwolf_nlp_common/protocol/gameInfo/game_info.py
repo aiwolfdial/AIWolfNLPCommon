@@ -26,10 +26,13 @@ The `GameInfo` class provides methods for initializing itself from JSON data and
 storing various elements of the game state in its attributes.
 """
 
+from __future__ import annotations
+
+from aiwolf_nlp_common.protocol.talk_list import TalkList
+
 from .divine_result import DivineResult
 from .list.existing_role_list import ExistingRoleList
 from .list.last_dead_agent_list import LastDeadAgentList
-from ..talk_list import TalkList
 from .list.vote_list import VoteList
 from .map.remain_talk_map import RemainTalkMap
 from .map.role_map import RoleMap
@@ -75,7 +78,7 @@ class GameInfo:
 
     day: int
     agent: str
-    divine_result:DivineResult
+    divine_result: DivineResult
     vote_list: VoteList
     latest_vote_list: VoteList
     attack_vote_list: VoteList
@@ -93,7 +96,7 @@ class GameInfo:
         self,
         day: int,
         agent: str,
-        divine_result:DivineResult,
+        divine_result: DivineResult | None,
         vote_list: VoteList,
         latest_vote_list: VoteList,
         attack_vote_list: VoteList,
@@ -144,7 +147,7 @@ class GameInfo:
         self.last_dead_agent_list = last_dead_agent_list
 
     @classmethod
-    def initialize_from_json(cls, value: dict) -> "GameInfo":
+    def initialize_from_json(cls, value: dict) -> GameInfo:
         """Initializes a GameInfo instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -177,7 +180,9 @@ class GameInfo:
         return cls(
             day=value["day"],
             agent=value["agent"],
-            divine_result=value["divineResult"],
+            divine_result=DivineResult.initialize_from_json(value=value["divineResult"])
+            if value.get("divineResult") is not None
+            else None,
             vote_list=VoteList.initialize_from_json(value["voteList"]),
             latest_vote_list=VoteList.initialize_from_json(value["latestVoteList"]),
             attack_vote_list=VoteList.initialize_from_json(value["attackVoteList"]),
@@ -191,3 +196,6 @@ class GameInfo:
             existing_role_list=ExistingRoleList.initialize_from_json(value["existingRoleList"]),
             last_dead_agent_list=LastDeadAgentList.initialize_from_json(value["lastDeadAgentList"]),
         )
+
+    def is_set_divine_result(self) -> bool:
+        return self.divine_result is not None
