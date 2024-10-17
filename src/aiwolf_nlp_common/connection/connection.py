@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import configparser
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     import paramiko
 
 
-class Connection(Protocol):
+class Connection():
     """A class that describes the settings and actions required to connect to the game server."""
 
     _encode_format: str = "utf-8"
