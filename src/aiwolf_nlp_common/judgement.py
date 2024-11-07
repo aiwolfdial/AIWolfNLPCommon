@@ -1,6 +1,6 @@
 import enum
 
-class Divine(enum.Enum):
+class Judgement(enum.Enum):
     HUMAN = "HUMAN"
     WEREWOLF = "WEREWOLF"
 

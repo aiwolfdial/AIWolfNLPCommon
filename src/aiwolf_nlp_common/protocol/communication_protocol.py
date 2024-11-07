@@ -30,7 +30,7 @@ class CommunicationProtocol:
 
     Attributes:
         request (str): The type of request being made to the game server.
-        game_info (info | None): An instance of info containing the current
+        info (info | None): An instance of info containing the current
             state of the game, or None if not provided.
         setting (setting | None): An instance of setting containing the
             settings for the game, or None if not provided.
@@ -41,7 +41,7 @@ class CommunicationProtocol:
     """
 
     request: str
-    game_info: Info | None
+    info: Info | None
     setting: Setting | None
     talk_history: TalkList | None
     whisper_history: TalkList | None
@@ -49,7 +49,7 @@ class CommunicationProtocol:
     def __init__(
         self,
         request: str,
-        game_info: Info | None,
+        info: Info | None,
         setting: Setting | None,
         talk_history: TalkList | None,
         whisper_history: TalkList | None,
@@ -60,13 +60,13 @@ class CommunicationProtocol:
 
         Args:
             request (str): The type of request being made to the game server.
-            game_info (info | None): The current state of the game.
+            info (info | None): The current state of the game.
             setting (setting | None): The settings for the game.
             talk_history (TalkList | None): The history of talks during the game.
             whisper_history (TalkList | None): The history of whispers during the game.
         """
         self.request = request
-        self.game_info = game_info
+        self.info = info
         self.setting = setting
         self.talk_history = talk_history
         self.whisper_history = whisper_history
@@ -106,8 +106,8 @@ class CommunicationProtocol:
             else None,
         )
     
-    def is_set_game_info(self) -> bool:
-        return not self.game_info is None
+    def is_set_info(self) -> bool:
+        return not self.info is None
     
     def is_set_setting(self) -> bool:
         return not self.setting is None
