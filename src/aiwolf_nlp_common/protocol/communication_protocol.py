@@ -15,7 +15,7 @@ from __future__ import annotations
 import json
 
 from .gameInfo.game_info import GameInfo
-from .gameSetting.game_setting import GameSetting
+from .setting.setting import Setting
 from .talk_list import TalkList
 
 
@@ -32,7 +32,7 @@ class CommunicationProtocol:
         request (str): The type of request being made to the game server.
         game_info (GameInfo | None): An instance of GameInfo containing the current
             state of the game, or None if not provided.
-        game_setting (GameSetting | None): An instance of GameSetting containing the
+        game_setting (setting | None): An instance of setting containing the
             settings for the game, or None if not provided.
         talk_history (TalkList | None): A list of previous talks during the game, or
             None if not provided.
@@ -42,7 +42,7 @@ class CommunicationProtocol:
 
     request: str
     game_info: GameInfo | None
-    game_setting: GameSetting | None
+    game_setting: Setting | None
     talk_history: TalkList | None
     whisper_history: TalkList | None
 
@@ -50,7 +50,7 @@ class CommunicationProtocol:
         self,
         request: str,
         game_info: GameInfo | None,
-        game_setting: GameSetting | None,
+        game_setting: Setting | None,
         talk_history: TalkList | None,
         whisper_history: TalkList | None,
     ) -> None:
@@ -61,7 +61,7 @@ class CommunicationProtocol:
         Args:
             request (str): The type of request being made to the game server.
             game_info (GameInfo | None): The current state of the game.
-            game_setting (GameSetting | None): The settings for the game.
+            game_setting (setting | None): The settings for the game.
             talk_history (TalkList | None): The history of talks during the game.
             whisper_history (TalkList | None): The history of whispers during the game.
         """
@@ -78,7 +78,7 @@ class CommunicationProtocol:
         This docstring was created by a generative AI.
         This method parses the received JSON string to extract the relevant information
         and initializes a new instance of CommunicationProtocol with it. It looks for
-        keys such as "request", "gameInfo", "gameSetting", "talkList", and
+        keys such as "request", "gameInfo", "setting", "talkList", and
         "whisperList" to populate the instance attributes.
 
         Args:
@@ -95,8 +95,8 @@ class CommunicationProtocol:
             GameInfo.initialize_from_json(value=received_json["gameInfo"])
             if received_json.get("gameInfo")
             else None,
-            GameSetting.initialize_from_json(value=received_json["gameSetting"])
-            if received_json.get("gameSetting")
+            Setting.initialize_from_json(value=received_json["setting"])
+            if received_json.get("setting")
             else None,
             TalkList.initialize_from_json(set_list=received_json["talkList"])
             if received_json.get("talkList")
@@ -105,3 +105,9 @@ class CommunicationProtocol:
             if received_json.get("whisperList")
             else None,
         )
+    
+    def is_set_game_info(self) -> bool:
+        return not self.game_info is None
+    
+    def is_set_game_setting(self) -> bool:
+        return not self.game_setting is None

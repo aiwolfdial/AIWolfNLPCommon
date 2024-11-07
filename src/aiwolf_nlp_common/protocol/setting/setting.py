@@ -26,7 +26,7 @@ Note:
 from .map.role_num_map import RoleNumMap
 
 
-class GameSetting:
+class Setting:
     """Class for storing “gameSetting” information received from the game server."""
 
     role_num_map: RoleNumMap
@@ -125,7 +125,7 @@ class GameSetting:
         return int(self.action_timeout / 1000)
 
     @classmethod
-    def initialize_from_json(cls, value: dict) -> "GameSetting":
+    def initialize_from_json(cls, value: dict) -> "Setting":
         """Initialize with information received from the game server.
 
         Args:
