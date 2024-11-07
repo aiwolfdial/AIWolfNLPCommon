@@ -1,14 +1,14 @@
-"""GameInfo Module.
+"""info Module.
 
 This docstring was created by a generative AI.
-This module defines the GameInfo class, which is responsible for storing and handling
+This module defines the info class, which is responsible for storing and handling
 the current state of a game based on data received from a game server. It includes
 various attributes such as the current day, agent details, vote lists, talk lists,
 role maps, status maps, and more. These attributes are initialized using JSON data
 received from the game server.
 
 Classes:
-    GameInfo: A class that represents the game state, including the current day, agent
+    info: A class that represents the game state, including the current day, agent
     information, votes, talks, roles, statuses, and other related game data.
 
 Imported Modules:
@@ -22,7 +22,7 @@ Imported Modules:
     - RoleMap: A map class that stores the roles of agents.
     - StatusMap: A map class that stores the status of agents.
 
-The `GameInfo` class provides methods for initializing itself from JSON data and
+The `info` class provides methods for initializing itself from JSON data and
 storing various elements of the game state in its attributes.
 """
 
@@ -39,11 +39,11 @@ from .map.role_map import RoleMap
 from .map.status_map import StatusMap
 
 
-class GameInfo:
+class Info:
     """Represents the current state of the game.
 
     This docstring was created by a generative AI.
-    The GameInfo class encapsulates all relevant information about the ongoing game, including
+    The info class encapsulates all relevant information about the ongoing game, including
     the current day, the active agent, and various lists and maps that track votes, talks, roles,
     and agent statuses. This class provides a structured way to manage and access game data,
     facilitating interactions between game components.
@@ -69,10 +69,10 @@ class GameInfo:
                  latest_attack_vote_list, talk_list, whisper_list, status_map,
                  role_map, remain_talk_map, remain_whisper_map,
                  existing_role_list, last_dead_agent_list):
-            Initializes a GameInfo instance with all game state information.
+            Initializes a info instance with all game state information.
 
-        initialize_from_json(value: dict) -> "GameInfo":
-            Class method that initializes a GameInfo instance from JSON data received
+        initialize_from_json(value: dict) -> "info":
+            Class method that initializes a info instance from JSON data received
             from the game server.
     """
 
@@ -110,7 +110,7 @@ class GameInfo:
         existing_role_list: ExistingRoleList,
         last_dead_agent_list: LastDeadAgentList,
     ) -> None:
-        """Initialize a GameInfo instance with all game state information.
+        """Initialize a info instance with all game state information.
 
         This description was written by Claude 3.5 Sonnet.
 
@@ -147,17 +147,17 @@ class GameInfo:
         self.last_dead_agent_list = last_dead_agent_list
 
     @classmethod
-    def initialize_from_json(cls, value: dict) -> GameInfo:
-        """Initializes a GameInfo instance from JSON data received from the game server.
+    def initialize_from_json(cls, value: dict) -> Info:
+        """Initializes a info instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
         This method takes a dictionary containing information about the game state and
-        initializes a new GameInfo instance with it. The provided JSON data is expected
+        initializes a new info instance with it. The provided JSON data is expected
         to include various components such as the current day, the agent's ID, and lists
         of votes, talks, and agent statuses, among others.
 
         Args:
-            value (dict): JSON dictionary of "gameInfo" received from the game server.
+            value (dict): JSON dictionary of "info" received from the game server.
                 The expected structure includes:
                 - "day" (int): The current day of the game.
                 - "agent" (int): The ID of the agent.
@@ -175,7 +175,7 @@ class GameInfo:
                 - "lastDeadAgentList" (list): The list of agents that have died.
 
         Returns:
-            GameInfo: An instance of GameInfo initialized with the provided JSON data.
+            info: An instance of info initialized with the provided JSON data.
         """
         return cls(
             day=value["day"],
