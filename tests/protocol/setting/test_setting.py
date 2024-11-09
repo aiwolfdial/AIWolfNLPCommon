@@ -16,7 +16,7 @@ def test_info(initialize_json):
     assert setting.is_enable_no_attack == bool(initialize_json[setting_key]["isEnableNoAttack"])
     assert setting.is_vote_visible == bool(initialize_json[setting_key]["isVoteVisible"])
     assert setting.is_talk_on_first_day == bool(initialize_json[setting_key]["isTalkOnFirstDay"])
-    assert setting.response_timeout == initialize_json[setting_key]["responseTimeout"]
-    assert setting.action_timeout == initialize_json[setting_key]["actionTimeout"]
+    assert setting.response_timeout == Setting.convert_ms_to_seconds(time=initialize_json[setting_key]["responseTimeout"])
+    assert setting.action_timeout == Setting.convert_ms_to_seconds(time=initialize_json[setting_key]["actionTimeout"])
     assert setting.max_revote == initialize_json[setting_key]["maxRevote"]
     assert setting.max_attack_revote == initialize_json[setting_key]["maxAttackRevote"]
