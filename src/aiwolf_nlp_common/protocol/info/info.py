@@ -173,6 +173,3 @@ class Info:
             remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
             remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"]),
         )
-
-    def is_set_divine_result(self) -> bool:
-        return self.divine_result is not None
