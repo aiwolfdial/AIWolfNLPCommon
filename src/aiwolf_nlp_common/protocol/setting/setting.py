@@ -44,7 +44,7 @@ class Setting:
     action_timeout: int
     max_revote: int
     max_attack_revote: int
-    playe_num: int
+    player_num: int
 
     def __init__(
         self,
@@ -108,7 +108,7 @@ class Setting:
         self.action_timeout = action_timeout
         self.max_revote = max_revote
         self.max_attack_revote = max_attack_revote
-        self.playe_num = player_num
+        self.player_num = player_num
 
     @classmethod
     def convert_ms_to_seconds(cls, time: int) -> int:
@@ -146,5 +146,5 @@ class Setting:
             action_timeout=cls.convert_ms_to_seconds(time=value["actionTimeout"]),
             max_revote=value["maxRevote"],
             max_attack_revote=value["maxAttackRevote"],
-            playe_num=value.get("playerNum", 5),  # Todo
+            player_num=value.get("playerNum", 5),  # Todo
         )
