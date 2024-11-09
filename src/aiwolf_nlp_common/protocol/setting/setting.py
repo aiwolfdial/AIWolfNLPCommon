@@ -23,6 +23,8 @@ Note:
     This description was written by Claude 3.5 Sonnet.
 """
 
+from __future__ import annotations
+
 from .map.role_num_map import RoleNumMap
 
 
