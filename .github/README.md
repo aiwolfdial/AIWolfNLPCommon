@@ -20,14 +20,14 @@ print(protocol.request)        # JSON内の "request" の値を取得
 print(protocol.info.agent)     # JSON内の "info" の中の "agent" の値を取得
 ```
 
-詳細については下記のプロトコルの説明やソースコードを参考にしてください。
-> プロトコルについて： https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/protocol.md
-
 ### 実行結果
 ```
 INITIALIZE
 Agent[02]
 ```
+
+詳細については下記のプロトコルの説明やソースコードを参考にしてください。
+> プロトコルについて： https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/protocol.md
 
 ## 手順
 ```
