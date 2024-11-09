@@ -98,13 +98,24 @@ class CommunicationProtocol:
             Setting.initialize_from_json(value=received_json["setting"])
             if received_json.get("setting")
             else None,
-            TalkList.initialize_from_json(set_list=received_json["talkList"])
-            if received_json.get("talkList")
-            else None,
-            TalkList.initialize_from_json(set_list=received_json["whisperList"])
-            if received_json.get("whisperList")
-            else None,
+            TalkList.initialize_from_json(set_list=received_json.get("talkList")),
+            TalkList.initialize_from_json(set_list=received_json.get("whisperList")),
         )
+    
+    def update_from_json(self, received_str: str) -> CommunicationProtocol:
+        received_json: dict = json.loads(received_str)
+
+        self.request = received_json["request"]
+        
+        if received_json.get("info") is not None:
+            self.info.update_from_json(value=received_json.get("info"))
+        
+        if received_json.get("setting") is not None:
+            self.setting.update_from_json(value=received_json.get("setting"))
+        
+        self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkList"))
+        self.whisper_history = TalkList.initialize_from_json(set_list=received_json.get("whisperList"))
+
     
     def is_set_info(self) -> bool:
         return not self.info is None

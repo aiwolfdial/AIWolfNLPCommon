@@ -148,3 +148,23 @@ class Setting:
             max_attack_revote=value["maxAttackRevote"],
             player_num=value.get("playerNum", 5),  # Todo
         )
+    
+    def update_from_json(self, value: dict | None) -> None:
+
+        if value is None:
+            return None
+        
+        self.role_num_map = RoleNumMap.initialize_from_json(value=value["roleNumMap"])
+        self.max_talk = value["maxTalk"]
+        self.max_talk_turn = value["maxTalkTurn"]
+        self.max_whisper = value["maxWhisper"]
+        self.max_whisper_turn = value["maxWhisperTurn"]
+        self.max_skip = value["maxSkip"]
+        self.is_enable_no_attack = value["isEnableNoAttack"]
+        self.is_vote_visible = value["isVoteVisible"]
+        self.is_talk_on_first_day = value["isTalkOnFirstDay"]
+        self.response_timeout = self.convert_ms_to_seconds(time=value["responseTimeout"])
+        self.action_timeout = self.convert_ms_to_seconds(time=value["actionTimeout"])
+        self.max_revote = value["maxRevote"]
+        self.max_attack_revote = value["maxAttackRevote"]
+        self.player_num = value.get("playerNum", 5)  # Todo

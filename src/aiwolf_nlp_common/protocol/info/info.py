@@ -182,6 +182,26 @@ class Info:
             remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
             remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"]),
         )
+    
+    def update_from_json(self, value: dict | None) -> None:
+
+        if value is None:
+            return None
+        
+        self.day = value["day"]
+        self.agent = value["agent"]
+        self.medium_result = JudgementResult.initialize_from_json(value.get("mediumResult", None))
+        self.divine_result = JudgementResult.initialize_from_json(value.get("divineResult", None))
+        self.executed_agent = value.get("executedAgent", None)
+        self.attacked_agent = value.get("attackedAgent", None)
+        self.vote_list.initialize_from_json(value.get("voteList", None))
+        self.attack_vote_list.initialize_from_json(value.get("attackVoteList", None))
+        self.talk_list.initialize_from_json(value.get("talkList", None))
+        self.whisper_list.initialize_from_json(value.get("whisperList", None))
+        self.status_map=StatusMap.initialize_from_json(value["statusMap"])
+        self.role_map=RoleMap.initialize_from_json(value["roleMap"])
+        self.remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"])
+        self.remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"])
 
     def has_executed_agent(self) -> bool:
         return self.executed_agent is not None
