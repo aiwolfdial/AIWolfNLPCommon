@@ -24,7 +24,7 @@ class TCPConnection(Connection):
         super().__init__(inifile)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    def receive(self) -> str | RuntimeError:
+    def receive(self) -> str:
         """Receive information from the game server and return it as a string.
 
         Returns:

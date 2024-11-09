@@ -29,7 +29,7 @@ class TCPServer(TCPConnection):
         self.host_port = self.get_host_port(inifile=inifile, name=name)
         self.socket.bind((self.host_ip, self.host_port))
 
-    def get_host_port(self, inifile: configparser.ConfigParser, name: str) -> int | ValueError:
+    def get_host_port(self, inifile: configparser.ConfigParser, name: str) -> int:
         """BSet up information to wait for the game server.
 
         Based on the agent's name and the settings in the Config file,
