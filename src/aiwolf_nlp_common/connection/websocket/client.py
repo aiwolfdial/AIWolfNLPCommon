@@ -10,6 +10,7 @@ class WebSocketClient(Connection):
     __uri_suffix:str = "/ws"
 
     def __init__(self, inifile: configparser.ConfigParser) -> None:
+        super().__init__(inifile=inifile)
         websocket.enableTrace(traceable=False)
         self.socket = websocket.WebSocket()
         self.uri = inifile.get("websocket","uri")
