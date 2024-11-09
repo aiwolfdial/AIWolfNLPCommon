@@ -61,7 +61,7 @@ class Info:
         __init__(day, agent, vote_list, latest_vote_list, attack_vote_list,
                  latest_attack_vote_list, talk_list, whisper_list, status_map,
                  role_map, remain_talk_map, remain_whisper_map,
-                 existing_role_list, last_dead_agent_list):
+                 existing_role_list):
             Initializes a info instance with all game state information.
 
         initialize_from_json(value: dict) -> "info":
