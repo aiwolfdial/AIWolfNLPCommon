@@ -70,7 +70,7 @@ class RemainTalkMap(set):
     """Set extension class for storing “remainTalkMap” information."""
 
     @classmethod
-    def initialize_from_json(cls, set_map: dict) -> RemainTalkMap:
+    def initialize_from_json(cls, set_map: dict | None) -> RemainTalkMap:
         """Initializes a RemainTalkMap instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -89,11 +89,25 @@ class RemainTalkMap(set):
         """
         instance = cls()
 
+        if set_map is None:
+            return instance
+
         for agent in set_map:
             add_elem = AgentRemainTalkInfo(agent=agent, remain_talk_number=set_map[agent])
             instance.add(add_elem)
 
         return instance
+
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
 
     def get_agent_remain_talk_number(self, agent: str) -> int:
         """Retrieve the remaining talk number of a specified agent.
