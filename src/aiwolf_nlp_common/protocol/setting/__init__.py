@@ -1,1 +1,1 @@
-from .setting import GameSetting
+from .setting import Setting
