@@ -36,4 +36,4 @@ $ pip install aiwolf-nlp-common
 
 > [!WARNING]
 > `pip install aiwolf-nlp-common` に失敗する場合は、以下のURLを参照してください。
-> https://pypi.org/project/aiwolf-nlp-common/
+> https://pypi.org/project/aiwolf-nlp-common/0.0.1/
