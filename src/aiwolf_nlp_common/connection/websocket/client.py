@@ -1,7 +1,9 @@
 from __future__ import annotations
 
-import websocket
 import configparser
+
+import websocket
+
 from aiwolf_nlp_common.connection import Connection
 
 
@@ -19,7 +21,7 @@ class WebSocketClient(Connection):
         self.socket.connect(self.__uri_prefix + self.uri + self.__uri_suffix)
 
     def receive(self) -> list:
-        response:str = self.socket.recv()
+        response: str = self.socket.recv()
         return Connection.split_receive_info(receive=response, is_include_newline=False)
 
     def send(self, message: str) -> None:
