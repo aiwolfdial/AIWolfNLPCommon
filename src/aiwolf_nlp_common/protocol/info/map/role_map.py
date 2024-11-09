@@ -94,7 +94,7 @@ class RoleMap(set):
 
         return instance
 
-    def get_agent_role(self, agent: str) -> Role:
+    def get_role(self, agent: str) -> Role:
         """Retrieve the role of a specified agent.
 
         This docstring was created by a generative AI.
