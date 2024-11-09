@@ -161,11 +161,13 @@ class Info:
             day=value["day"],
             agent=value["agent"],
             medium_result=value.get("mediumResult", None),
-            divine_result=JudgementResult.initialize_from_json(value=value.get("divineResult")),
-            vote_list=VoteList.initialize_from_json(value.get("voteList")),
-            attack_vote_list=VoteList.initialize_from_json(value.get("attackVoteList")),
-            talk_list=TalkList.initialize_from_json(value.get("talkList")),
-            whisper_list=TalkList.initialize_from_json(value.get("whisperList")),
+            divine_result=JudgementResult.initialize_from_json(
+                value=value.get("divineResult", None)
+            ),
+            vote_list=VoteList.initialize_from_json(value.get("voteList", None)),
+            attack_vote_list=VoteList.initialize_from_json(value.get("attackVoteList", None)),
+            talk_list=TalkList.initialize_from_json(value.get("talkList", None)),
+            whisper_list=TalkList.initialize_from_json(value.get("whisperList", None)),
             status_map=StatusMap.initialize_from_json(value["statusMap"]),
             role_map=RoleMap.initialize_from_json(value["roleMap"]),
             remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
