@@ -73,7 +73,7 @@ class Info:
     agent: str
     medium_result: JudgementResult
     divine_result: JudgementResult
-    executed_agent: str
+    executed_agent: str | None
     attacked_agent: str
     vote_list: VoteList
     attack_vote_list: VoteList
@@ -90,6 +90,7 @@ class Info:
         agent: str,
         medium_result: JudgementResult,
         divine_result: JudgementResult,
+        executed_agent: str | None,
         vote_list: VoteList,
         attack_vote_list: VoteList,
         talk_list: TalkList,
@@ -108,6 +109,7 @@ class Info:
             agent (str): The identifier of the current agent.
             medium_result (JudgementResult):
             divine_result: (JudgementResult):
+            executed_agent: (str):
             vote_list (VoteList): List of votes cast.
             attack_vote_list (VoteList): List of attack votes.
             talk_list (TalkList): List of talks made during the game.
@@ -121,6 +123,7 @@ class Info:
         self.agent = agent
         self.medium_result = medium_result
         self.divine_result = divine_result
+        self.executed_agent = executed_agent
         self.vote_list = vote_list
         self.attack_vote_list = attack_vote_list
         self.talk_list = talk_list
@@ -166,6 +169,7 @@ class Info:
             divine_result=JudgementResult.initialize_from_json(
                 value=value.get("divineResult", None)
             ),
+            executed_agent=value.get("executedAgent", None),
             vote_list=VoteList.initialize_from_json(value.get("voteList", None)),
             attack_vote_list=VoteList.initialize_from_json(value.get("attackVoteList", None)),
             talk_list=TalkList.initialize_from_json(value.get("talkList", None)),
@@ -175,3 +179,6 @@ class Info:
             remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
             remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"]),
         )
+
+    def has_executed_agent(self) -> bool:
+        return self.executed_agent is not None
