@@ -29,6 +29,8 @@ from .map.role_num_map import RoleNumMap
 class Setting:
     """Class for storing “gameSetting” information received from the game server."""
 
+    __ms_to_seconds_divisor: int = 1000
+
     role_num_map: RoleNumMap
     max_talk: int
     max_talk_turn: int
@@ -108,6 +110,10 @@ class Setting:
         self.max_attack_revote = max_attack_revote
         self.playe_num = player_num
 
+    @classmethod
+    def convert_ms_to_seconds(cls, time: int) -> int:
+        return int(time / cls.__ms_to_seconds_divisor)
+
     def get_action_timeout_in_seconds(self) -> int:
         """Convert and retrieve the action timeout in seconds.
 
@@ -127,18 +133,18 @@ class Setting:
             value (dict): json dict of “gameSetting” received from the game server.
         """
         return cls(
-            RoleNumMap.initialize_from_json(value=value["roleNumMap"]),
-            value["maxTalk"],
-            value["maxTalkTurn"],
-            value["maxWhisper"],
-            value["maxWhisperTurn"],
-            value["maxSkip"],
-            value["isEnableNoAttack"],
-            value["isVoteVisible"],
-            value["isTalkOnFirstDay"],
-            value["responseTimeout"],
-            value["actionTimeout"],
-            value["maxRevote"],
-            value["maxAttackRevote"],
-            value.get("playerNum", 5), # Todo
+            role_num_map=RoleNumMap.initialize_from_json(value=value["roleNumMap"]),
+            max_talk=value["maxTalk"],
+            max_talk_turn=value["maxTalkTurn"],
+            max_whisper=value["maxWhisper"],
+            max_whisper_turn=value["maxWhisperTurn"],
+            max_skip=value["maxSkip"],
+            is_enable_no_attack=value["isEnableNoAttack"],
+            is_vote_visible=value["isVoteVisible"],
+            is_talk_on_first_day=value["isTalkOnFirstDay"],
+            response_timeout=cls.convert_ms_to_seconds(time=value["responseTimeout"]),
+            action_timeout=cls.convert_ms_to_seconds(time=value["actionTimeout"]),
+            max_revote=value["maxRevote"],
+            max_attack_revote=value["maxAttackRevote"],
+            playe_num=value.get("playerNum", 5),  # Todo
         )
