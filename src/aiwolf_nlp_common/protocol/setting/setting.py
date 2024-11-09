@@ -140,5 +140,5 @@ class Setting:
             value["actionTimeout"],
             value["maxRevote"],
             value["maxAttackRevote"],
-            value["playerNum"],
+            value.get("playerNum", 5), # Todo
         )
