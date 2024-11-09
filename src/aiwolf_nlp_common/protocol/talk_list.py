@@ -1,5 +1,6 @@
 """This method is used to define a class for storing “talkList” information."""
 
+from __future__ import annotations
 
 class TalkInfo:
     """Class for defining elements of “talkList”."""
@@ -77,7 +78,7 @@ class TalkList(list):
     """List extension class for storing “talkList” information."""
 
     @classmethod
-    def initialize_from_json(cls, set_list: list) -> "TalkList":
+    def initialize_from_json(cls, set_list: list | None) -> "TalkList":
         """Initializes a TalkList instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -103,6 +104,9 @@ class TalkList(list):
         """
         instance = cls()
 
+        if set_list is None:
+            return instance
+
         for talk_info in set_list:
             add_elem = TalkInfo(
                 agent=talk_info["agent"],
@@ -116,3 +120,14 @@ class TalkList(list):
             instance.append(add_elem)
 
         return instance
+    
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
