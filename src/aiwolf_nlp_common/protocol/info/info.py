@@ -46,8 +46,8 @@ class Info:
     Attributes:
         day (int): The current day of the game.
         agent (str): The identifier of the current agent.
-        medium_result (JudgementResult): 
-        divine_result: (JudgementResult): 
+        medium_result (JudgementResult):
+        divine_result: (JudgementResult):
         vote_list (VoteList): A list of votes that have been cast during the game.
         attack_vote_list (VoteList): A list of votes related to attacks.
         talk_list (TalkList): A list of all talks made during the game.
@@ -74,7 +74,7 @@ class Info:
     medium_result: JudgementResult
     divine_result: JudgementResult
     executed_agent: str
-    attacked_agent:str
+    attacked_agent: str
     vote_list: VoteList
     attack_vote_list: VoteList
     talk_list: TalkList
@@ -106,8 +106,8 @@ class Info:
         Args:
             day (int): The current day in the game.
             agent (str): The identifier of the current agent.
-            medium_result (JudgementResult): 
-            divine_result: (JudgementResult): 
+            medium_result (JudgementResult):
+            divine_result: (JudgementResult):
             vote_list (VoteList): List of votes cast.
             attack_vote_list (VoteList): List of attack votes.
             talk_list (TalkList): List of talks made during the game.
@@ -160,7 +160,7 @@ class Info:
         return cls(
             day=value["day"],
             agent=value["agent"],
-            medium_result = value.get("mediumResult", None),
+            medium_result=value.get("mediumResult", None),
             divine_result=JudgementResult.initialize_from_json(value=value.get("divineResult")),
             vote_list=VoteList.initialize_from_json(value.get("voteList")),
             attack_vote_list=VoteList.initialize_from_json(value.get("attackVoteList")),
