@@ -14,8 +14,8 @@ from __future__ import annotations
 
 import json
 
-from .gameInfo.game_info import GameInfo
-from .gameSetting.game_setting import GameSetting
+from .info.info import Info
+from .setting.setting import Setting
 from .talk_list import TalkList
 
 
@@ -30,9 +30,9 @@ class CommunicationProtocol:
 
     Attributes:
         request (str): The type of request being made to the game server.
-        game_info (GameInfo | None): An instance of GameInfo containing the current
+        info (info | None): An instance of info containing the current
             state of the game, or None if not provided.
-        game_setting (GameSetting | None): An instance of GameSetting containing the
+        setting (setting | None): An instance of setting containing the
             settings for the game, or None if not provided.
         talk_history (TalkList | None): A list of previous talks during the game, or
             None if not provided.
@@ -41,16 +41,16 @@ class CommunicationProtocol:
     """
 
     request: str
-    game_info: GameInfo | None
-    game_setting: GameSetting | None
+    info: Info | None
+    setting: Setting | None
     talk_history: TalkList | None
     whisper_history: TalkList | None
 
     def __init__(
         self,
         request: str,
-        game_info: GameInfo | None,
-        game_setting: GameSetting | None,
+        info: Info | None,
+        setting: Setting | None,
         talk_history: TalkList | None,
         whisper_history: TalkList | None,
     ) -> None:
@@ -60,14 +60,14 @@ class CommunicationProtocol:
 
         Args:
             request (str): The type of request being made to the game server.
-            game_info (GameInfo | None): The current state of the game.
-            game_setting (GameSetting | None): The settings for the game.
+            info (info | None): The current state of the game.
+            setting (setting | None): The settings for the game.
             talk_history (TalkList | None): The history of talks during the game.
             whisper_history (TalkList | None): The history of whispers during the game.
         """
         self.request = request
-        self.game_info = game_info
-        self.game_setting = game_setting
+        self.info = info
+        self.setting = setting
         self.talk_history = talk_history
         self.whisper_history = whisper_history
 
@@ -78,7 +78,7 @@ class CommunicationProtocol:
         This docstring was created by a generative AI.
         This method parses the received JSON string to extract the relevant information
         and initializes a new instance of CommunicationProtocol with it. It looks for
-        keys such as "request", "gameInfo", "gameSetting", "talkList", and
+        keys such as "request", "info", "setting", "talkList", and
         "whisperList" to populate the instance attributes.
 
         Args:
@@ -92,16 +92,38 @@ class CommunicationProtocol:
         received_json: dict = json.loads(received_str)
         return cls(
             received_json["request"],
-            GameInfo.initialize_from_json(value=received_json["gameInfo"])
-            if received_json.get("gameInfo")
+            Info.initialize_from_json(value=received_json["info"])
+            if received_json.get("info")
             else None,
-            GameSetting.initialize_from_json(value=received_json["gameSetting"])
-            if received_json.get("gameSetting")
+            Setting.initialize_from_json(value=received_json["setting"])
+            if received_json.get("setting")
             else None,
-            TalkList.initialize_from_json(set_list=received_json["talkList"])
-            if received_json.get("talkList")
-            else None,
-            TalkList.initialize_from_json(set_list=received_json["whisperList"])
-            if received_json.get("whisperList")
-            else None,
+            TalkList.initialize_from_json(set_list=received_json.get("talkList")),
+            TalkList.initialize_from_json(set_list=received_json.get("whisperList")),
         )
+    
+    def update_from_json(self, received_str: str) -> CommunicationProtocol:
+        received_json: dict = json.loads(received_str)
+
+        self.request = received_json["request"]
+
+        if received_json.get("info") is not None:
+            if not self.is_set_info():
+                self.info = Info.initialize_from_json(value=received_json["info"])
+            else:
+                self.info.update_from_json(value=received_json.get("info"))
+        
+        if received_json.get("setting") is not None:
+            if not self.is_set_setting():
+                self.setting = Setting.initialize_from_json(value=received_json["setting"])
+            else:
+                self.setting.update_from_json(value=received_json.get("setting"))
+        
+        self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkList"))
+        self.whisper_history = TalkList.initialize_from_json(set_list=received_json.get("whisperList"))
+    
+    def is_set_info(self) -> bool:
+        return not self.info is None
+    
+    def is_set_setting(self) -> bool:
+        return not self.setting is None

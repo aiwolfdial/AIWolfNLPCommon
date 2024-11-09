@@ -26,7 +26,7 @@ class Connection:
         """
         self.buffer = inifile.getint("connection", "buffer")
 
-    def receive(self, socket: socket.socket | paramiko.channel.Channel) -> list | RuntimeError:
+    def receive(self, socket: socket.socket | paramiko.channel.Channel) -> list:
         """Receive information from the game server and return it as a string.
 
         Args:
@@ -110,11 +110,11 @@ class Connection:
 
     @classmethod
     def split_receive_info(cls, receive: str, *, is_include_newline: bool = True) -> list:
-        """Split multiple pieces of information received in bulk from the game server.
+        r"""Split multiple pieces of information received in bulk from the game server.
 
         Args:
             receive (str): String received from the game server.
-            is_include_newline(bool): True if the newline is include text, False otherwise.
+            is_include_newline (bool): True if the "\n" is include text, False otherwise.
 
         Returns:
             list: A list of notifications or requests from the game server.

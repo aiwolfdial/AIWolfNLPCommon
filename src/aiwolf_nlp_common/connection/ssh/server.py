@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 
 import paramiko
 
-from ..connection import Connection
+from aiwolf_nlp_common.connection import Connection
 
 if TYPE_CHECKING:
     import configparser
@@ -34,7 +34,7 @@ class SSHServer(Connection):
         self.timeout = inifile.getint("ssh-server", "timeout")
         self.ssh_remoteforward_port = self.get_ssh_port(inifile=inifile, name=name)
 
-    def get_ssh_port(self, inifile: configparser.ConfigParser, name: str) -> int | ValueError:
+    def get_ssh_port(self, inifile: configparser.ConfigParser, name: str) -> int:
         """Get the setting of the port to bind to the public server from the configuration file.
 
         Based on the agent's name and the settings in the Config file,
@@ -125,7 +125,7 @@ class SSHServer(Connection):
         self.transport.request_port_forward(address="", port=remote_port)
         self.channel = self.transport.accept()
 
-    def receive(self) -> str | RuntimeError:
+    def receive(self) -> str:
         """Receive information from the game server and return it as a string.
 
         Returns:

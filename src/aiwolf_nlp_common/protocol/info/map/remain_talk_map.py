@@ -95,6 +95,17 @@ class RemainTalkMap(set):
 
         return instance
 
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
+
     def get_agent_remain_talk_number(self, agent: str) -> int:
         """Retrieve the remaining talk number of a specified agent.
 

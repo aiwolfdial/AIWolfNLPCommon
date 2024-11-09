@@ -1,5 +1,7 @@
 """This method is used to define a class for storing “voteList” information."""
 
+from __future__ import annotations
+
 
 class VoteInfo:
     """Class for defining elements of “voteList”."""
@@ -38,7 +40,7 @@ class VoteList(list):
     """List extension class for storing “voteList” information."""
 
     @classmethod
-    def initialize_from_json(cls, set_list: list) -> "VoteList":
+    def initialize_from_json(cls, set_list: list | None) -> VoteList:
         """Initializes a VoteList instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -60,10 +62,24 @@ class VoteList(list):
         """
         instance = cls()
 
+        if set_list is None:
+            return instance
+
         for vote_info in set_list:
             add_elem = VoteInfo(
                 agent=vote_info["agent"], day=vote_info["day"], target=vote_info["target"]
             )
             instance.append(add_elem)
-        
+
         return instance
+
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
