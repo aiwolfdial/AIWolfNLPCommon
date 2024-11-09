@@ -42,7 +42,6 @@ class Setting:
     action_timeout: int
     max_revote: int
     max_attack_revote: int
-    is_enable_role_request: bool
     playe_num: int
 
     def __init__(
@@ -60,7 +59,6 @@ class Setting:
         action_timeout: int,
         max_revote: int,
         max_attack_revote: int,
-        is_enable_role_request: bool,
         player_num: int,
     ) -> None:
         """Initialize “GameSetting”.
@@ -92,8 +90,6 @@ class Setting:
                 the game server.
             max_attack_revote (int): The maximum number of revotes allowed for attacks,
                 as received from the game server.
-            is_enable_role_request (bool): Whether role requests are enabled, as received
-                from the game server.
             player_num (int): The number of players in the game, as received from the
                 game server.
         """
@@ -110,7 +106,6 @@ class Setting:
         self.action_timeout = action_timeout
         self.max_revote = max_revote
         self.max_attack_revote = max_attack_revote
-        self.is_enable_role_request = is_enable_role_request
         self.playe_num = player_num
 
     def get_action_timeout_in_seconds(self) -> int:
@@ -145,6 +140,5 @@ class Setting:
             value["actionTimeout"],
             value["maxRevote"],
             value["maxAttackRevote"],
-            value["isEnableRoleRequest"],
             value["playerNum"],
         )
