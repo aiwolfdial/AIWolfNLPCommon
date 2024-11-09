@@ -160,7 +160,9 @@ class Info:
         return cls(
             day=value["day"],
             agent=value["agent"],
-            medium_result=value.get("mediumResult", None),
+            medium_result=JudgementResult.initialize_from_json(
+                value=value.get("mediumResult", None)
+            ),
             divine_result=JudgementResult.initialize_from_json(
                 value=value.get("divineResult", None)
             ),
