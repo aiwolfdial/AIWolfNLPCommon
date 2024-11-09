@@ -26,7 +26,7 @@ class Connection:
         """
         self.buffer = inifile.getint("connection", "buffer")
 
-    def receive(self, socket: socket.socket | paramiko.channel.Channel) -> list | RuntimeError:
+    def receive(self, socket: socket.socket | paramiko.channel.Channel) -> list:
         """Receive information from the game server and return it as a string.
 
         Args:
