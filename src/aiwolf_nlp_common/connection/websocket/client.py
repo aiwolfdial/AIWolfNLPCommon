@@ -18,7 +18,7 @@ class WebSocketClient(Connection):
     def connect(self) -> None:
         self.socket.connect(self.__uri_prefix + self.uri + self.__uri_suffix)
 
-    def receive(self) -> list | RuntimeError:
+    def receive(self) -> list:
         response:str = self.socket.recv()
         return Connection.split_receive_info(receive=response, is_include_newline=False)
 
