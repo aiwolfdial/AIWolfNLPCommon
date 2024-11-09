@@ -70,7 +70,7 @@ class RemainTalkMap(set):
     """Set extension class for storing “remainTalkMap” information."""
 
     @classmethod
-    def initialize_from_json(cls, set_map: dict | None) -> RemainTalkMap:
+    def initialize_from_json(cls, set_map: dict) -> RemainTalkMap:
         """Initializes a RemainTalkMap instance from JSON data received from the game server.
 
         This docstring was created by a generative AI.
@@ -88,9 +88,6 @@ class RemainTalkMap(set):
             objects created from the input data.
         """
         instance = cls()
-
-        if set_map is None:
-            return instance
 
         for agent in set_map:
             add_elem = AgentRemainTalkInfo(agent=agent, remain_talk_number=set_map[agent])
