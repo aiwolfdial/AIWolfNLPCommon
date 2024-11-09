@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     import paramiko
 
 
-class Connection():
+class Connection:
     """A class that describes the settings and actions required to connect to the game server."""
 
     _encode_format: str = "utf-8"
@@ -109,14 +109,18 @@ class Connection():
         return "{" in receive_data
 
     @classmethod
-    def split_receive_info(cls, receive: str) -> list:
+    def split_receive_info(cls, receive: str, *, is_include_newline: bool = True) -> list:
         """Split multiple pieces of information received in bulk from the game server.
 
         Args:
             receive (str): String received from the game server.
+            is_include_newline(bool): True if the newline is include text, False otherwise.
 
         Returns:
             list: A list of notifications or requests from the game server.
 
         """
+        if not is_include_newline:
+            return re.findall("({.*})", receive)
+
         return re.findall("({.*})\n", receive)
