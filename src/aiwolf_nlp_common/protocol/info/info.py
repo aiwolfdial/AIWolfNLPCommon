@@ -74,7 +74,7 @@ class Info:
     medium_result: JudgementResult
     divine_result: JudgementResult
     executed_agent: str | None
-    attacked_agent: str
+    attacked_agent: str | None
     vote_list: VoteList
     attack_vote_list: VoteList
     talk_list: TalkList
@@ -91,6 +91,7 @@ class Info:
         medium_result: JudgementResult,
         divine_result: JudgementResult,
         executed_agent: str | None,
+        attacked_agent: str | None,
         vote_list: VoteList,
         attack_vote_list: VoteList,
         talk_list: TalkList,
@@ -124,6 +125,7 @@ class Info:
         self.medium_result = medium_result
         self.divine_result = divine_result
         self.executed_agent = executed_agent
+        self.attacked_agent = attacked_agent
         self.vote_list = vote_list
         self.attack_vote_list = attack_vote_list
         self.talk_list = talk_list
@@ -170,6 +172,7 @@ class Info:
                 value=value.get("divineResult", None)
             ),
             executed_agent=value.get("executedAgent", None),
+            attacked_agent=value.get("attackedAgent", None),
             vote_list=VoteList.initialize_from_json(value.get("voteList", None)),
             attack_vote_list=VoteList.initialize_from_json(value.get("attackVoteList", None)),
             talk_list=TalkList.initialize_from_json(value.get("talkList", None)),
@@ -182,3 +185,6 @@ class Info:
 
     def has_executed_agent(self) -> bool:
         return self.executed_agent is not None
+
+    def has_attacked_agent(self) -> bool:
+        return self.attacked_agent is not None
