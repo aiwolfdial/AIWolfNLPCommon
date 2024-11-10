@@ -137,8 +137,14 @@ class CommunicationProtocol:
             set_list=received_json.get("whisperList")
         )
 
-    def is_set_info(self) -> bool:
-        return not self.info is None
-
-    def is_set_setting(self) -> bool:
-        return not self.setting is None
+    def is_info_empty(self) -> bool:
+        return self.info is None
+    
+    def is_setting_empty(self) -> bool:
+        return self.setting is None
+    
+    def is_talk_history_empty(self) -> bool:
+        return self.talk_history is None
+    
+    def is_whisper_hisotry_empty(self) -> bool:
+        return self.whisper_history is None
