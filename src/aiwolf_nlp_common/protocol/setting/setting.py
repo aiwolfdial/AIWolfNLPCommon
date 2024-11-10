@@ -19,7 +19,7 @@ Imports:
 
 Note:
     This module is designed to work with a specific game server protocol. Ensure that the
-    server's JSON format matches the expected structure in the initialize_from_json method.
+    server's JSON format matches the expected structure in the initialize_from_json method.s
     This description was written by Claude 3.5 Sonnet.
 """
 
@@ -148,7 +148,7 @@ class Setting:
             action_timeout=cls.convert_ms_to_seconds(time=value["actionTimeout"]),
             max_revote=value["maxRevote"],
             max_attack_revote=value["maxAttackRevote"],
-            player_num=value.get("playerNum", 5),  # Todo
+            player_num=value["playerNum"]
         )
     
     def update_from_json(self, value: dict | None) -> None:
@@ -169,4 +169,4 @@ class Setting:
         self.action_timeout = self.convert_ms_to_seconds(time=value["actionTimeout"])
         self.max_revote = value["maxRevote"]
         self.max_attack_revote = value["maxAttackRevote"]
-        self.player_num = value.get("playerNum", 5)  # Todo
+        self.player_num = value["playerNum"]
