@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+
 class TalkInfo:
     """Class for defining elements of “talkList”."""
 
@@ -34,6 +35,9 @@ class TalkInfo:
         self.turn = turn
         self.skip = skip
         self.over = over
+
+    def __str__(self) -> str:
+        return f"index:{self.idx}, {self.agent}: {self.text}"
 
     def is_skip(self) -> bool:
         """Check if the content of the text is “Skip”.
@@ -76,6 +80,18 @@ class TalkInfo:
 
 class TalkList(list):
     """List extension class for storing “talkList” information."""
+
+    def __str__(self) -> str:
+        output: str = f"[{self.__class__.__name__}]"
+
+        if self.is_empty():
+            return output + "\nNo Result Available"
+
+        elem: TalkInfo
+        for elem in self:
+            output += "\n" + elem.__str__()
+
+        return output
 
     @classmethod
     def initialize_from_json(cls, set_list: list | None) -> "TalkList":
@@ -120,7 +136,7 @@ class TalkList(list):
             instance.append(add_elem)
 
         return instance
-    
+
     def is_empty(self) -> bool:
         """Check if the object is empty.
 
