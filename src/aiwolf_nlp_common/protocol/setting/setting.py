@@ -112,6 +112,24 @@ class Setting:
         self.max_attack_revote = max_attack_revote
         self.player_num = player_num
 
+    def __str__(self) -> str:
+        return (
+            f"{self.role_num_map}\n\n"
+            f"MaxTalk: {self.max_talk}\n"
+            f"MaxTalkTurn: {self.max_talk_turn}\n"
+            f"MaxWhisper: {self.max_whisper}\n"
+            f"MaxWhisperTurn: {self.max_whisper_turn}\n"
+            f"MaxSkip: {self.max_skip}\n"
+            f"isEnableNoAttack: {self.is_enable_no_attack}\n"
+            f"isVoteVisible: {self.is_vote_visible}\n"
+            f"isTalkOnFirstDay: {self.is_talk_on_first_day}\n"
+            f"ResponseTimeOut: {self.response_timeout}\n"
+            f"ActionTimeOut: {self.action_timeout}\n"
+            f"MaxReVote: {self.max_revote}\n"
+            f"MaxAttackReVote: {self.max_attack_revote}\n"
+            f"PlayerNum: {self.player_num}\n"
+        )
+
     @classmethod
     def convert_ms_to_seconds(cls, time: int) -> int:
         return int(time / cls.__ms_to_seconds_divisor)
@@ -148,14 +166,13 @@ class Setting:
             action_timeout=cls.convert_ms_to_seconds(time=value["actionTimeout"]),
             max_revote=value["maxRevote"],
             max_attack_revote=value["maxAttackRevote"],
-            player_num=value["playerNum"]
+            player_num=value["playerNum"],
         )
-    
-    def update_from_json(self, value: dict | None) -> None:
 
+    def update_from_json(self, value: dict | None) -> None:
         if value is None:
             return None
-        
+
         self.role_num_map = RoleNumMap.initialize_from_json(value=value["roleNumMap"])
         self.max_talk = value["maxTalk"]
         self.max_talk_turn = value["maxTalkTurn"]
