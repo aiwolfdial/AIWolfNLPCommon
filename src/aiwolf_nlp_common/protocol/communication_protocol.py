@@ -71,6 +71,19 @@ class CommunicationProtocol:
         self.talk_history = talk_history
         self.whisper_history = whisper_history
 
+    def __str__(self) -> str:
+        return (
+            f"Request: {self.request}\n\n"
+            f"---info---\n"
+            f"{self.info}\n"
+            f"---setting---\n"
+            f"{self.setting}\n"
+            f"---talkHistory---\n"
+            f"{self.talk_history}\n\n"
+            f"---whisperHistory---\n"
+            f"{self.whisper_history}\n"
+        )
+
     @classmethod
     def initialize_from_json(cls, received_str: str) -> CommunicationProtocol:
         """Initializes a CommunicationProtocol instance from a JSON string.
@@ -101,7 +114,7 @@ class CommunicationProtocol:
             TalkList.initialize_from_json(set_list=received_json.get("talkList")),
             WhisperList.initialize_from_json(set_list=received_json.get("whisperList")),
         )
-    
+
     def update_from_json(self, received_str: str) -> CommunicationProtocol:
         received_json: dict = json.loads(received_str)
 
@@ -112,18 +125,20 @@ class CommunicationProtocol:
                 self.info = Info.initialize_from_json(value=received_json["info"])
             else:
                 self.info.update_from_json(value=received_json.get("info"))
-        
+
         if received_json.get("setting") is not None:
             if not self.is_set_setting():
                 self.setting = Setting.initialize_from_json(value=received_json["setting"])
             else:
                 self.setting.update_from_json(value=received_json.get("setting"))
-        
+
         self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkList"))
-        self.whisper_history = WhisperList.initialize_from_json(set_list=received_json.get("whisperList"))
-    
+        self.whisper_history = WhisperList.initialize_from_json(
+            set_list=received_json.get("whisperList")
+        )
+
     def is_set_info(self) -> bool:
         return not self.info is None
-    
+
     def is_set_setting(self) -> bool:
         return not self.setting is None
