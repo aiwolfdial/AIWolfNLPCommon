@@ -187,8 +187,10 @@ class Info:
         self.divine_result = DivineResult.initialize_from_json(value.get("divineResult", None))
         self.executed_agent = value.get("executedAgent", None)
         self.attacked_agent = value.get("attackedAgent", None)
-        self.vote_list.initialize_from_json(value.get("voteList", None))
-        self.attack_vote_list.initialize_from_json(value.get("attackVoteList", None))
+        self.vote_list = VoteList.initialize_from_json(value.get("voteList", None))
+        self.attack_vote_list = AttackVoteList.initialize_from_json(
+            value.get("attackVoteList", None)
+        )
         self.status_map = StatusMap.initialize_from_json(value["statusMap"])
         self.role_map = RoleMap.initialize_from_json(value["roleMap"])
         self.remain_talk_map = RemainTalkMap.initialize_from_json(value["remainTalkMap"])
