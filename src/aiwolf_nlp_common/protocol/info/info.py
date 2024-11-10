@@ -26,6 +26,7 @@ from __future__ import annotations
 from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
 from .list import VoteList, AttackVoteList
 from .map.remain_talk_map import RemainTalkMap
+from .map.remain_whisper_map import RemainWhisperMap
 from .map.role_map import RoleMap
 from .map.status_map import StatusMap
 
@@ -75,7 +76,7 @@ class Info:
     status_map: StatusMap
     role_map: RoleMap
     remain_talk_map: RemainTalkMap
-    remain_whisper_map: RemainTalkMap
+    remain_whisper_map: RemainWhisperMap
 
     def __init__(
         self,
@@ -90,7 +91,7 @@ class Info:
         status_map: StatusMap,
         role_map: RoleMap,
         remain_talk_map: RemainTalkMap,
-        remain_whisper_map: RemainTalkMap,
+        remain_whisper_map: RemainWhisperMap,
     ) -> None:
         """Initialize a info instance with all game state information.
 
@@ -159,7 +160,7 @@ class Info:
             status_map=StatusMap.initialize_from_json(value["statusMap"]),
             role_map=RoleMap.initialize_from_json(value["roleMap"]),
             remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
-            remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"]),
+            remain_whisper_map=RemainWhisperMap.initialize_from_json(value["remainWhisperMap"]),
         )
 
     def update_from_json(self, value: dict | None) -> None:
@@ -177,7 +178,7 @@ class Info:
         self.status_map = StatusMap.initialize_from_json(value["statusMap"])
         self.role_map = RoleMap.initialize_from_json(value["roleMap"])
         self.remain_talk_map = RemainTalkMap.initialize_from_json(value["remainTalkMap"])
-        self.remain_whisper_map = RemainTalkMap.initialize_from_json(value["remainWhisperMap"])
+        self.remain_whisper_map = RemainWhisperMap.initialize_from_json(value["remainWhisperMap"])
 
     def has_executed_agent(self) -> bool:
         return self.executed_agent is not None
