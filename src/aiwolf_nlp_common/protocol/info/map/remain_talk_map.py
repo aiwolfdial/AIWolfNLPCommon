@@ -36,10 +36,27 @@ class AgentRemainTalkInfo:
         Returns:
             bool: True if the all values are the same., False otherwise.
         """
-        if value is None or not isinstance(value, AgentRemainTalkInfo):
+        if not isinstance(value, self.__class__):
             return False
 
         return self.agent == value.agent and self.remain_talk_number == value.remain_talk_number
+
+    def __lt__(self, value: object) -> bool:
+        """Comparison method for making comparisons in “AgentRemainTalk”.
+
+        Args:
+            value (object): Comparison object.
+
+        Returns:
+            bool: True if all values are the same, False otherwise.
+        """
+        if value is None or not isinstance(value, self.__class__):
+            return NotImplemented
+
+        return self.__agent < value.__agent
+
+    def __str__(self) -> str:
+        return f"{self.__agent} : {self.__remain_talk_number}"
 
     @property
     def agent(self) -> str:
@@ -68,6 +85,19 @@ class AgentRemainTalkInfo:
 
 class RemainTalkMap(set):
     """Set extension class for storing “remainTalkMap” information."""
+
+    def __str__(self) -> str:
+        output: str = f"[{self.__class__.__name__}]"
+
+        if self.is_empty():
+            return output + "\nNo Result Available"
+
+        output_list = list(self)
+        elem: AgentRemainTalkInfo
+        for elem in sorted(output_list):
+            output += "\n" + elem.__str__()
+
+        return output
 
     @classmethod
     def initialize_from_json(cls, set_map: dict) -> RemainTalkMap:
