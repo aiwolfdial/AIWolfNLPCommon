@@ -38,9 +38,19 @@ class AgentStatus:
         Returns:
             bool: True if all values are the same, False otherwise.
         """
-        if value is None or not isinstance(value, AgentStatus):
-            return False
+        if value is None or not isinstance(value, self.__class__):
+            return NotImplemented
+
         return self.agent == value.agent and self.status.value == value.status.value
+
+    def __lt__(self, value: object) -> bool:
+        if not isinstance(value, self.__class__):
+            return NotImplemented
+
+        return self.__agent < value.__agent
+
+    def __str__(self) -> str:
+        return f"{self.__agent} is {self.status.value}"
 
     @property
     def agent(self) -> str:
@@ -67,6 +77,19 @@ class AgentStatus:
 class StatusMap(set):
     """Set extension class for storing “statusMap” information."""
 
+    def __str__(self) -> str:
+        output: str = f"[{self.__class__.__name__}]"
+
+        if self.is_empty():
+            return output + "\nNo Result Available"
+
+        output_list = list(self)
+        elem: AgentStatus
+        for elem in sorted(output_list):
+            output += "\n" + elem.__str__()
+
+        return output
+
     @classmethod
     def initialize_from_json(cls, set_map: dict) -> StatusMap:
         """Initializes a StatusMap instance from JSON data received from the game server.
@@ -92,6 +115,17 @@ class StatusMap(set):
             instance.add(add_elem)
 
         return instance
+
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
 
     def reverse_status(self, agent: str) -> None:
         """Reverses the status of the agent.
