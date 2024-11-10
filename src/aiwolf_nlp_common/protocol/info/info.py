@@ -26,7 +26,7 @@ from __future__ import annotations
 
 from aiwolf_nlp_common.protocol.talk_list import TalkList
 
-from aiwolf_nlp_common.protocol.judgement_result import JudgementResult
+from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
 from .list.vote_list import VoteList
 from .map.remain_talk_map import RemainTalkMap
 from .map.role_map import RoleMap
@@ -71,8 +71,8 @@ class Info:
 
     day: int
     agent: str
-    medium_result: JudgementResult
-    divine_result: JudgementResult
+    medium_result: MediumResult
+    divine_result: DivineResult
     executed_agent: str | None
     attacked_agent: str | None
     vote_list: VoteList
@@ -88,8 +88,8 @@ class Info:
         self,
         day: int,
         agent: str,
-        medium_result: JudgementResult,
-        divine_result: JudgementResult,
+        medium_result: MediumResult,
+        divine_result: DivineResult,
         executed_agent: str | None,
         attacked_agent: str | None,
         vote_list: VoteList,
@@ -165,10 +165,10 @@ class Info:
         return cls(
             day=value["day"],
             agent=value["agent"],
-            medium_result=JudgementResult.initialize_from_json(
+            medium_result=MediumResult.initialize_from_json(
                 value=value.get("mediumResult", None)
             ),
-            divine_result=JudgementResult.initialize_from_json(
+            divine_result=DivineResult.initialize_from_json(
                 value=value.get("divineResult", None)
             ),
             executed_agent=value.get("executedAgent", None),
@@ -190,8 +190,8 @@ class Info:
         
         self.day = value["day"]
         self.agent = value["agent"]
-        self.medium_result = JudgementResult.initialize_from_json(value.get("mediumResult", None))
-        self.divine_result = JudgementResult.initialize_from_json(value.get("divineResult", None))
+        self.medium_result = MediumResult.initialize_from_json(value.get("mediumResult", None))
+        self.divine_result = DivineResult.initialize_from_json(value.get("divineResult", None))
         self.executed_agent = value.get("executedAgent", None)
         self.attacked_agent = value.get("attackedAgent", None)
         self.vote_list.initialize_from_json(value.get("voteList", None))
