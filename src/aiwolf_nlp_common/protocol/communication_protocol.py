@@ -111,8 +111,8 @@ class CommunicationProtocol:
             Setting.initialize_from_json(value=received_json["setting"])
             if received_json.get("setting")
             else None,
-            TalkList.initialize_from_json(set_list=received_json.get("talkList")),
-            WhisperList.initialize_from_json(set_list=received_json.get("whisperList")),
+            TalkList.initialize_from_json(set_list=received_json.get("talkHistory")),
+            WhisperList.initialize_from_json(set_list=received_json.get("whisperHistory")),
         )
 
     def update_from_json(self, received_str: str) -> CommunicationProtocol:
