@@ -142,7 +142,7 @@ class CommunicationProtocol:
             if self.is_whisper_hisotry_empty():
                 self.whisper_history = WhisperList.initialize_from_json(set_list=received_json.get("whisperHistory"))
             else:
-                self.talk_history.clear()
+                self.whisper_history.clear()
 
     def is_info_empty(self) -> bool:
         return self.info is None
