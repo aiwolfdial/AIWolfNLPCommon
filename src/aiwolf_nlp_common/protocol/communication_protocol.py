@@ -16,7 +16,7 @@ import json
 
 from .info.info import Info
 from .setting.setting import Setting
-from .talk_list import TalkList
+from .list.talk_list import TalkList
 
 
 class CommunicationProtocol:

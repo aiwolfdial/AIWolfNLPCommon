@@ -24,7 +24,7 @@ storing various elements of the game state in its attributes.
 
 from __future__ import annotations
 
-from aiwolf_nlp_common.protocol.talk_list import TalkList
+from aiwolf_nlp_common.protocol.list.talk_list import TalkList
 
 from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
 from .list import VoteList, AttackVoteList
