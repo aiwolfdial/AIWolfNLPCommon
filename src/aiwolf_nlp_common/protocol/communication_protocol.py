@@ -16,7 +16,7 @@ import json
 
 from .info.info import Info
 from .setting.setting import Setting
-from .list.talk_list import TalkList
+from .list import TalkList, WhisperList
 
 
 class CommunicationProtocol:
@@ -44,7 +44,7 @@ class CommunicationProtocol:
     info: Info | None
     setting: Setting | None
     talk_history: TalkList | None
-    whisper_history: TalkList | None
+    whisper_history: WhisperList | None
 
     def __init__(
         self,
@@ -52,7 +52,7 @@ class CommunicationProtocol:
         info: Info | None,
         setting: Setting | None,
         talk_history: TalkList | None,
-        whisper_history: TalkList | None,
+        whisper_history: WhisperList | None,
     ) -> None:
         """Initialize a CommunicationProtocol instance.
 
@@ -99,7 +99,7 @@ class CommunicationProtocol:
             if received_json.get("setting")
             else None,
             TalkList.initialize_from_json(set_list=received_json.get("talkList")),
-            TalkList.initialize_from_json(set_list=received_json.get("whisperList")),
+            WhisperList.initialize_from_json(set_list=received_json.get("whisperList")),
         )
     
     def update_from_json(self, received_str: str) -> CommunicationProtocol:
@@ -120,7 +120,7 @@ class CommunicationProtocol:
                 self.setting.update_from_json(value=received_json.get("setting"))
         
         self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkList"))
-        self.whisper_history = TalkList.initialize_from_json(set_list=received_json.get("whisperList"))
+        self.whisper_history = WhisperList.initialize_from_json(set_list=received_json.get("whisperList"))
     
     def is_set_info(self) -> bool:
         return not self.info is None
