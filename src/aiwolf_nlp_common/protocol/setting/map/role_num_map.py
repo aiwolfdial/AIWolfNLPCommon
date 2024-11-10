@@ -43,6 +43,23 @@ class RoleNumInfo:
 
         return self.__role == value.role and self.__allocated_count == value.allocated_count
 
+    def __lt__(self, value: object) -> bool:
+        """Comparison method for making comparisons in “RoleNumInfo”.
+
+        Args:
+            value (object): Comparison object.
+
+        Returns:
+            bool: True if all values are the same, False otherwise.
+        """
+        if value is None or not isinstance(value, self.__class__):
+            return NotImplemented
+
+        return self.__role.en < value.__role.en
+
+    def __str__(self) -> str:
+        return f"{self.__role.en} : {self.__allocated_count}"
+
     @property
     def role(self) -> Role:
         """Gets the role.
@@ -64,6 +81,19 @@ class RoleNumInfo:
 
 class RoleNumMap(set):
     """Set extension class for storing “roleNumMap” information."""
+
+    def __str__(self) -> str:
+        output: str = f"[{self.__class__.__name__}]"
+
+        if self.is_empty():
+            return output + "\nNo Result Available"
+
+        output_list = list(self)
+        elem: RoleNumInfo
+        for elem in sorted(output_list):
+            output += "\n" + elem.__str__()
+
+        return output
 
     @classmethod
     def initialize_from_json(cls, value: dict) -> RoleNumMap:
@@ -118,3 +148,14 @@ class RoleNumMap(set):
                 return role_num_info.allocated_count
 
         raise ValueError(role + " has not been added.")
+
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
