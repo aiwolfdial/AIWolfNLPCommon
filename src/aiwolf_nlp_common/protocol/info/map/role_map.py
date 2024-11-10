@@ -43,6 +43,23 @@ class AgentRole:
 
         return self.agent == value.agent and self.role == value.role
 
+    def __lt__(self, value: object) -> bool:
+        """Comparison method for making comparisons in “AgentRole”.
+
+        Args:
+            value (object): Comparison object.
+
+        Returns:
+            bool: True if all values are the same, False otherwise.
+        """
+        if value is None or not isinstance(value, self.__class__):
+            return NotImplemented
+
+        return self.__agent < value.__agent
+
+    def __str__(self) -> str:
+        return f"{self.__agent} is {self.__role.en}"
+
     @property
     def agent(self) -> str:
         """Gets the agent's name.
@@ -67,6 +84,19 @@ class AgentRole:
 
 class RoleMap(set):
     """Set extension class for storing “roleMap” information."""
+
+    def __str__(self) -> str:
+        output: str = f"[{self.__class__.__name__}]"
+
+        if self.is_empty():
+            return output + "\nNo Result Available"
+
+        output_list = list(self)
+        elem: AgentRole
+        for elem in sorted(output_list):
+            output += "\n" + elem.__str__()
+
+        return output
 
     @classmethod
     def initialize_from_json(cls, set_map: dict) -> RoleMap:
@@ -115,3 +145,14 @@ class RoleMap(set):
                 return agent_role.role
 
         raise ValueError(agent + " is a name that does not exist.")
+
+    def is_empty(self) -> bool:
+        """Check if the object is empty.
+
+        This method returns True if the object has no elements (i.e., its length is 0),
+        and False otherwise.
+
+        Returns:
+            bool: True if the object is empty, False otherwise.
+        """
+        return len(self) == 0
