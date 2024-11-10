@@ -12,7 +12,6 @@ Classes:
     information, votes, talks, roles, statuses, and other related game data.
 
 Imported Modules:
-    - TalkList: A list extension class for storing talk and whisper information.
     - VoteList: A list extension class for storing vote information.
     - RemainTalkMap: A map class that stores the remaining talk counts for agents.
     - RoleMap: A map class that stores the roles of agents.
@@ -23,8 +22,6 @@ storing various elements of the game state in its attributes.
 """
 
 from __future__ import annotations
-
-from aiwolf_nlp_common.protocol.list.talk_list import TalkList
 
 from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
 from .list import VoteList, AttackVoteList
@@ -50,8 +47,6 @@ class Info:
         divine_result: (JudgementResult):
         vote_list (VoteList): A list of votes that have been cast during the game.
         attack_vote_list (VoteList): A list of votes related to attacks.
-        talk_list (TalkList): A list of all talks made during the game.
-        whisper_list (TalkList): A list of whispers made during the game.
         status_map (StatusMap): A mapping of agent statuses (e.g., alive, dead).
         role_map (RoleMap): A mapping of agent roles.
         remain_talk_map (RemainTalkMap): A mapping of remaining talk counts for each agent.
@@ -59,7 +54,7 @@ class Info:
 
     Methods:
         __init__(day, agent, vote_list, latest_vote_list, attack_vote_list,
-                 latest_attack_vote_list, talk_list, whisper_list, status_map,
+                 latest_attack_vote_list, status_map,
                  role_map, remain_talk_map, remain_whisper_map,
                  existing_role_list):
             Initializes a info instance with all game state information.
@@ -77,8 +72,6 @@ class Info:
     attacked_agent: str | None
     vote_list: VoteList
     attack_vote_list: AttackVoteList
-    talk_list: TalkList
-    whisper_list: TalkList
     status_map: StatusMap
     role_map: RoleMap
     remain_talk_map: RemainTalkMap
@@ -94,8 +87,6 @@ class Info:
         attacked_agent: str | None,
         vote_list: VoteList,
         attack_vote_list: AttackVoteList,
-        talk_list: TalkList,
-        whisper_list: TalkList,
         status_map: StatusMap,
         role_map: RoleMap,
         remain_talk_map: RemainTalkMap,
@@ -113,8 +104,6 @@ class Info:
             executed_agent: (str):
             vote_list (VoteList): List of votes cast.
             attack_vote_list (VoteList): List of attack votes.
-            talk_list (TalkList): List of talks made during the game.
-            whisper_list (TalkList): List of whispers made during the game.
             status_map (StatusMap): Map of player statuses.
             role_map (RoleMap): Map of player roles.
             remain_talk_map (RemainTalkMap): Map of remaining talks for each player.
@@ -128,8 +117,6 @@ class Info:
         self.attacked_agent = attacked_agent
         self.vote_list = vote_list
         self.attack_vote_list = attack_vote_list
-        self.talk_list = talk_list
-        self.whisper_list = whisper_list
         self.status_map = status_map
         self.role_map = role_map
         self.remain_talk_map = remain_talk_map
@@ -152,8 +139,6 @@ class Info:
                 - "agent" (int): The ID of the agent.
                 - "voteList" (list): The list of votes cast.
                 - "attackVoteList" (list): The list of attack votes.
-                - "talkList" (list): The list of talks made by agents.
-                - "whisperList" (list): The list of whispers made by agents.
                 - "statusMap" (dict): The current status of agents.
                 - "roleMap" (dict): The roles assigned to agents.
                 - "remainTalkMap" (dict): The remaining talk counts for agents.
@@ -165,29 +150,22 @@ class Info:
         return cls(
             day=value["day"],
             agent=value["agent"],
-            medium_result=MediumResult.initialize_from_json(
-                value=value.get("mediumResult", None)
-            ),
-            divine_result=DivineResult.initialize_from_json(
-                value=value.get("divineResult", None)
-            ),
+            medium_result=MediumResult.initialize_from_json(value=value.get("mediumResult", None)),
+            divine_result=DivineResult.initialize_from_json(value=value.get("divineResult", None)),
             executed_agent=value.get("executedAgent", None),
             attacked_agent=value.get("attackedAgent", None),
             vote_list=VoteList.initialize_from_json(value.get("voteList", None)),
             attack_vote_list=AttackVoteList.initialize_from_json(value.get("attackVoteList", None)),
-            talk_list=TalkList.initialize_from_json(value.get("talkList", None)),
-            whisper_list=TalkList.initialize_from_json(value.get("whisperList", None)),
             status_map=StatusMap.initialize_from_json(value["statusMap"]),
             role_map=RoleMap.initialize_from_json(value["roleMap"]),
             remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
             remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"]),
         )
-    
-    def update_from_json(self, value: dict | None) -> None:
 
+    def update_from_json(self, value: dict | None) -> None:
         if value is None:
             return None
-        
+
         self.day = value["day"]
         self.agent = value["agent"]
         self.medium_result = MediumResult.initialize_from_json(value.get("mediumResult", None))
@@ -196,12 +174,10 @@ class Info:
         self.attacked_agent = value.get("attackedAgent", None)
         self.vote_list.initialize_from_json(value.get("voteList", None))
         self.attack_vote_list.initialize_from_json(value.get("attackVoteList", None))
-        self.talk_list.initialize_from_json(value.get("talkList", None))
-        self.whisper_list.initialize_from_json(value.get("whisperList", None))
-        self.status_map=StatusMap.initialize_from_json(value["statusMap"])
-        self.role_map=RoleMap.initialize_from_json(value["roleMap"])
-        self.remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"])
-        self.remain_whisper_map=RemainTalkMap.initialize_from_json(value["remainWhisperMap"])
+        self.status_map = StatusMap.initialize_from_json(value["statusMap"])
+        self.role_map = RoleMap.initialize_from_json(value["roleMap"])
+        self.remain_talk_map = RemainTalkMap.initialize_from_json(value["remainTalkMap"])
+        self.remain_whisper_map = RemainTalkMap.initialize_from_json(value["remainWhisperMap"])
 
     def has_executed_agent(self) -> bool:
         return self.executed_agent is not None
