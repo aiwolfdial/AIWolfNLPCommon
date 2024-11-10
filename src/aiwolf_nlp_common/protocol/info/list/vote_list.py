@@ -35,9 +35,24 @@ class VoteInfo:
             return False
         return self.agent == value.agent and self.day == value.day and self.target == value.target
 
+    def __str__(self) -> str:
+        return f" Day {self.day} : {self.agent} -> {self.target}"
+
 
 class VoteList(list):
     """List extension class for storing “voteList” information."""
+
+    def __str__(self) -> str:
+        output: str = f"[{self.__class__.__name__}]"
+
+        if self.is_empty():
+            return output + "\nNo Result Available"
+
+        elem: VoteInfo
+        for elem in self:
+            output += "\n" + elem.__str__()
+
+        return output
 
     @classmethod
     def initialize_from_json(cls, set_list: list | None) -> VoteList:
