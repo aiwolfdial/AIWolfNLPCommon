@@ -38,6 +38,12 @@ class JudgementResult:
             target=value["target"],
             result=value["result"],
         )
+    
+    def reset(self) -> None:
+        self.day = self.__default_day
+        self.agent = self.__default_agent
+        self.target = self.__default_target
+        self.reset = self.__default_result
 
     def is_empty(self) -> bool:
         return (
