@@ -123,6 +123,20 @@ class Info:
         self.remain_talk_map = remain_talk_map
         self.remain_whisper_map = remain_whisper_map
 
+    def __str__(self) -> str:
+        return (
+            f"Day: {self.day}\n"
+            f"Agent: {self.agent}\n\n"
+            f"{self.medium_result}\n\n"
+            f"{self.divine_result}\n\n"
+            f"Executed Agent: {self.executed_agent if self.has_executed_agent() else 'No Result Available'}\n"
+            f"Attacked Agent: {self.attacked_agent if self.has_attacked_agent() else 'No Result Available'}\n\n"
+            f"{self.status_map}\n\n"
+            f"{self.role_map}\n\n"
+            f"{self.remain_talk_map}\n\n"
+            f"{self.remain_whisper_map}\n"
+        )
+
     @classmethod
     def initialize_from_json(cls, value: dict) -> Info:
         """Initializes a info instance from JSON data received from the game server.
