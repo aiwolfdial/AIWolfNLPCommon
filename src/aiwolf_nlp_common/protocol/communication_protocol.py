@@ -133,16 +133,14 @@ class CommunicationProtocol:
                 self.setting.update_from_json(value=received_json.get("setting"))
         
         if received_json.get("talkHistory") is not None:
-            if self.is_talk_history_empty():
-                self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkHistory"))
-            else:
-                self.talk_history.clear()
+            self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkHistory"))
+        else:
+            self.talk_history.clear()
         
         if received_json.get("whisperHistory") is not None:
-            if self.is_whisper_hisotry_empty():
-                self.whisper_history = WhisperList.initialize_from_json(set_list=received_json.get("whisperHistory"))
-            else:
-                self.whisper_history.clear()
+            self.whisper_history = WhisperList.initialize_from_json(set_list=received_json.get("whisperHistory"))
+        else:
+            self.whisper_history.clear()
 
     def is_info_empty(self) -> bool:
         return self.info is None
