@@ -27,7 +27,7 @@ from __future__ import annotations
 from aiwolf_nlp_common.protocol.talk_list import TalkList
 
 from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
-from .list.vote_list import VoteList
+from .list import VoteList, AttackVoteList
 from .map.remain_talk_map import RemainTalkMap
 from .map.role_map import RoleMap
 from .map.status_map import StatusMap
@@ -76,7 +76,7 @@ class Info:
     executed_agent: str | None
     attacked_agent: str | None
     vote_list: VoteList
-    attack_vote_list: VoteList
+    attack_vote_list: AttackVoteList
     talk_list: TalkList
     whisper_list: TalkList
     status_map: StatusMap
@@ -93,7 +93,7 @@ class Info:
         executed_agent: str | None,
         attacked_agent: str | None,
         vote_list: VoteList,
-        attack_vote_list: VoteList,
+        attack_vote_list: AttackVoteList,
         talk_list: TalkList,
         whisper_list: TalkList,
         status_map: StatusMap,
@@ -174,7 +174,7 @@ class Info:
             executed_agent=value.get("executedAgent", None),
             attacked_agent=value.get("attackedAgent", None),
             vote_list=VoteList.initialize_from_json(value.get("voteList", None)),
-            attack_vote_list=VoteList.initialize_from_json(value.get("attackVoteList", None)),
+            attack_vote_list=AttackVoteList.initialize_from_json(value.get("attackVoteList", None)),
             talk_list=TalkList.initialize_from_json(value.get("talkList", None)),
             whisper_list=TalkList.initialize_from_json(value.get("whisperList", None)),
             status_map=StatusMap.initialize_from_json(value["statusMap"]),
