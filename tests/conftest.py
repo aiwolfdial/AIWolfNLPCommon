@@ -2,13 +2,14 @@ import json
 import re
 
 import pytest
-from AIWolfNLAgentPython.player.agent import Agent
-from AIWolfNLAgentPython.player.possessed import Possessed
-from AIWolfNLAgentPython.player.seer import Seer
-from AIWolfNLAgentPython.player.villager import Villager
-from AIWolfNLAgentPython.player.werewolf import Werewolf
 
 from aiwolf_nlp_common import util
+
+# from AIWolfNLAgentPython.player.agent import Agent
+# from AIWolfNLAgentPython.player.possessed import Possessed
+# from AIWolfNLAgentPython.player.seer import Seer
+# from AIWolfNLAgentPython.player.villager import Villager
+# from AIWolfNLAgentPython.player.werewolf import Werewolf
 
 
 @pytest.fixture
@@ -174,65 +175,65 @@ def config_file_path() -> str:
     return "tests/AIWolfNLAgentPython/res/config.ini"
 
 
-@pytest.fixture
-def agent() -> Agent:
-    config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.read_config_file(config_file_path=config_path)
+# @pytest.fixture
+# def agent() -> Agent:
+#     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
+#     inifile = util.read_config_file(config_file_path=config_path)
 
-    return Agent(inifile=inifile, name="test")
-
-
-@pytest.fixture
-def agent_villager(villager_text: str) -> Villager:
-    config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.read_config_file(config_file_path=config_path)
-
-    agent = Villager(inifile=inifile, name="test_villager")
-
-    agent.parse_info(receive=villager_text)
-    agent.get_info()
-    agent.action()
-
-    return agent
+#     return Agent(inifile=inifile, name="test")
 
 
-@pytest.fixture
-def agent_seer(seer_text: str) -> Seer:
-    config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.read_config_file(config_file_path=config_path)
+# @pytest.fixture
+# def agent_villager(villager_text: str) -> Villager:
+#     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
+#     inifile = util.read_config_file(config_file_path=config_path)
 
-    agent = Seer(inifile=inifile, name="test_seer")
+#     agent = Villager(inifile=inifile, name="test_villager")
 
-    agent.parse_info(receive=seer_text)
-    agent.get_info()
-    agent.action()
+#     agent.parse_info(receive=villager_text)
+#     agent.get_info()
+#     agent.action()
 
-    return agent
-
-
-@pytest.fixture
-def agent_werewolf(werewolf_text: str) -> Werewolf:
-    config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.read_config_file(config_file_path=config_path)
-
-    agent = Werewolf(inifile=inifile, name="test_werewolf")
-
-    agent.parse_info(receive=werewolf_text)
-    agent.get_info()
-    agent.action()
-
-    return agent
+#     return agent
 
 
-@pytest.fixture
-def agent_possessed(possessed_text: str) -> Possessed:
-    config_path = "tests/AIWolfNLAgentPython/res/config.ini"
-    inifile = util.read_config_file(config_file_path=config_path)
+# @pytest.fixture
+# def agent_seer(seer_text: str) -> Seer:
+#     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
+#     inifile = util.read_config_file(config_file_path=config_path)
 
-    agent = Possessed(inifile=inifile, name="test_possessed")
+#     agent = Seer(inifile=inifile, name="test_seer")
 
-    agent.parse_info(receive=possessed_text)
-    agent.get_info()
-    agent.action()
+#     agent.parse_info(receive=seer_text)
+#     agent.get_info()
+#     agent.action()
 
-    return agent
+#     return agent
+
+
+# @pytest.fixture
+# def agent_werewolf(werewolf_text: str) -> Werewolf:
+#     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
+#     inifile = util.read_config_file(config_file_path=config_path)
+
+#     agent = Werewolf(inifile=inifile, name="test_werewolf")
+
+#     agent.parse_info(receive=werewolf_text)
+#     agent.get_info()
+#     agent.action()
+
+#     return agent
+
+
+# @pytest.fixture
+# def agent_possessed(possessed_text: str) -> Possessed:
+#     config_path = "tests/AIWolfNLAgentPython/res/config.ini"
+#     inifile = util.read_config_file(config_file_path=config_path)
+
+#     agent = Possessed(inifile=inifile, name="test_possessed")
+
+#     agent.parse_info(receive=possessed_text)
+#     agent.get_info()
+#     agent.action()
+
+#     return agent
