@@ -35,8 +35,8 @@ paramiko==3.5.0
 pathspec==0.12.1
 pexpect==4.9.0
 pipdeptree==2.23.4
-pkg_resources==0.0.0
-pkginfo==1.11.1
+# pkg_resources==0.0.0
+pkginfo==1.9.6
 platformdirs==4.3.6
 pluggy==1.5.0
 ptyprocess==0.7.0

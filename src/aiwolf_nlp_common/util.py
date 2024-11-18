@@ -126,7 +126,10 @@ def get_name_from_index(agent_index: int) -> str:
     """
     return f"Agent[{agent_index:0>2d}]"
 
-def get_socket(inifile: configparser.ConfigParser, name:str) -> TCPClient | TCPServer | SSHServer | WebSocketClient:
+
+def get_socket(
+    inifile: configparser.ConfigParser, name: str
+) -> TCPClient | TCPServer | SSHServer | WebSocketClient:
     if inifile.getboolean("connection", "websocket"):
         return WebSocketClient(inifile=inifile)
 

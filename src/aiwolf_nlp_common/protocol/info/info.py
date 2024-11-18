@@ -24,7 +24,8 @@ storing various elements of the game state in its attributes.
 from __future__ import annotations
 
 from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
-from .list import VoteList, AttackVoteList
+
+from .list import AttackVoteList, VoteList
 from .map.remain_talk_map import RemainTalkMap
 from .map.remain_whisper_map import RemainWhisperMap
 from .map.role_map import RoleMap

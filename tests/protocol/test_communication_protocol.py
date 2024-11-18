@@ -1,7 +1,8 @@
 from aiwolf_nlp_common.protocol.communication_protocol import CommunicationProtocol
 from aiwolf_nlp_common.protocol.gameSetting.map.role_num_map import RoleNumInfo, RoleNumMap
 
-def test_request(name_str:str, name_json:dict,initialize_str:str, initialize_json:dict):
+
+def test_request(name_str: str, name_json: dict, initialize_str: str, initialize_json: dict):
     test_protocol = CommunicationProtocol.initialize_from_json(received_str=name_str)
 
     assert test_protocol.request == name_json["request"]
@@ -10,19 +11,23 @@ def test_request(name_str:str, name_json:dict,initialize_str:str, initialize_jso
 
     assert test_protocol.request == initialize_json["request"]
 
-def test_game_info(initialize_str:str, initialize_json:dict) -> None:
+
+def test_game_info(initialize_str: str, initialize_json: dict) -> None:
     test_protocol = CommunicationProtocol.initialize_from_json(received_str=initialize_str)
 
     assert test_protocol.game_info.day == initialize_json["gameInfo"]["day"]
     assert test_protocol.game_info.agent == initialize_json["gameInfo"]["agent"]
 
-def test_game_setting(initialize_str:str, initialize_json:dict) -> None:
+
+def test_game_setting(initialize_str: str, initialize_json: dict) -> None:
     result = CommunicationProtocol.initialize_from_json(received_str=initialize_str)
 
     check_role_num_map = RoleNumMap()
 
     for role in initialize_json["gameSetting"]["roleNumMap"].keys():
-        add_elem = RoleNumInfo(role=role, allocated_count=initialize_json["gameSetting"]["roleNumMap"][role])
+        add_elem = RoleNumInfo(
+            role=role, allocated_count=initialize_json["gameSetting"]["roleNumMap"][role]
+        )
         check_role_num_map.add(add_elem)
 
     assert result.game_setting.role_num_map == check_role_num_map

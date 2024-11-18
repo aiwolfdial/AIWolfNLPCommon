@@ -15,8 +15,8 @@ from __future__ import annotations
 import json
 
 from .info.info import Info
-from .setting.setting import Setting
 from .list import TalkList, WhisperList
+from .setting.setting import Setting
 
 
 class CommunicationProtocol:
@@ -131,25 +131,29 @@ class CommunicationProtocol:
                 self.setting = Setting.initialize_from_json(value=received_json["setting"])
             else:
                 self.setting.update_from_json(value=received_json.get("setting"))
-        
+
         if received_json.get("talkHistory") is not None:
-            self.talk_history = TalkList.initialize_from_json(set_list=received_json.get("talkHistory"))
+            self.talk_history = TalkList.initialize_from_json(
+                set_list=received_json.get("talkHistory")
+            )
         else:
             self.talk_history.clear()
-        
+
         if received_json.get("whisperHistory") is not None:
-            self.whisper_history = WhisperList.initialize_from_json(set_list=received_json.get("whisperHistory"))
+            self.whisper_history = WhisperList.initialize_from_json(
+                set_list=received_json.get("whisperHistory")
+            )
         else:
             self.whisper_history.clear()
 
     def is_info_empty(self) -> bool:
         return self.info is None
-    
+
     def is_setting_empty(self) -> bool:
         return self.setting is None
-    
+
     def is_talk_history_empty(self) -> bool:
         return self.talk_history is None
-    
+
     def is_whisper_hisotry_empty(self) -> bool:
         return self.whisper_history is None

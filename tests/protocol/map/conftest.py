@@ -1,16 +1,18 @@
-import re
 import json
+import re
 
 import pytest
 
-def json_fix(json_str:str) -> str:
-    json_str = json_str.replace("'",'"')
-    json_str = re.sub('[a-zA-Z]"[a-zA-Z]',"'",json_str)
-    json_str = json_str.replace("False",'"False"')
-    json_str = json_str.replace("True",'"True"')
-    json_str = json_str.replace("None",'"None"')
+
+def json_fix(json_str: str) -> str:
+    json_str = json_str.replace("'", '"')
+    json_str = re.sub('[a-zA-Z]"[a-zA-Z]', "'", json_str)
+    json_str = json_str.replace("False", '"False"')
+    json_str = json_str.replace("True", '"True"')
+    json_str = json_str.replace("None", '"None"')
 
     return json_str
+
 
 @pytest.fixture
 def status_map_json() -> None:
