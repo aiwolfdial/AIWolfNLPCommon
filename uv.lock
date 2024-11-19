@@ -3,16 +3,10 @@ requires-python = ">=3.8"
 
 [[package]]
 name = "aiwolf-nlp-common"
-version = "0.1.21"
+version = "0.2.1"
 source = { editable = "." }
 dependencies = [
-    { name = "bcrypt" },
-    { name = "cffi" },
-    { name = "cryptography" },
     { name = "paramiko" },
-    { name = "pycparser" },
-    { name = "pynacl" },
-    { name = "requests" },
     { name = "websocket-client" },
 ]
 
@@ -28,13 +22,7 @@ lint = [
 
 [package.metadata]
 requires-dist = [
-    { name = "bcrypt", specifier = ">=3.2" },
-    { name = "cffi", specifier = ">=1.4.1" },
-    { name = "cryptography", specifier = ">=3.3" },
     { name = "paramiko", specifier = ">=3.5" },
-    { name = "pycparser", specifier = ">=2.22" },
-    { name = "pynacl", specifier = ">=1.5" },
-    { name = "requests" },
     { name = "websocket-client", specifier = ">=1.8.0" },
 ]
 
