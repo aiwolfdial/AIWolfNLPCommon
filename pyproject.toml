@@ -1,6 +1,6 @@
 [project]
 name = "aiwolf_nlp_common"
-version = "0.1.21"
+version = "0.2.0"
 description = "aiwolf-nlp-common"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
