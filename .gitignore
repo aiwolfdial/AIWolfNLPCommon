@@ -1,20 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,venv,macos,windows,linux
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,venv,macos,windows,linux
-
-### Linux ###
-*~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,windows,python,venv
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,windows,python,venv
 
 ### macOS ###
 # General
@@ -233,6 +218,26 @@ pyrightconfig.json
 pyvenv.cfg
 pip-selfcheck.json
 
+### VisualStudioCode ###
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -259,4 +264,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/python,venv,macos,windows,linux
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,windows,python,venv

@@ -3,7 +3,7 @@ requires-python = ">=3.8"
 
 [[package]]
 name = "aiwolf-nlp-common"
-version = "0.1.20"
+version = "0.1.21"
 source = { editable = "." }
 dependencies = [
     { name = "bcrypt" },
