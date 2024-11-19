@@ -1,5 +1,5 @@
 [project]
-name = "aiwolf_nlp_common"
+name = "aiwolf-nlp-common"
 version = "0.2.1"
 description = "aiwolf-nlp-common"
 license = { file = "LICENSE" }
