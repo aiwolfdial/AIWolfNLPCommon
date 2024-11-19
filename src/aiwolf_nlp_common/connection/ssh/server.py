@@ -32,7 +32,7 @@ class SSHServer(Connection):
         self.ssh_host_name = inifile.get("ssh-server", "host_name")
         self.ssh_agent_flag = inifile.getboolean("ssh-server", "ssh_agent_flag")
         self.timeout = inifile.getint("ssh-server", "timeout")
-        self.ssh_remoteforward_port = self.get_ssh_port(inifile=inifile, name=name)
+        self.ssh_remote_forward_port = self.get_ssh_port(inifile=inifile, name=name)
 
     def get_ssh_port(self, inifile: configparser.ConfigParser, name: str) -> int:
         """Get the setting of the port to bind to the public server from the configuration file.
@@ -119,7 +119,7 @@ class SSHServer(Connection):
     def ssh_remote_forward(self) -> None:
         """Remote forward to the specified port on the ssh-connected server."""
         self.transport = self.ssh_client.get_transport()
-        parts = self.config["remoteforward"][self.ssh_remoteforward_port].split()
+        parts = self.config["remoteforward"][self.ssh_remote_forward_port].split()
         remote_port = int(parts[0])
 
         self.transport.request_port_forward(address="", port=remote_port)

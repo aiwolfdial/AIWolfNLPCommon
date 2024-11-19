@@ -21,5 +21,3 @@ def test_info(initialize_json):
         "Agent[05]",
     ]
     assert info.role_map.get_role(agent="Agent[01]") == RoleInfo.VILLAGER.value
-    assert info.remain_talk_map.is_empty()
-    assert info.remain_whisper_map.is_empty()

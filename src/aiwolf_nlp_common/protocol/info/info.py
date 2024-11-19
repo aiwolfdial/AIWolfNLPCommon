@@ -13,7 +13,6 @@ Classes:
 
 Imported Modules:
     - VoteList: A list extension class for storing vote information.
-    - RemainTalkMap: A map class that stores the remaining talk counts for agents.
     - RoleMap: A map class that stores the roles of agents.
     - StatusMap: A map class that stores the status of agents.
 
@@ -26,15 +25,12 @@ from __future__ import annotations
 from aiwolf_nlp_common.protocol.info.result import DivineResult, MediumResult
 
 from .list import AttackVoteList, VoteList
-from .map.remain_talk_map import RemainTalkMap
-from .map.remain_whisper_map import RemainWhisperMap
 from .map.role_map import RoleMap
 from .map.status_map import StatusMap
 
 
 class Info:
     """Represents the current state of the game.
-    TODO
 
     This docstring was created by a generative AI.
     The info class encapsulates all relevant information about the ongoing game, including
@@ -51,13 +47,11 @@ class Info:
         attack_vote_list (VoteList): A list of votes related to attacks.
         status_map (StatusMap): A mapping of agent statuses (e.g., alive, dead).
         role_map (RoleMap): A mapping of agent roles.
-        remain_talk_map (RemainTalkMap): A mapping of remaining talk counts for each agent.
-        remain_whisper_map (RemainTalkMap): A mapping of remaining whisper counts for each agent.
 
     Methods:
         __init__(day, agent, vote_list, latest_vote_list, attack_vote_list,
                  latest_attack_vote_list, status_map,
-                 role_map, remain_talk_map, remain_whisper_map,
+                 role_map,
                  existing_role_list):
             Initializes a info instance with all game state information.
 
@@ -76,8 +70,6 @@ class Info:
     attack_vote_list: AttackVoteList
     status_map: StatusMap
     role_map: RoleMap
-    remain_talk_map: RemainTalkMap
-    remain_whisper_map: RemainWhisperMap
 
     def __init__(
         self,
@@ -91,8 +83,6 @@ class Info:
         attack_vote_list: AttackVoteList,
         status_map: StatusMap,
         role_map: RoleMap,
-        remain_talk_map: RemainTalkMap,
-        remain_whisper_map: RemainWhisperMap,
     ) -> None:
         """Initialize a info instance with all game state information.
 
@@ -108,8 +98,6 @@ class Info:
             attack_vote_list (VoteList): List of attack votes.
             status_map (StatusMap): Map of player statuses.
             role_map (RoleMap): Map of player roles.
-            remain_talk_map (RemainTalkMap): Map of remaining talks for each player.
-            remain_whisper_map (RemainTalkMap): Map of remaining whispers for each player.
         """
         self.day = day
         self.agent = agent
@@ -121,8 +109,6 @@ class Info:
         self.attack_vote_list = attack_vote_list
         self.status_map = status_map
         self.role_map = role_map
-        self.remain_talk_map = remain_talk_map
-        self.remain_whisper_map = remain_whisper_map
 
     def __str__(self) -> str:
         return (
@@ -134,8 +120,6 @@ class Info:
             f"Attacked Agent: {self.attacked_agent if self.has_attacked_agent() else 'No Result Available'}\n\n"
             f"{self.status_map}\n\n"
             f"{self.role_map}\n\n"
-            f"{self.remain_talk_map}\n\n"
-            f"{self.remain_whisper_map}\n"
         )
 
     @classmethod
@@ -157,8 +141,6 @@ class Info:
                 - "attackVoteList" (list): The list of attack votes.
                 - "statusMap" (dict): The current status of agents.
                 - "roleMap" (dict): The roles assigned to agents.
-                - "remainTalkMap" (dict): The remaining talk counts for agents.
-                - "remainWhisperMap" (dict): The remaining whisper counts for agents.
 
         Returns:
             info: An instance of info initialized with the provided JSON data.
@@ -174,8 +156,6 @@ class Info:
             attack_vote_list=AttackVoteList.initialize_from_json(value.get("attackVoteList", None)),
             status_map=StatusMap.initialize_from_json(value["statusMap"]),
             role_map=RoleMap.initialize_from_json(value["roleMap"]),
-            remain_talk_map=RemainTalkMap.initialize_from_json(value["remainTalkMap"]),
-            remain_whisper_map=RemainWhisperMap.initialize_from_json(value["remainWhisperMap"]),
         )
 
     def update_from_json(self, value: dict | None) -> None:
@@ -194,8 +174,6 @@ class Info:
         )
         self.status_map = StatusMap.initialize_from_json(value["statusMap"])
         self.role_map = RoleMap.initialize_from_json(value["roleMap"])
-        self.remain_talk_map = RemainTalkMap.initialize_from_json(value["remainTalkMap"])
-        self.remain_whisper_map = RemainWhisperMap.initialize_from_json(value["remainWhisperMap"])
 
     def has_executed_agent(self) -> bool:
         return self.executed_agent is not None

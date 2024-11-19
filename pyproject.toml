@@ -1,14 +1,10 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "aiwolf_nlp_common"
-version = "0.1.19"
-license = {file = "LICENSE"}
-description = "A sample python code of an AIWolf Contest's agent for Natural Language Division."
+version = "0.1.20"
+description = "aiwolf-nlp-common"
+license = { file = "LICENSE" }
 requires-python = ">=3.8"
-readme = ".github/README.md"
+readme = "README.md"
 dependencies = [
   "pycparser >= 2.22 ",
   "cffi >= 1.4.1",
@@ -20,14 +16,27 @@ dependencies = [
   "requests",
 ]
 authors = [
-  {name = "aiwolfdial", email = "aiwolf@kanolab.net"},
-  {name = "nwatanabe", email = "aiwolf@kanolab.net"},
+  { name = "aiwolfdial", email = "aiwolf@kanolab.net" },
+  { name = "nwatanabe", email = "aiwolf@kanolab.net" },
 ]
 maintainers = [
-  {name = "aiwolfdial", email = "aiwolf@kanolab.net"},
-  {name = "nwatanabe", email = "aiwolf@kanolab.net"}
+  { name = "aiwolfdial", email = "aiwolf@kanolab.net" },
+  { name = "nwatanabe", email = "aiwolf@kanolab.net" },
 ]
 keywords = ["aiwolf", "aiwolfNLP", "aiwolfdial"]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.3",
+]
+lint = [
+    "ruff>=0.7.4",
+]
 
 [project.urls]
 Homepage = "https://aiwolf.org"
