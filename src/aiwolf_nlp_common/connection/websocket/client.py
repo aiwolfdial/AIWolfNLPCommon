@@ -8,9 +8,6 @@ from aiwolf_nlp_common.connection import Connection
 
 
 class WebSocketClient(Connection):
-    __uri_prefix: str = "ws://"
-    __uri_suffix: str = "/ws"
-
     def __init__(self, inifile: configparser.ConfigParser) -> None:
         super().__init__(inifile=inifile)
         websocket.enableTrace(traceable=False)
@@ -18,7 +15,7 @@ class WebSocketClient(Connection):
         self.uri = inifile.get("websocket", "uri")
 
     def connect(self) -> None:
-        self.socket.connect(self.__uri_prefix + self.uri + self.__uri_suffix)
+        self.socket.connect(self.uri)
 
     def receive(self) -> list:
         response: str = self.socket.recv()
