@@ -182,7 +182,9 @@ class Setting:
         self.is_enable_no_attack = value["isEnableNoAttack"]
         self.is_vote_visible = value["isVoteVisible"]
         self.is_talk_on_first_day = value["isTalkOnFirstDay"]
-        self.response_timeout = self.convert_ms_to_seconds(time=value["responseTimeout"])
+        self.response_timeout = self.convert_ms_to_seconds(
+            time=value["responseTimeout"]
+        )
         self.action_timeout = self.convert_ms_to_seconds(time=value["actionTimeout"])
         self.max_revote = value["maxRevote"]
         self.max_attack_revote = value["maxAttackRevote"]

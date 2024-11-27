@@ -41,7 +41,10 @@ class RoleNumInfo:
         if value is None or not isinstance(value, RoleNumInfo):
             return False
 
-        return self.__role == value.role and self.__allocated_count == value.allocated_count
+        return (
+            self.__role == value.role
+            and self.__allocated_count == value.allocated_count
+        )
 
     def __lt__(self, value: object) -> bool:
         """Comparison method for making comparisons in “RoleNumInfo”.
