@@ -1,19 +1,9 @@
 line-length = 100
-exclude = [".venv", "__init__.py"]
+exclude = [".venv"]
 
 [lint]
 select = ["ALL"]
-ignore = [
-    "W191",
-    "D206",
-    "D203",
-    "D213",
-    "COM812",
-    "ISC001",
-    "S311",
-    "PLR0913",
-    "FBT001",
-]
+ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D107", "F401"]
 fixable = ["ALL"]
 unfixable = []
 
