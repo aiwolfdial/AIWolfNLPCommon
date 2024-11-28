@@ -4,8 +4,7 @@ from aiwolf_nlp_common.role import RoleInfo
 
 
 class ExistingRoleList(list):
-    @classmethod
-    def initialize_from_json(cls, value: list[str] | None = None) -> ExistingRoleList:
-        if value is None:
-            return cls()
-        return cls([RoleInfo.get_role_info(role=role) for role in value])
+    def __init__(self, value: list[str] | None = None) -> None:
+        super().__init__()
+        if value is not None:
+            self.extend(RoleInfo.get_role_info(role=role) for role in value)

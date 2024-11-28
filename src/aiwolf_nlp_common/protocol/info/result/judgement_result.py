@@ -21,14 +21,12 @@ class JudgementResult:
             return f"[{self.__class__.__name__}]\nNo Result Available"
         return f"[{self.__class__.__name__}]\nDay {self.day} : {self.target} is {self.result}"
 
-    @classmethod
-    def initialize_from_json(cls, value: dict | None) -> JudgementResult:
-        if value is None:
-            return cls()
-        return cls(**value)
-
     def __init__(self, value: dict | None = None) -> None:
-        self.initialize_from_json(value)
+        if value is not None:
+            self.day = value.get("day", self.DEFAULT_DAY)
+            self.agent = value.get("agent", self.DEFAULT_AGENT)
+            self.target = value.get("target", self.DEFAULT_TARGET)
+            self.result = value.get("result", self.DEFAULT_RESULT)
 
     def reset(self) -> None:
         self.day = self.DEFAULT_DAY

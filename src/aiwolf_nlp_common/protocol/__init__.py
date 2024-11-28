@@ -1,1 +1,1 @@
-from .communication_protocol import CommunicationProtocol
+from .packet import Packet

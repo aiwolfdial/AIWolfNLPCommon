@@ -19,30 +19,6 @@ class Info:
     status_map: StatusMap
     role_map: RoleMap
 
-    def __init__(  # noqa: PLR0913
-        self,
-        day: int,
-        agent: str,
-        medium_result: MediumResult,
-        divine_result: DivineResult,
-        executed_agent: str | None,
-        attacked_agent: str | None,
-        vote_list: VoteList,
-        attack_vote_list: AttackVoteList,
-        status_map: StatusMap,
-        role_map: RoleMap,
-    ) -> None:
-        self.day = day
-        self.agent = agent
-        self.medium_result = medium_result
-        self.divine_result = divine_result
-        self.executed_agent = executed_agent
-        self.attacked_agent = attacked_agent
-        self.vote_list = vote_list
-        self.attack_vote_list = attack_vote_list
-        self.status_map = status_map
-        self.role_map = role_map
-
     def __str__(self) -> str:
         executed_text = (
             self.executed_agent if self.has_executed_agent() else "No Result Available"
@@ -62,34 +38,21 @@ class Info:
             f"{self.role_map}\n\n"
         )
 
-    @classmethod
-    def initialize_from_json(cls, value: dict) -> Info:
-        return cls(
-            day=value["day"],
-            agent=value["agent"],
-            medium_result=MediumResult(value.get("mediumResult")),
-            divine_result=DivineResult(value.get("divineResult")),
-            executed_agent=value.get("executedAgent"),
-            attacked_agent=value.get("attackedAgent"),
-            vote_list=VoteList(value.get("voteList")),
-            attack_vote_list=AttackVoteList(value.get("attackVoteList")),
-            status_map=StatusMap(value["statusMap"]),
-            role_map=RoleMap(value["roleMap"]),
-        )
+    def __init__(self, value: dict | None = None) -> None:
+        if value is not None:
+            self.day = value["day"]
+            self.agent = value["agent"]
+            self.medium_result = MediumResult(value.get("mediumResult"))
+            self.divine_result = DivineResult(value.get("divineResult"))
+            self.executed_agent = value.get("executedAgent")
+            self.attacked_agent = value.get("attackedAgent")
+            self.vote_list = VoteList(value.get("voteList"))
+            self.attack_vote_list = AttackVoteList(value.get("attackVoteList"))
+            self.status_map = StatusMap(value["statusMap"])
+            self.role_map = RoleMap(value["roleMap"])
 
-    def update_from_json(self, value: dict | None) -> None:
-        if value is None:
-            return
-        self.day = value["day"]
-        self.agent = value["agent"]
-        self.medium_result = MediumResult(value.get("mediumResult"))
-        self.divine_result = DivineResult(value.get("divineResult"))
-        self.executed_agent = value.get("executedAgent")
-        self.attacked_agent = value.get("attackedAgent")
-        self.vote_list = VoteList(value.get("voteList"))
-        self.attack_vote_list = AttackVoteList(value.get("attackVoteList"))
-        self.status_map = StatusMap(value["statusMap"])
-        self.role_map = RoleMap(value["roleMap"])
+    def update(self, value: dict | None) -> None:
+        self.__init__(value)
 
     def has_executed_agent(self) -> bool:
         return self.executed_agent is not None

@@ -22,23 +22,17 @@ class VoteList(list[VoteInfo]):
             else f"{output}\n" + "\n".join(map(str, self))
         )
 
-    @classmethod
-    def initialize_from_json(cls, value: list[dict] | None = None) -> VoteList:
-        instance = cls()
-        if value is None:
-            return instance
-        instance.extend(
-            VoteInfo(
-                agent=vote_info["agent"],
-                day=vote_info["day"],
-                target=vote_info["target"],
-            )
-            for vote_info in value
-        )
-        return instance
-
     def __init__(self, value: list[dict] | None = None) -> None:
-        self.initialize_from_json(value)
+        super().__init__()
+        if value is not None:
+            self.extend(
+                VoteInfo(
+                    agent=vote_info["agent"],
+                    day=vote_info["day"],
+                    target=vote_info["target"],
+                )
+                for vote_info in value
+            )
 
     def is_empty(self) -> bool:
         return not bool(self)

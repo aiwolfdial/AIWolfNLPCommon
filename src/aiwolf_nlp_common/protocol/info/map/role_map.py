@@ -43,17 +43,11 @@ class RoleMap(set):
             return output + "\nNo Result Available"
         return output + "\n" + "\n".join(str(elem) for elem in sorted(self))
 
-    @classmethod
-    def initialize_from_json(cls, value: dict | None = None) -> RoleMap:
-        instance = cls()
-        if value is None:
-            return instance
-        for agent, role in value.items():
-            instance.add(AgentRole(agent=agent, role=role))
-        return instance
-
     def __init__(self, value: dict | None = None) -> None:
-        self.initialize_from_json(value)
+        super().__init__()
+        if value is not None:
+            for agent, role in value.items():
+                self.add(AgentRole(agent=agent, role=role))
 
     def get_role(self, agent: str) -> Role:
         for agent_role in self:
