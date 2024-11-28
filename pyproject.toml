@@ -1,11 +1,11 @@
 [project]
 name = "aiwolf-nlp-common"
-version = "0.2.2"
+version = "0.3.2"
 description = "aiwolf-nlp-common"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
 readme = "README.md"
-dependencies = ["paramiko >= 3.5", "websocket-client >= 1.8.0"]
+dependencies = ["paramiko>=3.5.0", "websocket-client>=1.8.0"]
 authors = [
   { name = "aiwolfdial", email = "aiwolf@kanolab.net" },
   { name = "nwatanabe", email = "nwatanabe@kanolab.net" },
