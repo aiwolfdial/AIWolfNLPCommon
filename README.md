@@ -30,11 +30,8 @@ Agent[02]
 pip install aiwolf-nlp-common
 ```
 
-> [!WARNING]
-> `pip install aiwolf-nlp-common` に失敗する場合は、以下の手順を試してください。
-
-```
-pip install --upgrade pip
-pip install --upgrade setuptools
-pip install -i https://test.pypi.org/simple/ aiwolf-nlp-common
-```
+> [!IMPORTANT]
+> リファクタリングなどに伴い、コードの修正、破壊的変更を行いました。
+> 修正前のコードの動作確認は実施済みになりますが、型エラーなどの警告が表示されます。修正後のコードの動作確認は現在実施中になります。  
+> こちらのコードは修正後のコードになります。  
+> aiwolf-nlp-agentのv.0.2.0未満（v0.1.0など）を使う場合は、本ライブラリのバージョンはv.0.2.2以下をご利用ください。
