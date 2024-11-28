@@ -23,23 +23,22 @@ class VoteList(list[VoteInfo]):
         )
 
     @classmethod
-    def initialize_from_json(cls, vote_data: list[dict] | None = None) -> VoteList:
+    def initialize_from_json(cls, value: list[dict] | None = None) -> VoteList:
         instance = cls()
-        if not vote_data:
+        if value is None:
             return instance
-
         instance.extend(
             VoteInfo(
                 agent=vote_info["agent"],
                 day=vote_info["day"],
                 target=vote_info["target"],
             )
-            for vote_info in vote_data
+            for vote_info in value
         )
         return instance
 
-    def __init__(self, vote_data: list[dict] | None = None) -> None:
-        self.initialize_from_json(vote_data)
+    def __init__(self, value: list[dict] | None = None) -> None:
+        self.initialize_from_json(value)
 
     def is_empty(self) -> bool:
         return not bool(self)

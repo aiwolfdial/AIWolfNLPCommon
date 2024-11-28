@@ -17,7 +17,6 @@ class RoleNumInfo:
     def __eq__(self, value: object) -> bool:
         if value is None or not isinstance(value, RoleNumInfo):
             return False
-
         return (
             self.__role == value.role
             and self.__allocated_count == value.allocated_count
@@ -26,7 +25,6 @@ class RoleNumInfo:
     def __lt__(self, value: object) -> bool:
         if value is None or not isinstance(value, self.__class__):
             return NotImplemented
-
         return self.__role.en < value.__role.en
 
     def __str__(self) -> str:
@@ -53,28 +51,25 @@ class RoleNumMap(set):
         return output
 
     @classmethod
-    def initialize_from_json(cls, value: dict) -> RoleNumMap:
+    def initialize_from_json(cls, value: dict | None = None) -> RoleNumMap:
         instance = cls()
+        if value is None:
+            return instance
         for role, count in value.items():
             instance.add(RoleNumInfo(role=role, allocated_count=count))
         return instance
 
     def __init__(self, value: dict | None = None) -> None:
-        if value is None:
-            return
         self.initialize_from_json(value)
 
     def get_role_num(self, role: str | Role) -> int:
         if not RoleInfo.is_exist_role(role=role):
             raise ValueError(role, "is a name that does not exist.")
-
         if not isinstance(role, Role):
             role = RoleInfo.get_role_info(role=role)
-
         for role_num_info in self:
             if role_num_info.role == role:
                 return role_num_info.allocated_count
-
         raise ValueError(role, "is a name that does not exist.")
 
     def is_empty(self) -> bool:

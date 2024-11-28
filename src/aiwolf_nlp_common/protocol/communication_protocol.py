@@ -42,8 +42,8 @@ class CommunicationProtocol:
         )
 
     @classmethod
-    def initialize_from_json(cls, received_str: str) -> CommunicationProtocol:
-        received_json: dict = json.loads(received_str)
+    def initialize_from_json(cls, value: str) -> CommunicationProtocol:
+        received_json: dict = json.loads(value)
         return cls(
             received_json["request"],
             (
@@ -56,39 +56,37 @@ class CommunicationProtocol:
                 if received_json.get("setting")
                 else None
             ),
-            TalkList(talk_list=received_json.get("talkHistory")),
-            WhisperList(whisper_list=received_json.get("whisperHistory")),
+            TalkList(value=received_json.get("talkHistory")),
+            WhisperList(value=received_json.get("whisperHistory")),
         )
 
-    def update_from_json(self, received_str: str) -> CommunicationProtocol:
-        received_json: dict = json.loads(received_str)
-
+    def update_from_json(  # noqa: C901
+        self,
+        value: str,
+    ) -> None:
+        received_json: dict = json.loads(value)
         self.request = received_json["request"]
-
         if received_json.get("info") is not None:
             if self.is_info_empty():
                 self.info = Info.initialize_from_json(value=received_json["info"])
-            else:
+            elif self.info is not None:
                 self.info.update_from_json(value=received_json.get("info"))
-
         if received_json.get("setting") is not None:
             if self.is_setting_empty():
                 self.setting = Setting.initialize_from_json(
                     value=received_json["setting"],
                 )
-            else:
+            elif self.setting is not None:
                 self.setting.update_from_json(value=received_json.get("setting"))
-
         if received_json.get("talkHistory") is not None:
-            self.talk_history = TalkList(talk_list=received_json.get("talkHistory"))
-        else:
+            self.talk_history = TalkList(value=received_json.get("talkHistory"))
+        elif self.talk_history is not None:
             self.talk_history.clear()
-
         if received_json.get("whisperHistory") is not None:
             self.whisper_history = WhisperList(
-                whisper_list=received_json.get("whisperHistory"),
+                value=received_json.get("whisperHistory"),
             )
-        else:
+        elif self.whisper_history is not None:
             self.whisper_history.clear()
 
     def is_info_empty(self) -> bool:

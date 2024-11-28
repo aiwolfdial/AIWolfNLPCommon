@@ -91,7 +91,6 @@ class Setting:
     def update_from_json(self, value: dict | None) -> None:
         if value is None:
             return
-
         self.role_num_map = RoleNumMap(value=value["roleNumMap"])
         self.max_talk = value["maxTalk"]
         self.max_talk_turn = value["maxTalkTurn"]

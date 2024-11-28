@@ -46,11 +46,10 @@ class TalkList(list[TalkInfo]):
         )
 
     @classmethod
-    def initialize_from_json(cls, talk_list: list[dict] | None) -> TalkList:
+    def initialize_from_json(cls, value: list[dict] | None) -> TalkList:
         instance = cls()
-        if not talk_list:
+        if not value:
             return instance
-
         instance.extend(
             TalkInfo(
                 agent=talk_info["agent"],
@@ -61,12 +60,12 @@ class TalkList(list[TalkInfo]):
                 skip=talk_info["skip"],
                 over=talk_info["over"],
             )
-            for talk_info in talk_list
+            for talk_info in value
         )
         return instance
 
-    def __init__(self, talk_list: list[dict] | None = None) -> None:
-        self.initialize_from_json(talk_list)
+    def __init__(self, value: list[dict] | None = None) -> None:
+        self.initialize_from_json(value)
 
     def is_empty(self) -> bool:
         return not bool(self)

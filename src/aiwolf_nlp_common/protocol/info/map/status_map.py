@@ -41,16 +41,16 @@ class StatusMap(set):
         return output + "\n".join(str(elem) for elem in sorted(self))
 
     @classmethod
-    def initialize_from_json(cls, set_map: dict) -> StatusMap:
+    def initialize_from_json(cls, value: dict | None = None) -> StatusMap:
         instance = cls()
-        for agent, status in set_map.items():
+        if value is None:
+            return instance
+        for agent, status in value.items():
             instance.add(AgentStatus(agent=agent, status=status))
         return instance
 
-    def __init__(self, set_map: dict | None = None) -> None:
-        if set_map is None:
-            return
-        self.initialize_from_json(set_map)
+    def __init__(self, value: dict | None = None) -> None:
+        self.initialize_from_json(value)
 
     def is_empty(self) -> bool:
         return len(self) == 0
@@ -58,10 +58,8 @@ class StatusMap(set):
     def reverse_status(self, agent: str) -> None:
         prev_alive = AgentStatus(agent=agent, status=Status.ALIVE.value)
         prev_dead = AgentStatus(agent=agent, status=Status.DEAD.value)
-
         if prev_alive not in self and prev_dead not in self:
             raise ValueError(agent, "is a name that does not exist.")
-
         if prev_alive in self:
             self.remove(prev_alive)
             self.add(prev_dead)

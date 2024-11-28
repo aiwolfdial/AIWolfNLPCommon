@@ -80,7 +80,6 @@ class Info:
     def update_from_json(self, value: dict | None) -> None:
         if value is None:
             return
-
         self.day = value["day"]
         self.agent = value["agent"]
         self.medium_result = MediumResult(value.get("mediumResult"))
