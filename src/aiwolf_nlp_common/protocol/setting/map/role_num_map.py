@@ -50,17 +50,11 @@ class RoleNumMap(set):
             output += "\n" + elem.__str__()
         return output
 
-    @classmethod
-    def initialize_from_json(cls, value: dict | None = None) -> RoleNumMap:
-        instance = cls()
-        if value is None:
-            return instance
-        for role, count in value.items():
-            instance.add(RoleNumInfo(role=role, allocated_count=count))
-        return instance
-
     def __init__(self, value: dict | None = None) -> None:
-        self.initialize_from_json(value)
+        super().__init__()
+        if value is not None:
+            for role, count in value.items():
+                self.add(RoleNumInfo(role=role, allocated_count=count))
 
     def get_role_num(self, role: str | Role) -> int:
         if not RoleInfo.is_exist_role(role=role):

@@ -40,17 +40,11 @@ class StatusMap(set):
             return output + "\nNo Result Available"
         return output + "\n".join(str(elem) for elem in sorted(self))
 
-    @classmethod
-    def initialize_from_json(cls, value: dict | None = None) -> StatusMap:
-        instance = cls()
-        if value is None:
-            return instance
-        for agent, status in value.items():
-            instance.add(AgentStatus(agent=agent, status=status))
-        return instance
-
     def __init__(self, value: dict | None = None) -> None:
-        self.initialize_from_json(value)
+        super().__init__()
+        if value is not None:
+            for agent, status in value.items():
+                self.add(AgentStatus(agent=agent, status=status))
 
     def is_empty(self) -> bool:
         return len(self) == 0

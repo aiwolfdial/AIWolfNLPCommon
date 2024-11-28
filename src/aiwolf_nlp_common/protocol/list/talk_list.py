@@ -45,27 +45,21 @@ class TalkList(list[TalkInfo]):
             else f"{header}" + "\n".join(str(elem) for elem in self)
         )
 
-    @classmethod
-    def initialize_from_json(cls, value: list[dict] | None) -> TalkList:
-        instance = cls()
-        if not value:
-            return instance
-        instance.extend(
-            TalkInfo(
-                agent=talk_info["agent"],
-                day=talk_info["day"],
-                idx=talk_info["idx"],
-                text=talk_info["text"],
-                turn=talk_info["turn"],
-                skip=talk_info["skip"],
-                over=talk_info["over"],
-            )
-            for talk_info in value
-        )
-        return instance
-
     def __init__(self, value: list[dict] | None = None) -> None:
-        self.initialize_from_json(value)
+        super().__init__()
+        if value is not None:
+            self.extend(
+                TalkInfo(
+                    agent=talk_info["agent"],
+                    day=talk_info["day"],
+                    idx=talk_info["idx"],
+                    text=talk_info["text"],
+                    turn=talk_info["turn"],
+                    skip=talk_info["skip"],
+                    over=talk_info["over"],
+                )
+                for talk_info in value
+            )
 
     def is_empty(self) -> bool:
         return not bool(self)
